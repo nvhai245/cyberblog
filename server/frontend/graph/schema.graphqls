@@ -1,0 +1,32 @@
+# GraphQL schema
+
+# Authentication Schema
+type User {
+  id: ID!
+  username: String!
+  first_name: String!
+  last_name: String!
+  email: String!
+  created_at: Int!
+  updated_at: Int!
+}
+
+input NewUser {
+  email: String!
+  password: String!
+}
+
+type Token {
+  token: String!
+  expire_at: Int!
+}
+
+type Query {
+  users: [User!]!
+}
+
+type Mutation {
+  createUser(input: NewUser!): User!
+  register(email: String!, password: String!): Token!
+  login(email: String!, password: String!): Token!
+}

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = ".;proto";
+
+service Read {
+    rpc GetHash (GetHashRequest) returns (GetHashResponse);
+}
+
+message GetHashRequest {
+    int32 id = 1;
+}
+
+message GetHashResponse {
+    string hash = 2;
+}
