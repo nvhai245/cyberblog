@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = ".;proto";
+
+service Auth {
+    rpc Register (RegisterRequest) returns (RegisterResponse);
+}
+
+message SavedUser {
+    string username = 1;
+    string email = 2;
+    string first_name = 3;
+    string last_name = 4;
+    string avatar = 5;
+    string birthday = 6;
+    string bio = 7;
+    string facebook = 8;
+    string instagram = 9;
+    string twitter = 10;
+}
+
+message RegisterRequest {
+    string email = 1;
+    string password = 2;
+}
+
+message RegisterResponse {
+    SavedUser user = 1;
+}

@@ -4,6 +4,7 @@ go 1.14
 
 require (
 	github.com/99designs/gqlgen v0.11.3
+	github.com/davecgh/go-spew v1.1.1
 	github.com/golang/protobuf v1.4.2
 	github.com/google/uuid v1.1.1
 	github.com/graph-gophers/graphql-go v0.0.0-20200622220639-c1d9693c95a6
@@ -12,6 +13,7 @@ require (
 	github.com/joho/godotenv v1.3.0
 	github.com/lib/pq v1.7.0
 	github.com/vektah/gqlparser/v2 v2.0.1
+	golang.org/x/crypto v0.0.0-20191011191535-87dc89f01550
 	google.golang.org/grpc v1.27.0
 	google.golang.org/protobuf v1.25.0
 )

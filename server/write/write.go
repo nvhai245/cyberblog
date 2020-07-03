@@ -8,7 +8,7 @@ import (
 	"os"
 
 	"github.com/nvhai245/cyberblog/server/read/connection"
-	pb "github.com/nvhai245/cyberblog/server/read/proto"
+	pb "github.com/nvhai245/cyberblog/server/write/proto"
 
 	"github.com/jmoiron/sqlx"
 	"github.com/joho/godotenv"
@@ -28,14 +28,15 @@ func main() {
 	}
 	log.Println("Successfully connected to postgres DB!")
 
-	lis, err := net.Listen("tcp", os.Getenv("READ_SERVICE_HOST"))
+	lis, err := net.Listen("tcp", os.Getenv("WRITE_SERVICE_HOST"))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	} else {
-		log.Println("Read service listening on port 8082...")
+		log.Println("Write service listening on port 8083...")
 	}
+
 	grpcServer := grpc.NewServer()
-	pb.RegisterReadServer(grpcServer, &pb.UnimplementedReadServer{})
+	pb.RegisterWriteServer(grpcServer, &pb.UnimplementedWriteServer{})
 	// determine whether to use TLS
 	grpcServer.Serve(lis)
 }
