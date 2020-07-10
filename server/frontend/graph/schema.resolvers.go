@@ -5,29 +5,16 @@ package graph
 
 import (
 	"context"
-	"time"
+	"fmt"
+	"github.com/nvhai245/cyberblog/server/frontend/helper"
 	"log"
+	"time"
 
-	"github.com/nvhai245/cyberblog/server/frontend/graph/generated"
-	"github.com/nvhai245/cyberblog/server/frontend/graph/model"
 	authPb "github.com/nvhai245/cyberblog/server/auth/proto"
 	"github.com/nvhai245/cyberblog/server/frontend/connection"
+	"github.com/nvhai245/cyberblog/server/frontend/graph/generated"
+	"github.com/nvhai245/cyberblog/server/frontend/graph/model"
 )
-
-func (r *mutationResolver) CreateUser(ctx context.Context, input model.NewUser) (*model.User, error) {
-	// Call gRPC to Auth
-	res, err := connection.AuthClient.Register(context.Background(), &authPb.RegisterRequest{Email: input.Email, Password: input.Password})
-	if err != nil {
-		log.Println("Error in rpc AuthClient.Register: ", err)
-	}
-	log.Println(res)
-	return &model.User{
-		FirstName: "",
-		LastName: "",
-		Email: res.User.GetEmail(),
-		CreatedAt: int(time.Now().Unix()),
-	}, nil
-}
 
 func (r *mutationResolver) Register(ctx context.Context, email string, password string) (*model.Token, error) {
 	res, err := connection.AuthClient.Register(context.Background(), &authPb.RegisterRequest{Email: email, Password: password})
@@ -35,19 +22,36 @@ func (r *mutationResolver) Register(ctx context.Context, email string, password 
 		log.Println("Error in rpc AuthClient.Register: ", err)
 		return &model.Token{}, nil
 	}
-	log.Println("Called AuthClient.Register()")
-	expiredAt := time.Now().Add(time.Hour * 1).Unix()
+	log.Println("Called AuthClient.Register() successful!")
+	expiredAt := time.Now().Add(time.Hour * 24).Unix()
+
+	// Grab a session (gorilla returns a session if the named session doesn't exist)
+	session := helper.GetSession(ctx, "auth")
+
+	// Reading userID cookie value
+	token := session.Values["token"]
+	log.Println("current token is: ", token)
+
+	// Setting userID cookie value
+	session.Values["token"] = res.GetToken()
+
+	// Save session
+	if err := helper.SaveSession(ctx, session); err != nil {
+		return nil, fmt.Errorf("Failed to save cart in session with error: %s", err)
+	}
+
 	return &model.Token{
-		Token: res.User.,
+		Token:    res.GetToken(),
 		ExpireAt: int(expiredAt),
 	}, nil
+
 }
 
 func (r *mutationResolver) Login(ctx context.Context, email string, password string) (*model.Token, error) {
 	// Call gRPC to Auth
 	expiredAt := time.Now().Add(time.Hour * 1).Unix()
 	token := &model.Token{
-		Token: "jwtToken@abcdef",
+		Token:    "jwtToken@abcdef",
 		ExpireAt: int(expiredAt),
 	}
 	return token, nil

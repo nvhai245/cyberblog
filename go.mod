@@ -4,11 +4,10 @@ go 1.14
 
 require (
 	github.com/99designs/gqlgen v0.11.3
-	github.com/davecgh/go-spew v1.1.1
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/fatih/structs v1.1.0
 	github.com/golang/protobuf v1.4.2
-	github.com/google/uuid v1.1.1
-	github.com/graph-gophers/graphql-go v0.0.0-20200622220639-c1d9693c95a6
-	github.com/graphql-go/graphql v0.7.9
+	github.com/gorilla/sessions v1.2.0
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/joho/godotenv v1.3.0
 	github.com/lib/pq v1.7.0

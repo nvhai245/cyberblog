@@ -14,7 +14,7 @@ message SavedUser {
     string first_name = 3;
     string last_name = 4;
     string avatar = 5;
-    string birthday = 6;
+    int32 birthday = 6;
     string bio = 7;
     string facebook = 8;
     string instagram = 9;
@@ -28,4 +28,5 @@ message RegisterRequest {
 
 message RegisterResponse {
     SavedUser user = 1;
+    string token = 2;
 }

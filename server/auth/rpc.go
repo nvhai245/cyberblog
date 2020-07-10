@@ -3,13 +3,11 @@ package main
 import (
 	"context"
 
-	pb "github.com/nvhai245/cyberblog/server/auth/proto"
 	"github.com/nvhai245/cyberblog/server/auth/controller"
-
-	"github.com/davecgh/go-spew/spew"
+	pb "github.com/nvhai245/cyberblog/server/auth/proto"
 )
 
-// AuthServer for rpc 
+// AuthServer for rpc
 type AuthServer struct {
 	pb.UnimplementedAuthServer
 }
