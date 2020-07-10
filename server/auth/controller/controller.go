@@ -56,6 +56,38 @@ func Register(req *pb.RegisterRequest) *pb.RegisterResponse {
 	}
 }
 
+func Login(req *pb.LoginRequest) *pb.LoginResponse {
+	res, err := connection.WriteClient.GetUser(context.Background(), &writePb.GetUserRequest{Email: req.GetEmail()})
+	if err != nil {
+		log.Printf("Error in controller.Login(), rpc call WriteClient.GetUser(): %v", err)
+		return &pb.LoginResponse{}
+	}
+
+	if res.GetUser() == nil {
+		log.Printf("Error in controller.Login(), Failed WriteClient.GetUser(): Can't find user with given email!")
+		return &pb.LoginResponse{}
+	}
+
+	loggedInUser := res.GetUser()
+
+	generatedJWT := generateJWT(loggedInUser.GetEmail())
+
+	return &pb.LoginResponse{
+		User: &pb.SavedUser{
+			Username:  loggedInUser.GetUsername(),
+			Email:     loggedInUser.GetEmail(),
+			FirstName: loggedInUser.GetFirstName(),
+			LastName:  loggedInUser.GetLastName(),
+			Avatar:    loggedInUser.GetAvatar(),
+			Bio:       loggedInUser.GetBio(),
+			Facebook:  loggedInUser.GetFacebook(),
+			Instagram: loggedInUser.GetInstagram(),
+			Twitter:   loggedInUser.GetTwitter(),
+		},
+		Token: generatedJWT,
+	}
+}
+
 func hashAndSalt(pwd []byte) string {
 	hash, err := bcrypt.GenerateFromPassword(pwd, bcrypt.DefaultCost)
 	if err != nil {
@@ -68,7 +100,7 @@ func generateJWT(email string) (jwtString string) {
 	mySigningKey := []byte(os.Getenv("JWT_SECRET"))
 
 	type MyCustomClaims struct {
-		email string `json:"email"`
+		Email string `json:"email"`
 		jwt.StandardClaims
 	}
 

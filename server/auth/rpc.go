@@ -17,3 +17,8 @@ func (*AuthServer) Register(ctx context.Context, req *pb.RegisterRequest) (*pb.R
 	registeredUser := controller.Register(req)
 	return registeredUser, nil
 }
+
+func (*AuthServer) Login(ctx context.Context, req *pb.LoginRequest) (*pb.LoginResponse, error) {
+	loggedInUser := controller.Login(req)
+	return loggedInUser, nil
+}

@@ -43,7 +43,7 @@ func main() {
 
 	// ---gRPC Dials---
 	// Auth
-	conn, err := grpc.Dial("localhost:9090", grpc.WithInsecure())
+	conn, err := grpc.Dial("localhost:9090", grpc.WithInsecure(), grpc.WithBlock())
 	if err != nil {
 		log.Println(err)
 	} else {

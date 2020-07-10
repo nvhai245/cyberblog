@@ -6,14 +6,14 @@ import (
 	"net"
 	"os"
 
-	pb "github.com/nvhai245/cyberblog/server/auth/proto"
 	"github.com/nvhai245/cyberblog/server/auth/connection"
-	writePb "github.com/nvhai245/cyberblog/server/write/proto"
+	pb "github.com/nvhai245/cyberblog/server/auth/proto"
 	readPb "github.com/nvhai245/cyberblog/server/read/proto"
+	writePb "github.com/nvhai245/cyberblog/server/write/proto"
 
-	"google.golang.org/grpc"
 	"github.com/joho/godotenv"
 	_ "github.com/joho/godotenv/autoload"
+	"google.golang.org/grpc"
 )
 
 func main() {
@@ -22,7 +22,7 @@ func main() {
 
 	// ---gRPC Dials---
 	// Write
-	writeConn, err := grpc.Dial(os.Getenv("WRITE_SERVICE_HOST"), grpc.WithInsecure())
+	writeConn, err := grpc.Dial(os.Getenv("WRITE_SERVICE_HOST"), grpc.WithInsecure(), grpc.WithBlock())
 	if err != nil {
 		log.Println(err)
 	} else {
@@ -32,7 +32,7 @@ func main() {
 	connection.WriteClient = writePb.NewWriteClient(writeConn)
 
 	// Read
-	readConn, err := grpc.Dial(os.Getenv("READ_SERVICE_HOST"), grpc.WithInsecure())
+	readConn, err := grpc.Dial(os.Getenv("READ_SERVICE_HOST"), grpc.WithInsecure(), grpc.WithBlock())
 	if err != nil {
 		log.Println(err)
 	} else {

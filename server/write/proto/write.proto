@@ -6,6 +6,7 @@ option go_package = ".;proto";
 
 service Write {
     rpc SaveUser (SaveUserRequest) returns (SaveUserResponse);
+    rpc GetUser (GetUserRequest) returns (GetUserResponse);
 }
 
 message NewUser {
@@ -29,4 +30,13 @@ message SaveUserRequest {
 message SaveUserResponse {
     NewUser user = 1;
     bool success = 2;
+}
+
+message GetUserRequest {
+    string email = 1;
+}
+
+message GetUserResponse {
+    NewUser user = 1;
+    string hash = 2;
 }

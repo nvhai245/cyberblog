@@ -38,3 +38,13 @@ func SaveUser(req *pb.SaveUserRequest) *pb.SaveUserResponse {
 		Success: true,
 	}
 }
+
+// GetUser controller
+func GetUser(req *pb.GetUserRequest) *pb.GetUserResponse {
+	// TODO: call to model
+	log.Println(req.GetEmail())
+	return &pb.GetUserResponse{
+		User: nil,
+		Hash: "",
+	}
+}

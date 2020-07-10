@@ -6,6 +6,7 @@ option go_package = ".;proto";
 
 service Auth {
     rpc Register (RegisterRequest) returns (RegisterResponse);
+    rpc Login (LoginRequest) returns (LoginResponse);
 }
 
 message SavedUser {
@@ -27,6 +28,16 @@ message RegisterRequest {
 }
 
 message RegisterResponse {
+    SavedUser user = 1;
+    string token = 2;
+}
+
+message LoginRequest {
+    string email = 1;
+    string password = 2;
+}
+
+message LoginResponse {
     SavedUser user = 1;
     string token = 2;
 }
