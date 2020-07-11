@@ -6,20 +6,22 @@ option go_package = ".;proto";
 
 service Write {
     rpc SaveUser (SaveUserRequest) returns (SaveUserResponse);
-    rpc GetUser (GetUserRequest) returns (GetUserResponse);
 }
 
 message NewUser {
-    string username = 1;
-    string email = 2;
-    string first_name = 3;
-    string last_name = 4;
-    string avatar = 5;
-    int32 birthday = 6;
-    string bio = 7;
-    string facebook = 8;
-    string instagram = 9;
-    string twitter = 10;
+    int32 id = 1;
+    string username = 2;
+    string email = 3;
+    string first_name = 4;
+    string last_name = 5;
+    string avatar = 6;
+    int64 birthday = 7;
+    string bio = 8;
+    string facebook = 9;
+    string instagram = 10;
+    string twitter = 11;
+    int64 created_at = 12;
+    int64 updated_at = 13;
 }
 
 message SaveUserRequest {
@@ -30,13 +32,4 @@ message SaveUserRequest {
 message SaveUserResponse {
     NewUser user = 1;
     bool success = 2;
-}
-
-message GetUserRequest {
-    string email = 1;
-}
-
-message GetUserResponse {
-    NewUser user = 1;
-    string hash = 2;
 }

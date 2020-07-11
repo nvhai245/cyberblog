@@ -2,6 +2,7 @@ package controller
 
 import (
 	"context"
+	readPb "github.com/nvhai245/cyberblog/server/read/proto"
 	"log"
 	"os"
 	"time"
@@ -16,6 +17,10 @@ import (
 
 // Register controller fuc
 func Register(req *pb.RegisterRequest) *pb.RegisterResponse {
+	log.Printf("controller.Register(): [Request]: %+v\n", req)
+
+	// ***************************************************************************************************************
+
 	hashedPassword := hashAndSalt([]byte(req.GetPassword()))
 	res, err := connection.WriteClient.SaveUser(context.Background(), &writePb.SaveUserRequest{
 		User: &writePb.NewUser{
@@ -23,6 +28,7 @@ func Register(req *pb.RegisterRequest) *pb.RegisterResponse {
 			Email:     req.GetEmail(),
 			FirstName: "",
 			LastName:  "",
+			CreatedAt: time.Now().Unix(),
 		},
 		Hash: hashedPassword,
 	})
@@ -30,18 +36,16 @@ func Register(req *pb.RegisterRequest) *pb.RegisterResponse {
 		log.Printf("Error in controller.Register(), rpc call WriteClient.SaveUser(): %v", err)
 		return &pb.RegisterResponse{}
 	}
-
 	if !res.GetSuccess() {
 		log.Printf("Error in controller.Register(), Failed WriteClient.SaveUser()")
 		return &pb.RegisterResponse{}
 	}
 
 	savedUser := res.GetUser()
-
 	generatedJWT := generateJWT(savedUser.GetEmail())
-
-	return &pb.RegisterResponse{
+	response := &pb.RegisterResponse{
 		User: &pb.SavedUser{
+			Id:        savedUser.GetId(),
 			Username:  savedUser.GetUsername(),
 			Email:     savedUser.GetEmail(),
 			FirstName: savedUser.GetFirstName(),
@@ -51,49 +55,76 @@ func Register(req *pb.RegisterRequest) *pb.RegisterResponse {
 			Facebook:  savedUser.GetFacebook(),
 			Instagram: savedUser.GetInstagram(),
 			Twitter:   savedUser.GetTwitter(),
+			CreatedAt: savedUser.GetCreatedAt(),
 		},
 		Token: generatedJWT,
 	}
+
+	// ***************************************************************************************************************
+
+	log.Printf("controller.Register(): [Response]: %+v\n", response)
+	return response
 }
 
 func Login(req *pb.LoginRequest) *pb.LoginResponse {
-	res, err := connection.WriteClient.GetUser(context.Background(), &writePb.GetUserRequest{Email: req.GetEmail()})
+	log.Printf("controller.Login(): [Request]: %+v\n", req)
+
+	// ***************************************************************************************************************
+
+	res, err := connection.ReadClient.GetUser(context.Background(), &readPb.GetUserRequest{Email: req.GetEmail()})
 	if err != nil {
-		log.Printf("Error in controller.Login(), rpc call WriteClient.GetUser(): %v", err)
+		log.Printf("Error in controller.Login(), rpc call ReadClient.GetUser(): %v", err)
 		return &pb.LoginResponse{}
 	}
-
 	if res.GetUser() == nil {
-		log.Printf("Error in controller.Login(), Failed WriteClient.GetUser(): Can't find user with given email!")
+		log.Printf("Error in controller.Login(), Failed ReadClient.GetUser(): Can't find user with given email!")
 		return &pb.LoginResponse{}
 	}
 
-	loggedInUser := res.GetUser()
+	var response = &pb.LoginResponse{}
 
-	generatedJWT := generateJWT(loggedInUser.GetEmail())
-
-	return &pb.LoginResponse{
-		User: &pb.SavedUser{
-			Username:  loggedInUser.GetUsername(),
-			Email:     loggedInUser.GetEmail(),
-			FirstName: loggedInUser.GetFirstName(),
-			LastName:  loggedInUser.GetLastName(),
-			Avatar:    loggedInUser.GetAvatar(),
-			Bio:       loggedInUser.GetBio(),
-			Facebook:  loggedInUser.GetFacebook(),
-			Instagram: loggedInUser.GetInstagram(),
-			Twitter:   loggedInUser.GetTwitter(),
-		},
-		Token: generatedJWT,
+	if passwordIsValid([]byte(req.GetPassword()), []byte(res.GetHash())) {
+		loggedInUser := res.GetUser()
+		generatedJWT := generateJWT(loggedInUser.GetEmail())
+		response = &pb.LoginResponse{
+			User: &pb.SavedUser{
+				Id:        loggedInUser.GetId(),
+				Username:  loggedInUser.GetUsername(),
+				Email:     loggedInUser.GetEmail(),
+				FirstName: loggedInUser.GetFirstName(),
+				LastName:  loggedInUser.GetLastName(),
+				Avatar:    loggedInUser.GetAvatar(),
+				Bio:       loggedInUser.GetBio(),
+				Facebook:  loggedInUser.GetFacebook(),
+				Instagram: loggedInUser.GetInstagram(),
+				Twitter:   loggedInUser.GetTwitter(),
+				CreatedAt: loggedInUser.GetCreatedAt(),
+				UpdatedAt: loggedInUser.GetUpdatedAt(),
+			},
+			Token: generatedJWT,
+		}
 	}
+
+	// ***************************************************************************************************************
+
+	log.Printf("controller.Login(): [Response]: %+v\n", response)
+	return response
 }
 
 func hashAndSalt(pwd []byte) string {
 	hash, err := bcrypt.GenerateFromPassword(pwd, bcrypt.DefaultCost)
 	if err != nil {
-		log.Println(err)
+		log.Println("Error in controller.hashAndSalt(): ", err)
 	}
 	return string(hash)
+}
+
+func passwordIsValid(pwd []byte, hash []byte) bool {
+	err := bcrypt.CompareHashAndPassword(hash, pwd)
+	if err != nil {
+		return false
+	}
+	return true
 }
 
 func generateJWT(email string) (jwtString string) {
@@ -113,10 +144,10 @@ func generateJWT(email string) (jwtString string) {
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	ss, err := token.SignedString(mySigningKey)
+	signedString, err := token.SignedString(mySigningKey)
 	if err != nil {
 		log.Println("Error in controller.generateJWT(): ", err)
 		return ""
 	}
-	return ss
+	return signedString
 }

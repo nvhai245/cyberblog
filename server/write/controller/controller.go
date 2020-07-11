@@ -10,7 +10,7 @@ import (
 // SaveUser controller
 func SaveUser(req *pb.SaveUserRequest) *pb.SaveUserResponse {
 	newUser := req.GetUser()
-	userToSave := &model.NewUser{
+	userToSave := &model.User{
 		Username:  newUser.GetUsername(),
 		Email:     newUser.GetEmail(),
 		Hash:      req.GetHash(),
@@ -22,29 +22,22 @@ func SaveUser(req *pb.SaveUserRequest) *pb.SaveUserResponse {
 		Facebook:  newUser.GetFacebook(),
 		Instagram: newUser.GetInstagram(),
 		Twitter:   newUser.GetTwitter(),
+		CreatedAt: newUser.GetCreatedAt(),
 	}
-	success := model.Insert(userToSave)
+	success, userID := model.Insert(userToSave)
 
 	if !success {
-		log.Println("model.Insert() failed in controller.SaveUser()")
+		log.Println("controller.SaveUser() failed in model.Insert()")
 		return &pb.SaveUserResponse{
 			User:    &pb.NewUser{},
 			Success: false,
 		}
 	}
 
+	newUser.Id = userID
+
 	return &pb.SaveUserResponse{
 		User:    newUser,
 		Success: true,
-	}
-}
-
-// GetUser controller
-func GetUser(req *pb.GetUserRequest) *pb.GetUserResponse {
-	// TODO: call to model
-	log.Println(req.GetEmail())
-	return &pb.GetUserResponse{
-		User: nil,
-		Hash: "",
 	}
 }

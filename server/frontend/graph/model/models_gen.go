@@ -2,6 +2,11 @@
 
 package model
 
+type AuthResponse struct {
+	Message string `json:"message"`
+	User    *User  `json:"user"`
+}
+
 type NewUser struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
@@ -13,11 +18,17 @@ type Token struct {
 }
 
 type User struct {
-	ID        string `json:"id"`
+	ID        int    `json:"id"`
 	Username  string `json:"username"`
+	Email     string `json:"email"`
 	FirstName string `json:"first_name"`
 	LastName  string `json:"last_name"`
-	Email     string `json:"email"`
+	Avatar    string `json:"avatar"`
+	Birthday  int    `json:"birthday"`
+	Bio       string `json:"bio"`
+	Facebook  string `json:"facebook"`
+	Instagram string `json:"instagram"`
+	Twitter   string `json:"twitter"`
 	CreatedAt int    `json:"created_at"`
 	UpdatedAt int    `json:"updated_at"`
 }

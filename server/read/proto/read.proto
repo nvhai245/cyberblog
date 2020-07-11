@@ -4,14 +4,31 @@ package proto;
 
 option go_package = ".;proto";
 
-service Read {
-    rpc GetHash (GetHashRequest) returns (GetHashResponse);
-}
-
-message GetHashRequest {
+message User {
     int32 id = 1;
+    string username = 2;
+    string email = 3;
+    string first_name = 4;
+    string last_name = 5;
+    string avatar = 6;
+    int64 birthday = 7;
+    string bio = 8;
+    string facebook = 9;
+    string instagram = 10;
+    string twitter = 11;
+    int64 created_at = 12;
+    int64 updated_at = 13;
 }
 
-message GetHashResponse {
+service Read {
+    rpc GetUser (GetUserRequest) returns (GetUserResponse);
+}
+
+message GetUserRequest {
+    string email = 1;
+}
+
+message GetUserResponse {
+    User user = 1;
     string hash = 2;
 }
