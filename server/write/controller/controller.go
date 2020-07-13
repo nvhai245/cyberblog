@@ -22,6 +22,7 @@ func SaveUser(req *pb.SaveUserRequest) *pb.SaveUserResponse {
 		Facebook:  newUser.GetFacebook(),
 		Instagram: newUser.GetInstagram(),
 		Twitter:   newUser.GetTwitter(),
+		IsAdmin:   newUser.GetIsAdmin(),
 		CreatedAt: newUser.GetCreatedAt(),
 	}
 	success, userID := model.Insert(userToSave)

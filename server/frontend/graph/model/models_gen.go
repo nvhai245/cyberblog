@@ -29,6 +29,7 @@ type User struct {
 	Facebook  string `json:"facebook"`
 	Instagram string `json:"instagram"`
 	Twitter   string `json:"twitter"`
+	IsAdmin   bool   `json:"is_admin"`
 	CreatedAt int    `json:"created_at"`
 	UpdatedAt int    `json:"updated_at"`
 }

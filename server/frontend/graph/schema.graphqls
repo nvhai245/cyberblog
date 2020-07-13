@@ -2,41 +2,42 @@
 
 # Authentication Schema
 type User {
-  id: Int!
-  username: String!
-  email: String!
-  first_name: String!
-  last_name: String!
-  avatar: String!
-  birthday: Int!
-  bio: String!
-  facebook: String!
-  instagram: String!
-  twitter: String!
-  created_at: Int!
-  updated_at: Int!
+    id: Int!
+    username: String!
+    email: String!
+    first_name: String!
+    last_name: String!
+    avatar: String!
+    birthday: Int!
+    bio: String!
+    facebook: String!
+    instagram: String!
+    twitter: String!
+    is_admin: Boolean!
+    created_at: Int!
+    updated_at: Int!
 }
 
 type AuthResponse {
-  message: String!
-  user: User!
+    message: String!
+    user: User!
 }
 
 input NewUser {
-  email: String!
-  password: String!
+    email: String!
+    password: String!
 }
 
 type Token {
-  token: String!
-  expire_at: Int!
+    token: String!
+    expire_at: Int!
 }
 
 type Query {
-  users: [User!]!
+    users: [User!]!
 }
 
 type Mutation {
-  register(email: String!, password: String!): AuthResponse!
-  login(email: String!, password: String!): AuthResponse!
+    register(email: String!, password: String!): AuthResponse!
+    login(email: String!, password: String!): AuthResponse!
 }

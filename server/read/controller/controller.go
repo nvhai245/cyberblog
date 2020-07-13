@@ -25,6 +25,7 @@ func GetUser(req *pb.GetUserRequest) *pb.GetUserResponse {
 			Facebook:  foundUser.Facebook,
 			Instagram: foundUser.Instagram,
 			Twitter:   foundUser.Twitter,
+			IsAdmin:   foundUser.IsAdmin,
 			CreatedAt: foundUser.CreatedAt,
 			UpdatedAt: foundUser.UpdatedAt,
 		},

@@ -21,6 +21,7 @@ type User struct {
 	Facebook  string `db:"facebook"`
 	Instagram string `db:"instagram"`
 	Twitter   string `db:"twitter"`
+	IsAdmin   bool   `db:"is_admin"`
 	CreatedAt int64  `db:"created_at"`
 	UpdatedAt int64  `db:"updated_at"`
 }

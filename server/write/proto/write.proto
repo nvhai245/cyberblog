@@ -20,8 +20,9 @@ message NewUser {
     string facebook = 9;
     string instagram = 10;
     string twitter = 11;
-    int64 created_at = 12;
-    int64 updated_at = 13;
+    bool is_admin = 12;
+    int64 created_at = 13;
+    int64 updated_at = 14;
 }
 
 message SaveUserRequest {

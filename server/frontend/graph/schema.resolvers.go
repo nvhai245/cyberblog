@@ -51,6 +51,7 @@ func (r *mutationResolver) Register(ctx context.Context, email string, password 
 		Facebook:  registeredUser.GetFacebook(),
 		Instagram: registeredUser.GetInstagram(),
 		Twitter:   registeredUser.GetTwitter(),
+		IsAdmin:   registeredUser.GetIsAdmin(),
 		CreatedAt: int(registeredUser.GetCreatedAt()),
 	}
 	response = &model.AuthResponse{
@@ -97,6 +98,7 @@ func (r *mutationResolver) Login(ctx context.Context, email string, password str
 		Facebook:  loggedInUser.GetFacebook(),
 		Instagram: loggedInUser.GetInstagram(),
 		Twitter:   loggedInUser.GetTwitter(),
+		IsAdmin:   loggedInUser.GetIsAdmin(),
 		CreatedAt: int(loggedInUser.GetCreatedAt()),
 		UpdatedAt: int(loggedInUser.GetUpdatedAt()),
 	}
