@@ -7,29 +7,55 @@ type AuthResponse struct {
 	User    *User  `json:"user"`
 }
 
-type NewUser struct {
-	Email    string `json:"email"`
-	Password string `json:"password"`
+type DeleteUserResponse struct {
+	Message string `json:"message"`
 }
 
-type Token struct {
-	Token    string `json:"token"`
-	ExpireAt int    `json:"expire_at"`
+type EditUserResponse struct {
+	Message string `json:"message"`
+	User    *User  `json:"user"`
 }
 
-type User struct {
-	ID        int    `json:"id"`
+type EditedUser struct {
 	Username  string `json:"username"`
-	Email     string `json:"email"`
-	FirstName string `json:"first_name"`
-	LastName  string `json:"last_name"`
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
 	Avatar    string `json:"avatar"`
 	Birthday  int    `json:"birthday"`
 	Bio       string `json:"bio"`
 	Facebook  string `json:"facebook"`
 	Instagram string `json:"instagram"`
 	Twitter   string `json:"twitter"`
-	IsAdmin   bool   `json:"is_admin"`
-	CreatedAt int    `json:"created_at"`
-	UpdatedAt int    `json:"updated_at"`
+}
+
+type Token struct {
+	Token    string `json:"token"`
+	ExpireAt int    `json:"expireAt"`
+}
+
+type User struct {
+	ID        int    `json:"id"`
+	Username  string `json:"username"`
+	Email     string `json:"email"`
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
+	Avatar    string `json:"avatar"`
+	Birthday  int    `json:"birthday"`
+	Bio       string `json:"bio"`
+	Facebook  string `json:"facebook"`
+	Instagram string `json:"instagram"`
+	Twitter   string `json:"twitter"`
+	IsAdmin   bool   `json:"isAdmin"`
+	CreatedAt int    `json:"createdAt"`
+	UpdatedAt int    `json:"updatedAt"`
+}
+
+type GetAllUsersResponse struct {
+	Message string  `json:"message"`
+	Users   []*User `json:"users"`
+}
+
+type GetUserByIDResponse struct {
+	Message string `json:"message"`
+	User    *User  `json:"user"`
 }

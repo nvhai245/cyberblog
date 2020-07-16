@@ -112,8 +112,23 @@ func (r *mutationResolver) Login(ctx context.Context, email string, password str
 	return response, nil
 }
 
+func (r *mutationResolver) GetUserByID(ctx context.Context, requestorID int, userID int) (*model.GetUserByIDResponse, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
+func (r *mutationResolver) GetAllUsers(ctx context.Context, adminID int) (*model.GetAllUsersResponse, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
+func (r *mutationResolver) EditUser(ctx context.Context, userID int, editedUser model.EditedUser) (*model.EditUserResponse, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
+func (r *mutationResolver) DeleteUser(ctx context.Context, adminID int, userID int) (*model.DeleteUserResponse, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
 func (r *queryResolver) Users(ctx context.Context) ([]*model.User, error) {
-	// Call gRPC to Biz
 	return []*model.User{}, nil
 }
 

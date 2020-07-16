@@ -5,17 +5,17 @@ type User {
     id: Int!
     username: String!
     email: String!
-    first_name: String!
-    last_name: String!
+    firstName: String!
+    lastName: String!
     avatar: String!
     birthday: Int!
     bio: String!
     facebook: String!
     instagram: String!
     twitter: String!
-    is_admin: Boolean!
-    created_at: Int!
-    updated_at: Int!
+    isAdmin: Boolean!
+    createdAt: Int!
+    updatedAt: Int!
 }
 
 type AuthResponse {
@@ -23,21 +23,51 @@ type AuthResponse {
     user: User!
 }
 
-input NewUser {
-    email: String!
-    password: String!
+input EditedUser {
+    username: String!
+    firstName: String!
+    lastName: String!
+    avatar: String!
+    birthday: Int!
+    bio: String!
+    facebook: String!
+    instagram: String!
+    twitter: String!
 }
 
 type Token {
     token: String!
-    expire_at: Int!
+    expireAt: Int!
 }
 
 type Query {
     users: [User!]!
 }
 
+type getUserByIdResponse {
+    message: String!
+    user: User!
+}
+
+type getAllUsersResponse {
+    message: String!
+    users: [User!]!
+}
+
+type EditUserResponse {
+    message: String!
+    user: User!
+}
+
+type DeleteUserResponse {
+    message: String!
+}
+
 type Mutation {
     register(email: String!, password: String!): AuthResponse!
     login(email: String!, password: String!): AuthResponse!
+    getUserById(requestorId: Int!, userId: Int!): getUserByIdResponse!
+    getAllUsers(adminId: Int!): getAllUsersResponse!
+    EditUser(userId: Int!, editedUser: EditedUser!): EditUserResponse!
+    DeleteUser(adminId: Int!, userId: Int!): DeleteUserResponse!
 }

@@ -2,8 +2,6 @@ package main
 
 import (
 	"context"
-	"log"
-
 	"github.com/nvhai245/cyberblog/server/write/controller"
 	pb "github.com/nvhai245/cyberblog/server/write/proto"
 )
@@ -16,8 +14,5 @@ type WriteServer struct {
 // SaveUser method
 func (*WriteServer) SaveUser(ctx context.Context, req *pb.SaveUserRequest) (*pb.SaveUserResponse, error) {
 	res := controller.SaveUser(req)
-	if res.GetSuccess() == false {
-		log.Println("controller.GetUser(): success: false")
-	}
 	return res, nil
 }
