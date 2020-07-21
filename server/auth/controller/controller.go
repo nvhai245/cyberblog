@@ -15,6 +15,12 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+// MyCustomClaims for jwt
+type MyCustomClaims struct {
+	Email string `json:"email"`
+	jwt.StandardClaims
+}
+
 // Register controller fuc
 func Register(req *pb.RegisterRequest) *pb.RegisterResponse {
 	log.Printf("controller.Register(): [Request]: %+v\n", req)
@@ -113,6 +119,23 @@ func Login(req *pb.LoginRequest) *pb.LoginResponse {
 	return response
 }
 
+// CheckToken func
+func CheckToken(req *pb.CheckTokenRequest) *pb.CheckTokenResponse {
+	claims := &MyCustomClaims{}
+	parsedToken, err := jwt.ParseWithClaims(req.GetToken(), claims, func(token *jwt.Token) (interface{}, error) {
+		return []byte(os.Getenv("JWT_SECRET")), nil
+	})
+	if err != nil {
+		log.Println("controller.CheckToken(): ", err)
+		return &pb.CheckTokenResponse{Valid: false}
+	}
+	if !parsedToken.Valid {
+		return &pb.CheckTokenResponse{Valid: false}
+	}
+
+	return &pb.CheckTokenResponse{Valid: true}
+}
+
 func hashAndSalt(pwd []byte) string {
 	hash, err := bcrypt.GenerateFromPassword(pwd, bcrypt.DefaultCost)
 	if err != nil {
@@ -131,11 +154,6 @@ func passwordIsValid(pwd []byte, hash []byte) bool {
 
 func generateJWT(email string) (jwtString string) {
 	mySigningKey := []byte(os.Getenv("JWT_SECRET"))
-
-	type MyCustomClaims struct {
-		Email string `json:"email"`
-		jwt.StandardClaims
-	}
 
 	claims := MyCustomClaims{
 		email,

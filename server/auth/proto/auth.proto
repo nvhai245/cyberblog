@@ -7,6 +7,7 @@ option go_package = ".;proto";
 service Auth {
   rpc Register (RegisterRequest) returns (RegisterResponse);
   rpc Login (LoginRequest) returns (LoginResponse);
+  rpc CheckToken (CheckTokenRequest) returns (CheckTokenResponse);
 }
 
 message SavedUser {
@@ -44,4 +45,12 @@ message LoginRequest {
 message LoginResponse {
   SavedUser user = 1;
   string token = 2;
+}
+
+message CheckTokenRequest {
+  string token = 1;
+}
+
+message CheckTokenResponse {
+  bool valid = 1;
 }

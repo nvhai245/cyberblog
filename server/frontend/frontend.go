@@ -4,6 +4,7 @@ import (
 	"flag"
 	"github.com/gorilla/sessions"
 	"github.com/joho/godotenv"
+	cyberPb "github.com/nvhai245/cyberblog/server/cyber/proto"
 	"github.com/nvhai245/cyberblog/server/frontend/middleware"
 	"log"
 	"net/http"
@@ -43,14 +44,24 @@ func main() {
 
 	// ---gRPC Dials---
 	// Auth
-	conn, err := grpc.Dial("localhost:9090", grpc.WithInsecure(), grpc.WithBlock())
+	authConn, err := grpc.Dial(os.Getenv("AUTH_SERVICE_HOST"), grpc.WithInsecure(), grpc.WithBlock())
 	if err != nil {
 		log.Println(err)
 	} else {
 		log.Println("Connected to Auth service")
 	}
-	defer conn.Close()
-	connection.AuthClient = authPb.NewAuthClient(conn)
+	defer authConn.Close()
+	connection.AuthClient = authPb.NewAuthClient(authConn)
+
+	// Cyber
+	cyberConn, err := grpc.Dial(os.Getenv("CYBER_HOST"), grpc.WithInsecure(), grpc.WithBlock())
+	if err != nil {
+		log.Println(err)
+	} else {
+		log.Println("Connected to Cyber")
+	}
+	defer cyberConn.Close()
+	connection.CyberClient = cyberPb.NewCyberClient(cyberConn)
 
 	log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))

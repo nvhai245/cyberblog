@@ -6,6 +6,7 @@ package graph
 import (
 	"context"
 	"fmt"
+	cyberPb "github.com/nvhai245/cyberblog/server/cyber/proto"
 	"log"
 
 	authPb "github.com/nvhai245/cyberblog/server/auth/proto"
@@ -113,7 +114,48 @@ func (r *mutationResolver) Login(ctx context.Context, email string, password str
 }
 
 func (r *mutationResolver) GetUserByID(ctx context.Context, requestorID int, userID int) (*model.GetUserByIDResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	session := helper.GetSession(ctx, "auth")
+	// Reading userID cookie value
+	token := fmt.Sprintf("%v", session.Values["token"])
+	checkResponse, err := connection.AuthClient.CheckToken(context.Background(), &authPb.CheckTokenRequest{Token: token})
+	if err != nil {
+		log.Println("Error in rpc AuthClient.CheckToken(): ", err)
+		return nil, fmt.Errorf("INTERNAL SERVER ERROR!")
+	}
+	if !checkResponse.GetValid() {
+		return nil, fmt.Errorf("UNAUTHORIZED!")
+	}
+	res, err := connection.CyberClient.GetUserById(context.Background(), &cyberPb.GetUserByIdRequest{
+		RequestorId: int32(requestorID),
+		UserId:      int32(userID),
+	})
+	if err != nil {
+		log.Println("Error in rpc CyberClient.GetUserById(): ", err)
+		return nil, fmt.Errorf("INTERNAL SERVER ERROR!")
+	}
+	response := &model.GetUserByIDResponse{
+		Message: "User found!",
+		User: &model.User{
+			ID:        int(res.GetUser().GetId()),
+			Username:  "",
+			Email:     "",
+			FirstName: "",
+			LastName:  "",
+			Avatar:    "",
+			Birthday:  0,
+			Bio:       "",
+			Facebook:  "",
+			Instagram: "",
+			Twitter:   "",
+			IsAdmin:   false,
+			CreatedAt: 0,
+			UpdatedAt: 0,
+		},
+	}
+	// ****************************************************************************************************************
+
+	log.Printf("Called CyberClient.GetUserById() successful!, reply: %+v\n", response)
+	return response, nil
 }
 
 func (r *mutationResolver) GetAllUsers(ctx context.Context, adminID int) (*model.GetAllUsersResponse, error) {
