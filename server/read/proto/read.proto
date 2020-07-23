@@ -23,6 +23,7 @@ message User {
 
 service Read {
   rpc GetUser (GetUserRequest) returns (GetUserResponse);
+  rpc GetUserById (GetUserByIdRequest) returns (GetUserByIdResponse);
 }
 
 message GetUserRequest {
@@ -32,4 +33,13 @@ message GetUserRequest {
 message GetUserResponse {
   User user = 1;
   string hash = 2;
+}
+
+message GetUserByIdRequest {
+  int32 userId = 1;
+}
+
+message GetUserByIdResponse {
+  bool success = 1;
+  User user = 2;
 }

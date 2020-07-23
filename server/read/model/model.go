@@ -32,7 +32,7 @@ func GetUserByEmail(email string) *User {
 		log.Println("Error in model.GetUserByEmail(): ", err)
 		return nil
 	}
-	if rows.Err() == sql.ErrNoRows {
+	if err == sql.ErrNoRows {
 		log.Println("Error in model.GetUserByEmail(): ", err)
 		return nil
 	}
@@ -43,6 +43,33 @@ func GetUserByEmail(email string) *User {
 			log.Println("Error in model.GetUserByEmail(): rows.StructScan()", err)
 			return nil
 		}
+	}
+	log.Printf("%+v", foundUser)
+	return &foundUser
+}
+
+// GetUserById func
+func GetUserById(id int32) *User {
+	foundUser := User{}
+	rows, err := connection.DB.Queryx(`SELECT * FROM users WHERE id = $1`, id)
+	if err != nil {
+		log.Println("Error in model.GetUserById(): ", err)
+		return nil
+	}
+	if err == sql.ErrNoRows {
+		log.Println("Error in model.GetUserById(): ", err)
+		return nil
+	}
+	defer rows.Close()
+	if rows.Next() {
+		err = rows.StructScan(&foundUser)
+		if err != nil {
+			log.Println("Error in model.GetUserById(): rows.StructScan()", err)
+			return nil
+		}
+	} else {
+		log.Println("Error in model.GetUserById(): ", rows.Err())
+		return nil
 	}
 	log.Printf("%+v", foundUser)
 	return &foundUser

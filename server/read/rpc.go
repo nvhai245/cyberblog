@@ -20,3 +20,11 @@ func (*ReadServer) GetUser(ctx context.Context, req *pb.GetUserRequest) (*pb.Get
 	}
 	return res, nil
 }
+
+func (*ReadServer) GetUserById(ctx context.Context, req *pb.GetUserByIdRequest) (*pb.GetUserByIdResponse, error) {
+	res := controller.GetUserById(req)
+	if res.GetSuccess() == false {
+		log.Println("controller.GetUserById(): Can't find user with given id!")
+	}
+	return res, nil
+}

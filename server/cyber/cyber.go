@@ -46,7 +46,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	} else {
-		log.Println("Auth service listening on port 9090...")
+		log.Printf("Cyber running on %s...", os.Getenv("CYBER_HOST"))
 	}
 	grpcServer := grpc.NewServer()
 	pb.RegisterCyberServer(grpcServer, &CyberServer{})

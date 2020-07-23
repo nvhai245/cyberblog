@@ -133,23 +133,27 @@ func (r *mutationResolver) GetUserByID(ctx context.Context, requestorID int, use
 		log.Println("Error in rpc CyberClient.GetUserById(): ", err)
 		return nil, fmt.Errorf("INTERNAL SERVER ERROR!")
 	}
+	foundUser := res.GetUser()
+	if foundUser == nil {
+		return nil, fmt.Errorf("Can't find user with given id!")
+	}
 	response := &model.GetUserByIDResponse{
 		Message: "User found!",
 		User: &model.User{
-			ID:        int(res.GetUser().GetId()),
-			Username:  "",
-			Email:     "",
-			FirstName: "",
-			LastName:  "",
-			Avatar:    "",
-			Birthday:  0,
-			Bio:       "",
-			Facebook:  "",
-			Instagram: "",
-			Twitter:   "",
-			IsAdmin:   false,
-			CreatedAt: 0,
-			UpdatedAt: 0,
+			ID:        int(foundUser.GetId()),
+			Username:  foundUser.GetUsername(),
+			Email:     foundUser.GetEmail(),
+			FirstName: foundUser.GetFirstName(),
+			LastName:  foundUser.GetLastName(),
+			Avatar:    foundUser.GetAvatar(),
+			Birthday:  int(foundUser.GetBirthday()),
+			Bio:       foundUser.GetBio(),
+			Facebook:  foundUser.GetFacebook(),
+			Instagram: foundUser.GetInstagram(),
+			Twitter:   foundUser.GetTwitter(),
+			IsAdmin:   foundUser.GetIsAdmin(),
+			CreatedAt: int(foundUser.GetCreatedAt()),
+			UpdatedAt: int(foundUser.GetUpdatedAt()),
 		},
 	}
 	// ****************************************************************************************************************
