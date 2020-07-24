@@ -28,3 +28,11 @@ func (*ReadServer) GetUserById(ctx context.Context, req *pb.GetUserByIdRequest) 
 	}
 	return res, nil
 }
+
+func (*ReadServer) GetAllUsers(ctx context.Context, req *pb.GetAllUsersRequest) (*pb.GetAllUsersResponse, error) {
+	res := controller.GetAllUsers(req)
+	if res.GetSuccess() == false {
+		log.Println("controller.GetAllUsers(): Can't get all users!")
+	}
+	return res, nil
+}

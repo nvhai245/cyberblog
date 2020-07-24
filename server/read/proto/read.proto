@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package proto;
+package readProto;
 
-option go_package = ".;proto";
+option go_package = ".;readProto";
 
 message User {
   int32 id = 1;
@@ -24,6 +24,7 @@ message User {
 service Read {
   rpc GetUser (GetUserRequest) returns (GetUserResponse);
   rpc GetUserById (GetUserByIdRequest) returns (GetUserByIdResponse);
+  rpc GetAllUsers (GetAllUsersRequest) returns (GetAllUsersResponse);
 }
 
 message GetUserRequest {
@@ -42,4 +43,13 @@ message GetUserByIdRequest {
 message GetUserByIdResponse {
   bool success = 1;
   User user = 2;
+}
+
+message GetAllUsersRequest {
+  int32 admin_id = 1;
+}
+
+message GetAllUsersResponse{
+  bool success = 1;
+  repeated User users = 2;
 }

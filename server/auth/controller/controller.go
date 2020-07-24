@@ -17,7 +17,8 @@ import (
 
 // MyCustomClaims for jwt
 type MyCustomClaims struct {
-	Email string `json:"email"`
+	Email   string `json:"email"`
+	IsAdmin bool   `json:"isAdmin"`
 	jwt.StandardClaims
 }
 
@@ -48,7 +49,7 @@ func Register(req *pb.RegisterRequest) *pb.RegisterResponse {
 	}
 
 	savedUser := res.GetUser()
-	generatedJWT := generateJWT(savedUser.GetEmail())
+	generatedJWT := generateJWT(savedUser.GetEmail(), savedUser.GetIsAdmin())
 	response := &pb.RegisterResponse{
 		User: &pb.SavedUser{
 			Id:        savedUser.GetId(),
@@ -92,7 +93,7 @@ func Login(req *pb.LoginRequest) *pb.LoginResponse {
 
 	if passwordIsValid([]byte(req.GetPassword()), []byte(res.GetHash())) {
 		loggedInUser := res.GetUser()
-		generatedJWT := generateJWT(loggedInUser.GetEmail())
+		generatedJWT := generateJWT(loggedInUser.GetEmail(), loggedInUser.GetIsAdmin())
 		response = &pb.LoginResponse{
 			User: &pb.SavedUser{
 				Id:        loggedInUser.GetId(),
@@ -127,13 +128,16 @@ func CheckToken(req *pb.CheckTokenRequest) *pb.CheckTokenResponse {
 	})
 	if err != nil {
 		log.Println("controller.CheckToken(): ", err)
-		return &pb.CheckTokenResponse{Valid: false}
+		return &pb.CheckTokenResponse{Valid: false, IsAdmin: false}
 	}
 	if !parsedToken.Valid {
-		return &pb.CheckTokenResponse{Valid: false}
+		return &pb.CheckTokenResponse{Valid: false, IsAdmin: false}
+	}
+	if claims.IsAdmin {
+		return &pb.CheckTokenResponse{Valid: true, IsAdmin: true}
 	}
 
-	return &pb.CheckTokenResponse{Valid: true}
+	return &pb.CheckTokenResponse{Valid: true, IsAdmin: false}
 }
 
 func hashAndSalt(pwd []byte) string {
@@ -152,11 +156,12 @@ func passwordIsValid(pwd []byte, hash []byte) bool {
 	return true
 }
 
-func generateJWT(email string) (jwtString string) {
+func generateJWT(email string, isAdmin bool) (jwtString string) {
 	mySigningKey := []byte(os.Getenv("JWT_SECRET"))
 
 	claims := MyCustomClaims{
 		email,
+		isAdmin,
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Hour * 24).Unix(),
 			Issuer:    "auth",

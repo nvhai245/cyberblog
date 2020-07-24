@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package proto;
+package authProto;
 
-option go_package = ".;proto";
+option go_package = ".;authProto";
 
 service Auth {
   rpc Register (RegisterRequest) returns (RegisterResponse);
@@ -53,4 +53,5 @@ message CheckTokenRequest {
 
 message CheckTokenResponse {
   bool valid = 1;
+  bool is_admin = 2;
 }

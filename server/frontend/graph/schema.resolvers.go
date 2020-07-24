@@ -25,9 +25,6 @@ func (r *mutationResolver) Register(ctx context.Context, email string, password 
 	//expiredAt := time.Now().Add(time.Hour * 24).Unix()
 	session := helper.GetSession(ctx, "auth")
 	session.Values["token"] = res.GetToken()
-	// Reading userID cookie value
-	//token := session.Values["token"]
-	// Save session
 	if err := helper.SaveSession(ctx, session); err != nil {
 		return nil, fmt.Errorf("Resolver.Register(): Failed to save cart in session with error: %s", err)
 	}
@@ -74,9 +71,6 @@ func (r *mutationResolver) Login(ctx context.Context, email string, password str
 	//expiredAt := time.Now().Add(time.Hour * 24).Unix()
 	session := helper.GetSession(ctx, "auth")
 	session.Values["token"] = res.GetToken()
-	// Reading userID cookie value
-	//token := session.Values["token"]
-	// Save session
 	if err := helper.SaveSession(ctx, session); err != nil {
 		return nil, fmt.Errorf("Resolver.Register(): Failed to save cart in session with error: %s", err)
 	}
@@ -115,7 +109,6 @@ func (r *mutationResolver) Login(ctx context.Context, email string, password str
 
 func (r *mutationResolver) GetUserByID(ctx context.Context, requestorID int, userID int) (*model.GetUserByIDResponse, error) {
 	session := helper.GetSession(ctx, "auth")
-	// Reading userID cookie value
 	token := fmt.Sprintf("%v", session.Values["token"])
 	checkResponse, err := connection.AuthClient.CheckToken(context.Background(), &authPb.CheckTokenRequest{Token: token})
 	if err != nil {
@@ -163,7 +156,60 @@ func (r *mutationResolver) GetUserByID(ctx context.Context, requestorID int, use
 }
 
 func (r *mutationResolver) GetAllUsers(ctx context.Context, adminID int) (*model.GetAllUsersResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	session := helper.GetSession(ctx, "auth")
+	token := fmt.Sprintf("%v", session.Values["token"])
+	checkResponse, err := connection.AuthClient.CheckToken(context.Background(), &authPb.CheckTokenRequest{Token: token})
+	if err != nil {
+		log.Println("Error in rpc AuthClient.CheckToken(): ", err)
+		return nil, fmt.Errorf("INTERNAL SERVER ERROR!")
+	}
+	if !checkResponse.GetValid() {
+		return nil, fmt.Errorf("UNAUTHORIZED!")
+	}
+	if !checkResponse.GetIsAdmin() {
+		return nil, fmt.Errorf("YOU ARE NOT AN ADMIN!")
+	}
+
+	res, err := connection.CyberClient.GetAllUsers(context.Background(), &cyberPb.GetAllUsersRequest{
+		AdminId: int32(adminID),
+	})
+	if err != nil {
+		log.Println("Error in rpc CyberClient.GetAllUsers(): ", err)
+		return nil, fmt.Errorf("INTERNAL SERVER ERROR!")
+	}
+	foundUsers := res.GetUsers()
+	if foundUsers == nil {
+		return nil, fmt.Errorf("Can't get all users!")
+	}
+	var users []*model.User
+	for _, foundUser := range foundUsers {
+		user := &model.User{
+			ID:        int(foundUser.GetId()),
+			Username:  foundUser.GetUsername(),
+			Email:     foundUser.GetEmail(),
+			FirstName: foundUser.GetFirstName(),
+			LastName:  foundUser.GetLastName(),
+			Avatar:    foundUser.GetAvatar(),
+			Birthday:  int(foundUser.GetBirthday()),
+			Bio:       foundUser.GetBio(),
+			Facebook:  foundUser.GetFacebook(),
+			Instagram: foundUser.GetInstagram(),
+			Twitter:   foundUser.GetTwitter(),
+			IsAdmin:   foundUser.GetIsAdmin(),
+			CreatedAt: int(foundUser.GetCreatedAt()),
+			UpdatedAt: int(foundUser.GetUpdatedAt()),
+		}
+		users = append(users, user)
+	}
+	response := &model.GetAllUsersResponse{
+		Message: "Get all users successful!",
+		Users:   users,
+	}
+
+	// ****************************************************************************************************************
+
+	log.Printf("Called CyberClient.GetAllUsers() successful!, reply: %+v\n", response)
+	return response, nil
 }
 
 func (r *mutationResolver) EditUser(ctx context.Context, userID int, editedUser model.EditedUser) (*model.EditUserResponse, error) {

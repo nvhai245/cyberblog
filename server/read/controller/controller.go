@@ -63,3 +63,41 @@ func GetUserById(req *pb.GetUserByIdRequest) *pb.GetUserByIdResponse {
 		Success: true,
 	}
 }
+
+// GetUserById controller
+func GetAllUsers(req *pb.GetAllUsersRequest) *pb.GetAllUsersResponse {
+	foundUsers := model.GetAllUsers(req.GetAdminId())
+	if foundUsers == nil {
+		log.Println("controller.GetAllUsers() failed in model.GetAllUsers()")
+		return &pb.GetAllUsersResponse{
+			Success: false,
+			Users:   nil,
+		}
+	}
+
+	var users []*pb.User
+
+	for _, foundUser := range foundUsers {
+		user := &pb.User{
+			Id:        foundUser.ID,
+			Username:  foundUser.Username,
+			Email:     foundUser.Email,
+			FirstName: foundUser.FirstName,
+			LastName:  foundUser.LastName,
+			Avatar:    foundUser.Avatar,
+			Birthday:  foundUser.Birthday,
+			Bio:       foundUser.Bio,
+			Facebook:  foundUser.Facebook,
+			Instagram: foundUser.Instagram,
+			Twitter:   foundUser.Twitter,
+			IsAdmin:   foundUser.IsAdmin,
+			CreatedAt: foundUser.CreatedAt,
+			UpdatedAt: foundUser.UpdatedAt,
+		}
+		users = append(users, user)
+	}
+	return &pb.GetAllUsersResponse{
+		Users:   users,
+		Success: true,
+	}
+}

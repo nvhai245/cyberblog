@@ -1,11 +1,12 @@
 syntax = "proto3";
 
-package proto;
+package cyberProto;
 
-option go_package = ".;proto";
+option go_package = ".;cyberProto";
 
 service Cyber {
   rpc GetUserById (GetUserByIdRequest) returns (GetUserByIdResponse);
+  rpc GetAllUsers (GetAllUsersRequest) returns (GetAllUsersResponse);
 }
 
 message User {
@@ -33,4 +34,13 @@ message GetUserByIdRequest {
 message GetUserByIdResponse{
   bool success = 1;
   User user = 2;
+}
+
+message GetAllUsersRequest {
+  int32 admin_id = 1;
+}
+
+message GetAllUsersResponse{
+  bool success = 1;
+  repeated User users = 2;
 }

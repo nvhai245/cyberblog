@@ -15,3 +15,8 @@ func (*CyberServer) GetUserById(ctx context.Context, req *pb.GetUserByIdRequest)
 	foundUser := controller.GetUserById(req.GetRequestorId(), req.GetUserId())
 	return foundUser, nil
 }
+
+func (*CyberServer) GetAllUsers(ctx context.Context, req *pb.GetAllUsersRequest) (*pb.GetAllUsersResponse, error) {
+	foundUser := controller.GetAllUsers(req.GetAdminId())
+	return foundUser, nil
+}

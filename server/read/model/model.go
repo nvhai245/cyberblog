@@ -74,3 +74,20 @@ func GetUserById(id int32) *User {
 	log.Printf("%+v", foundUser)
 	return &foundUser
 }
+
+// GetUserById func
+func GetAllUsers(adminId int32) []*User {
+	_ = adminId
+	var foundUsers []*User
+	err := connection.DB.Select(&foundUsers, `SELECT * FROM users`)
+	if err != nil {
+		log.Println("Error in model.GetAllUsers(): ", err)
+		return nil
+	}
+	if err == sql.ErrNoRows {
+		log.Println("Error in model.GetAllUsers(): ", err)
+		return nil
+	}
+	log.Printf("%+v", foundUsers)
+	return foundUsers
+}
