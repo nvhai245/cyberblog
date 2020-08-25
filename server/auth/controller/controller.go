@@ -134,10 +134,10 @@ func CheckToken(req *pb.CheckTokenRequest) *pb.CheckTokenResponse {
 		return &pb.CheckTokenResponse{Valid: false, IsAdmin: false}
 	}
 	if claims.IsAdmin {
-		return &pb.CheckTokenResponse{Valid: true, IsAdmin: true}
+		return &pb.CheckTokenResponse{Valid: true, IsAdmin: true, Email: claims.Email}
 	}
 
-	return &pb.CheckTokenResponse{Valid: true, IsAdmin: false}
+	return &pb.CheckTokenResponse{Valid: true, IsAdmin: false, Email: claims.Email}
 }
 
 func hashAndSalt(pwd []byte) string {

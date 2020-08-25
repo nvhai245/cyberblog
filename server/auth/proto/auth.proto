@@ -54,4 +54,5 @@ message CheckTokenRequest {
 message CheckTokenResponse {
   bool valid = 1;
   bool is_admin = 2;
+  string email = 3;
 }

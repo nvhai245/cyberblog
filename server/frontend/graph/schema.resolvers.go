@@ -213,11 +213,33 @@ func (r *mutationResolver) GetAllUsers(ctx context.Context, adminID int) (*model
 }
 
 func (r *mutationResolver) EditUser(ctx context.Context, userID int, editedUser model.EditedUser) (*model.EditUserResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	session := helper.GetSession(ctx, "auth")
+	token := fmt.Sprintf("%v", session.Values["token"])
+	checkResponse, err := connection.AuthClient.CheckToken(context.Background(), &authPb.CheckTokenRequest{Token: token})
+	if err != nil {
+		log.Println("Error in rpc AuthClient.CheckToken(): ", err)
+		return nil, fmt.Errorf("INTERNAL SERVER ERROR!")
+	}
+	if !checkResponse.GetValid() {
+		return nil, fmt.Errorf("UNAUTHORIZED!")
+	}
+	//	TODO: call to cyber
+	return &model.EditUserResponse{}, nil
 }
 
 func (r *mutationResolver) DeleteUser(ctx context.Context, adminID int, userID int) (*model.DeleteUserResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	session := helper.GetSession(ctx, "auth")
+	token := fmt.Sprintf("%v", session.Values["token"])
+	checkResponse, err := connection.AuthClient.CheckToken(context.Background(), &authPb.CheckTokenRequest{Token: token})
+	if err != nil {
+		log.Println("Error in rpc AuthClient.CheckToken(): ", err)
+		return nil, fmt.Errorf("INTERNAL SERVER ERROR!")
+	}
+	if !checkResponse.GetValid() {
+		return nil, fmt.Errorf("UNAUTHORIZED!")
+	}
+	//	TODO: call to cyber
+	return &model.DeleteUserResponse{}, nil
 }
 
 func (r *queryResolver) Users(ctx context.Context) ([]*model.User, error) {
