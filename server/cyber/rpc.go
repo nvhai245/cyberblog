@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"github.com/nvhai245/cyberblog/server/cyber/controller"
-
 	pb "github.com/nvhai245/cyberblog/server/cyber/proto"
 )
 
@@ -19,4 +18,9 @@ func (*CyberServer) GetUserById(ctx context.Context, req *pb.GetUserByIdRequest)
 func (*CyberServer) GetAllUsers(ctx context.Context, req *pb.GetAllUsersRequest) (*pb.GetAllUsersResponse, error) {
 	foundUser := controller.GetAllUsers(req.GetAdminId())
 	return foundUser, nil
+}
+
+func (*CyberServer) EditUser(ctx context.Context, req *pb.EditUserRequest) (*pb.EditUserResponse, error) {
+	editedUser := controller.EditUser(req.GetRequestorEmail(), req.GetRequestorIsAdmin(), req.GetUser())
+	return editedUser, nil
 }

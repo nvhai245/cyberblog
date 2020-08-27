@@ -7,6 +7,7 @@ option go_package = ".;cyberProto";
 service Cyber {
   rpc GetUserById (GetUserByIdRequest) returns (GetUserByIdResponse);
   rpc GetAllUsers (GetAllUsersRequest) returns (GetAllUsersResponse);
+  rpc EditUser (EditUserRequest) returns (EditUserResponse);
 }
 
 message User {
@@ -43,4 +44,15 @@ message GetAllUsersRequest {
 message GetAllUsersResponse{
   bool success = 1;
   repeated User users = 2;
+}
+
+message EditUserRequest {
+  string requestor_email = 1;
+  bool requestor_is_admin = 2;
+  User user = 3;
+}
+
+message EditUserResponse {
+  bool success = 1;
+  User user = 2;
 }

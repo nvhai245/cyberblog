@@ -6,6 +6,7 @@ option go_package = ".;writeProto";
 
 service Write {
     rpc SaveUser (SaveUserRequest) returns (SaveUserResponse);
+    rpc EditUser (EditUserRequest) returns (EditUserResponse);
 }
 
 message NewUser {
@@ -33,4 +34,15 @@ message SaveUserRequest {
 message SaveUserResponse {
     NewUser user = 1;
     bool success = 2;
+}
+
+message EditUserRequest {
+    string requestor_email = 1;
+    bool requestor_is_admin = 2;
+    NewUser user = 3;
+}
+
+message EditUserResponse {
+    bool success = 1;
+    NewUser user = 2;
 }

@@ -290,6 +290,124 @@ func (x *SaveUserResponse) GetSuccess() bool {
 	return false
 }
 
+type EditUserRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	RequestorEmail   string   `protobuf:"bytes,1,opt,name=requestor_email,json=requestorEmail,proto3" json:"requestor_email,omitempty"`
+	RequestorIsAdmin bool     `protobuf:"varint,2,opt,name=requestor_is_admin,json=requestorIsAdmin,proto3" json:"requestor_is_admin,omitempty"`
+	User             *NewUser `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
+}
+
+func (x *EditUserRequest) Reset() {
+	*x = EditUserRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EditUserRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EditUserRequest) ProtoMessage() {}
+
+func (x *EditUserRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EditUserRequest.ProtoReflect.Descriptor instead.
+func (*EditUserRequest) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *EditUserRequest) GetRequestorEmail() string {
+	if x != nil {
+		return x.RequestorEmail
+	}
+	return ""
+}
+
+func (x *EditUserRequest) GetRequestorIsAdmin() bool {
+	if x != nil {
+		return x.RequestorIsAdmin
+	}
+	return false
+}
+
+func (x *EditUserRequest) GetUser() *NewUser {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+type EditUserResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success bool     `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	User    *NewUser `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
+}
+
+func (x *EditUserResponse) Reset() {
+	*x = EditUserResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EditUserResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EditUserResponse) ProtoMessage() {}
+
+func (x *EditUserResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EditUserResponse.ProtoReflect.Descriptor instead.
+func (*EditUserResponse) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *EditUserResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *EditUserResponse) GetUser() *NewUser {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
 var File_write_proto protoreflect.FileDescriptor
 
 var file_write_proto_rawDesc = []byte{
@@ -328,14 +446,33 @@ var file_write_proto_rawDesc = []byte{
 	0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65,
 	0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4e, 0x65, 0x77, 0x55, 0x73, 0x65, 0x72, 0x52, 0x04, 0x75,
 	0x73, 0x65, 0x72, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x32, 0x4e, 0x0a,
-	0x05, 0x57, 0x72, 0x69, 0x74, 0x65, 0x12, 0x45, 0x0a, 0x08, 0x53, 0x61, 0x76, 0x65, 0x55, 0x73,
-	0x65, 0x72, 0x12, 0x1b, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e,
-	0x53, 0x61, 0x76, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
-	0x1c, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x53, 0x61, 0x76,
-	0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x0e, 0x5a,
-	0x0c, 0x2e, 0x3b, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x22, 0x91, 0x01,
+	0x0a, 0x0f, 0x45, 0x64, 0x69, 0x74, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x12, 0x27, 0x0a, 0x0f, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x5f, 0x65,
+	0x6d, 0x61, 0x69, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x72, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x6f, 0x72, 0x45, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x2c, 0x0a, 0x12, 0x72, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x5f, 0x69, 0x73, 0x5f, 0x61, 0x64, 0x6d, 0x69, 0x6e,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x10, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x6f,
+	0x72, 0x49, 0x73, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x12, 0x27, 0x0a, 0x04, 0x75, 0x73, 0x65, 0x72,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72,
+	0x6f, 0x74, 0x6f, 0x2e, 0x4e, 0x65, 0x77, 0x55, 0x73, 0x65, 0x72, 0x52, 0x04, 0x75, 0x73, 0x65,
+	0x72, 0x22, 0x55, 0x0a, 0x10, 0x45, 0x64, 0x69, 0x74, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x12,
+	0x27, 0x0a, 0x04, 0x75, 0x73, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e,
+	0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4e, 0x65, 0x77, 0x55, 0x73,
+	0x65, 0x72, 0x52, 0x04, 0x75, 0x73, 0x65, 0x72, 0x32, 0x95, 0x01, 0x0a, 0x05, 0x57, 0x72, 0x69,
+	0x74, 0x65, 0x12, 0x45, 0x0a, 0x08, 0x53, 0x61, 0x76, 0x65, 0x55, 0x73, 0x65, 0x72, 0x12, 0x1b,
+	0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x53, 0x61, 0x76, 0x65,
+	0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1c, 0x2e, 0x77, 0x72,
+	0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x53, 0x61, 0x76, 0x65, 0x55, 0x73, 0x65,
+	0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x45, 0x0a, 0x08, 0x45, 0x64, 0x69,
+	0x74, 0x55, 0x73, 0x65, 0x72, 0x12, 0x1b, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f,
+	0x74, 0x6f, 0x2e, 0x45, 0x64, 0x69, 0x74, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x1c, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e,
+	0x45, 0x64, 0x69, 0x74, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x42, 0x0e, 0x5a, 0x0c, 0x2e, 0x3b, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -350,22 +487,28 @@ func file_write_proto_rawDescGZIP() []byte {
 	return file_write_proto_rawDescData
 }
 
-var file_write_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_write_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_write_proto_goTypes = []interface{}{
 	(*NewUser)(nil),          // 0: writeProto.NewUser
 	(*SaveUserRequest)(nil),  // 1: writeProto.SaveUserRequest
 	(*SaveUserResponse)(nil), // 2: writeProto.SaveUserResponse
+	(*EditUserRequest)(nil),  // 3: writeProto.EditUserRequest
+	(*EditUserResponse)(nil), // 4: writeProto.EditUserResponse
 }
 var file_write_proto_depIdxs = []int32{
 	0, // 0: writeProto.SaveUserRequest.user:type_name -> writeProto.NewUser
 	0, // 1: writeProto.SaveUserResponse.user:type_name -> writeProto.NewUser
-	1, // 2: writeProto.Write.SaveUser:input_type -> writeProto.SaveUserRequest
-	2, // 3: writeProto.Write.SaveUser:output_type -> writeProto.SaveUserResponse
-	3, // [3:4] is the sub-list for method output_type
-	2, // [2:3] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	0, // 2: writeProto.EditUserRequest.user:type_name -> writeProto.NewUser
+	0, // 3: writeProto.EditUserResponse.user:type_name -> writeProto.NewUser
+	1, // 4: writeProto.Write.SaveUser:input_type -> writeProto.SaveUserRequest
+	3, // 5: writeProto.Write.EditUser:input_type -> writeProto.EditUserRequest
+	2, // 6: writeProto.Write.SaveUser:output_type -> writeProto.SaveUserResponse
+	4, // 7: writeProto.Write.EditUser:output_type -> writeProto.EditUserResponse
+	6, // [6:8] is the sub-list for method output_type
+	4, // [4:6] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_write_proto_init() }
@@ -410,6 +553,30 @@ func file_write_proto_init() {
 				return nil
 			}
 		}
+		file_write_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EditUserRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EditUserResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -417,7 +584,7 @@ func file_write_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_write_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -444,6 +611,7 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type WriteClient interface {
 	SaveUser(ctx context.Context, in *SaveUserRequest, opts ...grpc.CallOption) (*SaveUserResponse, error)
+	EditUser(ctx context.Context, in *EditUserRequest, opts ...grpc.CallOption) (*EditUserResponse, error)
 }
 
 type writeClient struct {
@@ -463,9 +631,19 @@ func (c *writeClient) SaveUser(ctx context.Context, in *SaveUserRequest, opts ..
 	return out, nil
 }
 
+func (c *writeClient) EditUser(ctx context.Context, in *EditUserRequest, opts ...grpc.CallOption) (*EditUserResponse, error) {
+	out := new(EditUserResponse)
+	err := c.cc.Invoke(ctx, "/writeProto.Write/EditUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WriteServer is the server API for Write service.
 type WriteServer interface {
 	SaveUser(context.Context, *SaveUserRequest) (*SaveUserResponse, error)
+	EditUser(context.Context, *EditUserRequest) (*EditUserResponse, error)
 }
 
 // UnimplementedWriteServer can be embedded to have forward compatible implementations.
@@ -474,6 +652,9 @@ type UnimplementedWriteServer struct {
 
 func (*UnimplementedWriteServer) SaveUser(context.Context, *SaveUserRequest) (*SaveUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SaveUser not implemented")
+}
+func (*UnimplementedWriteServer) EditUser(context.Context, *EditUserRequest) (*EditUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EditUser not implemented")
 }
 
 func RegisterWriteServer(s *grpc.Server, srv WriteServer) {
@@ -498,6 +679,24 @@ func _Write_SaveUser_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Write_EditUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EditUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WriteServer).EditUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/writeProto.Write/EditUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WriteServer).EditUser(ctx, req.(*EditUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Write_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "writeProto.Write",
 	HandlerType: (*WriteServer)(nil),
@@ -505,6 +704,10 @@ var _Write_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SaveUser",
 			Handler:    _Write_SaveUser_Handler,
+		},
+		{
+			MethodName: "EditUser",
+			Handler:    _Write_EditUser_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

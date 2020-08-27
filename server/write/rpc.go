@@ -16,3 +16,9 @@ func (*WriteServer) SaveUser(ctx context.Context, req *pb.SaveUserRequest) (*pb.
 	res := controller.SaveUser(req)
 	return res, nil
 }
+
+// EditUser method
+func (*WriteServer) EditUser(ctx context.Context, req *pb.EditUserRequest) (*pb.EditUserResponse, error) {
+	res := controller.EditUser(req)
+	return res, nil
+}

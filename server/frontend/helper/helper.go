@@ -3,6 +3,9 @@ package helper
 import (
 	"context"
 	"github.com/gorilla/sessions"
+	authPb "github.com/nvhai245/cyberblog/server/auth/proto"
+	cyberPb "github.com/nvhai245/cyberblog/server/cyber/proto"
+	"github.com/nvhai245/cyberblog/server/frontend/graph/model"
 	"net/http"
 )
 
@@ -33,4 +36,46 @@ func SaveSession(ctx context.Context, session *sessions.Session) error {
 	err := session.Save(httpContext.R, *httpContext.W)
 
 	return err
+}
+
+// CyberUserToGraphUser parse user object from cyber into graphql user
+func CyberUserToGraphUser(foundUser *cyberPb.User) *model.User {
+	user := &model.User{
+		ID:        int(foundUser.GetId()),
+		Username:  foundUser.GetUsername(),
+		Email:     foundUser.GetEmail(),
+		FirstName: foundUser.GetFirstName(),
+		LastName:  foundUser.GetLastName(),
+		Avatar:    foundUser.GetAvatar(),
+		Birthday:  int(foundUser.GetBirthday()),
+		Bio:       foundUser.GetBio(),
+		Facebook:  foundUser.GetFacebook(),
+		Instagram: foundUser.GetInstagram(),
+		Twitter:   foundUser.GetTwitter(),
+		IsAdmin:   foundUser.GetIsAdmin(),
+		CreatedAt: int(foundUser.GetCreatedAt()),
+		UpdatedAt: int(foundUser.GetUpdatedAt()),
+	}
+	return user
+}
+
+// CyberUserToGraphUser parse user object from cyber into graphql user
+func AuthUserToGraphUser(foundUser *authPb.SavedUser) *model.User {
+	user := &model.User{
+		ID:        int(foundUser.GetId()),
+		Username:  foundUser.GetUsername(),
+		Email:     foundUser.GetEmail(),
+		FirstName: foundUser.GetFirstName(),
+		LastName:  foundUser.GetLastName(),
+		Avatar:    foundUser.GetAvatar(),
+		Birthday:  int(foundUser.GetBirthday()),
+		Bio:       foundUser.GetBio(),
+		Facebook:  foundUser.GetFacebook(),
+		Instagram: foundUser.GetInstagram(),
+		Twitter:   foundUser.GetTwitter(),
+		IsAdmin:   foundUser.GetIsAdmin(),
+		CreatedAt: int(foundUser.GetCreatedAt()),
+		UpdatedAt: int(foundUser.GetUpdatedAt()),
+	}
+	return user
 }
