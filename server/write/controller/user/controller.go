@@ -1,4 +1,4 @@
-package controller
+package userController
 
 import (
 	"log"
@@ -62,6 +62,23 @@ func EditUser(req *pb.EditUserRequest) *pb.EditUserResponse {
 		Success: true,
 		User:    userToReturn,
 	}
+}
+
+// DeleteUser controller
+func DeleteUser(req *pb.DeleteUserRequest) (*pb.DeleteUserResponse, error) {
+	success, deletedUser, err := userModel.Delete(req.GetRequestorEmail(), req.GetUserId())
+	returnedUser := modelUserToProtoUser(deletedUser)
+	if !success || returnedUser.GetId() == 0 {
+		log.Println("controller.Delete() failed in userModel.Delete()")
+		return &pb.DeleteUserResponse{
+			Success: false,
+			User:    nil,
+		}, err
+	}
+	return &pb.DeleteUserResponse{
+		Success: true,
+		User:    returnedUser,
+	}, nil
 }
 
 // protoUserToModelUser func

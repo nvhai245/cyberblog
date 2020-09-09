@@ -24,3 +24,8 @@ func (*CyberServer) EditUser(ctx context.Context, req *pb.EditUserRequest) (*pb.
 	editedUser := controller.EditUser(req.GetRequestorEmail(), req.GetRequestorIsAdmin(), req.GetUser())
 	return editedUser, nil
 }
+
+func (*CyberServer) DeleteUser(ctx context.Context, req *pb.DeleteUserRequest) (*pb.DeleteUserResponse, error) {
+	deletedUser, err := controller.DeleteUser(req.GetRequestorEmail(), req.GetRequestorIsAdmin(), req.GetUserId())
+	return deletedUser, err
+}

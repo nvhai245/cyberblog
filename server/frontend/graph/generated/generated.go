@@ -50,6 +50,7 @@ type ComplexityRoot struct {
 
 	DeleteUserResponse struct {
 		Message func(childComplexity int) int
+		User    func(childComplexity int) int
 	}
 
 	EditUserResponse struct {
@@ -150,6 +151,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.DeleteUserResponse.Message(childComplexity), true
+
+	case "DeleteUserResponse.user":
+		if e.complexity.DeleteUserResponse.User == nil {
+			break
+		}
+
+		return e.complexity.DeleteUserResponse.User(childComplexity), true
 
 	case "EditUserResponse.message":
 		if e.complexity.EditUserResponse.Message == nil {
@@ -511,6 +519,7 @@ type EditUserResponse {
 
 type DeleteUserResponse {
     message: String!
+    user: User!
 }
 
 type Mutation {
@@ -802,6 +811,40 @@ func (ec *executionContext) _DeleteUserResponse_message(ctx context.Context, fie
 	res := resTmp.(string)
 	fc.Result = res
 	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _DeleteUserResponse_user(ctx context.Context, field graphql.CollectedField, obj *model.DeleteUserResponse) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:   "DeleteUserResponse",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.User, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.User)
+	fc.Result = res
+	return ec.marshalNUser2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐUser(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _EditUserResponse_message(ctx context.Context, field graphql.CollectedField, obj *model.EditUserResponse) (ret graphql.Marshaler) {
@@ -3075,6 +3118,11 @@ func (ec *executionContext) _DeleteUserResponse(ctx context.Context, sel ast.Sel
 			out.Values[i] = graphql.MarshalString("DeleteUserResponse")
 		case "message":
 			out.Values[i] = ec._DeleteUserResponse_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "user":
+			out.Values[i] = ec._DeleteUserResponse_user(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}

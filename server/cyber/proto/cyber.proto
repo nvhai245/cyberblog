@@ -8,6 +8,7 @@ service Cyber {
   rpc GetUserById (GetUserByIdRequest) returns (GetUserByIdResponse);
   rpc GetAllUsers (GetAllUsersRequest) returns (GetAllUsersResponse);
   rpc EditUser (EditUserRequest) returns (EditUserResponse);
+  rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
 }
 
 message User {
@@ -53,6 +54,17 @@ message EditUserRequest {
 }
 
 message EditUserResponse {
+  bool success = 1;
+  User user = 2;
+}
+
+message DeleteUserRequest {
+  string requestor_email = 1;
+  bool requestor_is_admin = 2;
+  int32 user_id = 3;
+}
+
+message DeleteUserResponse {
   bool success = 1;
   User user = 2;
 }

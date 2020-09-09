@@ -1,8 +1,9 @@
-package user
+package userModel
 
 import (
 	"database/sql"
 	_ "database/sql"
+	"fmt"
 	"log"
 
 	"github.com/fatih/structs"
@@ -75,4 +76,31 @@ func Update(requestorEmail string, requestorIsAdmin bool, userToEdit *User) (suc
 		return false, nil
 	}
 	return true, &updatedUser
+}
+
+// Delete func
+func Delete(adminEmail string, userId int32) (bool, *User, error) {
+	deletedUser := User{}
+	queryString := "DELETE FROM users WHERE id = $1 AND email != $2 RETURNING *"
+	rows, err := connection.DB.Queryx(queryString, userId, adminEmail)
+	if err != nil {
+		log.Println("Error in userModel.Delete(): ", err)
+		return false, &deletedUser, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		if rows.Err() == sql.ErrNoRows {
+			log.Println("Error in userModel.Delete(): no rows returned!", err)
+			return false, &deletedUser, fmt.Errorf("user does not exist")
+		}
+		err = rows.StructScan(&deletedUser)
+		if err != nil {
+			log.Println("Error in userModel.Delete(): rows.Scan()", err)
+			return false, &deletedUser, err
+		}
+	}
+	if structs.IsZero(deletedUser) {
+		return false, &deletedUser, fmt.Errorf("user does not exist")
+	}
+	return true, &deletedUser, nil
 }

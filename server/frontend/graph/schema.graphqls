@@ -61,6 +61,7 @@ type EditUserResponse {
 
 type DeleteUserResponse {
     message: String!
+    user: User!
 }
 
 type Mutation {

@@ -6,10 +6,10 @@ package graph
 import (
 	"context"
 	"fmt"
-	cyberPb "github.com/nvhai245/cyberblog/server/cyber/proto"
 	"log"
 
 	authPb "github.com/nvhai245/cyberblog/server/auth/proto"
+	cyberPb "github.com/nvhai245/cyberblog/server/cyber/proto"
 	"github.com/nvhai245/cyberblog/server/frontend/connection"
 	"github.com/nvhai245/cyberblog/server/frontend/graph/generated"
 	"github.com/nvhai245/cyberblog/server/frontend/graph/model"
@@ -153,7 +153,8 @@ func (r *mutationResolver) GetAllUsers(ctx context.Context, adminID int) (*model
 	return response, nil
 }
 
-func (r *mutationResolver) EditUser(ctx context.Context, userID int, userToEdit model.EditedUser) (*model.EditUserResponse, error) {
+func (r *mutationResolver) EditUser(ctx context.Context, userID int, editedUser model.EditedUser) (*model.EditUserResponse, error) {
+	userToEdit := editedUser
 	session := helper.GetSession(ctx, "auth")
 	token := fmt.Sprintf("%v", session.Values["token"])
 	checkResponse, err := connection.AuthClient.CheckToken(context.Background(), &authPb.CheckTokenRequest{Token: token})
@@ -164,7 +165,6 @@ func (r *mutationResolver) EditUser(ctx context.Context, userID int, userToEdit 
 	if !checkResponse.GetValid() {
 		return nil, fmt.Errorf("UNAUTHORIZED!")
 	}
-	//	TODO: call to cyber
 	res, err := connection.CyberClient.EditUser(context.Background(), &cyberPb.EditUserRequest{
 		RequestorEmail:   checkResponse.GetEmail(),
 		RequestorIsAdmin: checkResponse.GetIsAdmin(),
@@ -210,8 +210,28 @@ func (r *mutationResolver) DeleteUser(ctx context.Context, adminID int, userID i
 	if !checkResponse.GetValid() {
 		return nil, fmt.Errorf("UNAUTHORIZED!")
 	}
+	if !checkResponse.GetIsAdmin() {
+		return nil, fmt.Errorf("YOU ARE NOT AN ADMIN!")
+	}
 	//	TODO: call to cyber
-	return &model.DeleteUserResponse{}, nil
+	res, err := connection.CyberClient.DeleteUser(context.Background(), &cyberPb.DeleteUserRequest{
+		RequestorEmail:   checkResponse.GetEmail(),
+		RequestorIsAdmin: checkResponse.GetIsAdmin(),
+		UserId:           int32(userID),
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	if !res.GetSuccess() {
+		return nil, fmt.Errorf("CAN NOT DELETE USER!")
+	}
+
+	return &model.DeleteUserResponse{
+		Message: "User deleted!",
+		User:    helper.CyberUserToGraphUser(res.GetUser()),
+	}, nil
 }
 
 func (r *queryResolver) Users(ctx context.Context) ([]*model.User, error) {

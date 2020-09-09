@@ -123,6 +123,39 @@ func EditUser(requestorEmail string, requestorIsAdmin bool, user *pb.User) *pb.E
 	return response
 }
 
+func DeleteUser(requestorEmail string, requestorIsAdmin bool, userId int32) (*pb.DeleteUserResponse, error) {
+	log.Printf(`controller.DeleteUser(): [Request]: 
+       %+v
+       %+v
+       %+v`, requestorEmail, requestorIsAdmin, userId)
+
+	res, err := connection.WriteClient.DeleteUser(context.Background(), &writePb.DeleteUserRequest{
+		RequestorEmail:   requestorEmail,
+		RequestorIsAdmin: requestorIsAdmin,
+		UserId:           userId,
+	})
+	if err != nil {
+		log.Println("Err in controller.DeleteUser(): ", err)
+		return &pb.DeleteUserResponse{
+			Success: false,
+			User:    nil,
+		}, err
+	}
+	if !res.GetSuccess() {
+		return &pb.DeleteUserResponse{
+			Success: false,
+			User:    nil,
+		}, err
+	}
+	response := &pb.DeleteUserResponse{
+		Success: true,
+		User:    writeUserToCyberUser(res.GetUser()),
+	}
+	// ***************************************************************************************************************
+	log.Printf("controller.DeleteUser(): [Response]: %+v\n", response)
+	return response, nil
+}
+
 func readUserToCyberUser(foundUser *readPb.User) *pb.User {
 	cyberUser := &pb.User{
 		Id:        foundUser.GetId(),

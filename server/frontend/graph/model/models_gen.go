@@ -9,6 +9,7 @@ type AuthResponse struct {
 
 type DeleteUserResponse struct {
 	Message string `json:"message"`
+	User    *User  `json:"user"`
 }
 
 type EditUserResponse struct {
