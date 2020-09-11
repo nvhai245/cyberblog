@@ -27,6 +27,18 @@ message NewUser {
     int64 updated_at = 14;
 }
 
+message Post {
+
+}
+
+message Comment {
+
+}
+
+message Category {
+
+}
+
 message SaveUserRequest {
     NewUser user = 1;
     string hash = 2;

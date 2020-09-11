@@ -20,18 +20,6 @@ type Post struct {
 	PublishedAt int32  `db:"published_at"`
 }
 
-type Category struct {
-	ID      int32  `db:"id"`
-	Title   string `db:"title"`
-	Slug    string `db:"slug"`
-	Content string `db:"content"`
-}
-
-type PostCategory struct {
-	PostId     int32 `db:"post_id"`
-	CategoryId int32 `db:"category_id"`
-}
-
 // GetPostById func
 func GetPostById(requesterId int32, postId int32) (success bool, foundPost *Post, err error) {
 	queryString := "SELECT * FROM posts WHERE id = $1"
@@ -84,6 +72,17 @@ func GetUserAllPosts(ownerId int32, offset int32, limit int32) (success bool, fo
 // GetUserUnPublishedPosts func
 func GetUserUnPublishedPosts(ownerId int32, offset int32, limit int32) (success bool, foundPosts []*Post, err error) {
 	queryString := "SELECT * FROM posts WHERE author_id = $1 AND published = $2 ORDER BY created_at DESC OFFSET $3 LIMIT $4"
+	err = connection.DB.Select(&foundPosts, queryString, ownerId, false, offset, limit)
+	if err != nil {
+		log.Println("Error in postModel.GetUserUnPublishedPosts(): ", err)
+		return false, nil, err
+	}
+	return true, foundPosts, nil
+}
+
+// GetCategoryPosts func
+func GetCategoryPosts(categoryId int32, offset int32, limit int32) (success bool, foundPosts []*Post, err error) {
+	queryString := "SELECT * FROM posts WHERE published = $1 AND id in (SELECT post_id FROM post_category WHERE category_id = $2) ORDER BY created_at DESC OFFSET $3 LIMIT $4"
 	err = connection.DB.Select(&foundPosts, queryString, ownerId, false, offset, limit)
 	if err != nil {
 		log.Println("Error in postModel.GetUserUnPublishedPosts(): ", err)
