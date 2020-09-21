@@ -1,26 +1,10 @@
 package postController
 
 import (
-	postModel "github.com/nvhai245/cyberblog/server/write/model/post"
-	pb "github.com/nvhai245/cyberblog/server/write/proto"
+	postModel "github.com/nvhai245/cyberblog/server/read/model/post"
+	pb "github.com/nvhai245/cyberblog/server/read/proto"
 	"log"
 )
-
-func AddPost() {
-
-}
-
-func PublishPost() {
-
-}
-
-func EditPost() {
-
-}
-
-func DeletePost() {
-
-}
 
 func protoPostToModelPost(protoPost *pb.Post) *postModel.Post {
 	modelPost := &postModel.Post{

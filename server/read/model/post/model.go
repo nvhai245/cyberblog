@@ -83,7 +83,7 @@ func GetUserUnPublishedPosts(ownerId int32, offset int32, limit int32) (success 
 // GetCategoryPosts func
 func GetCategoryPosts(categoryId int32, offset int32, limit int32) (success bool, foundPosts []*Post, err error) {
 	queryString := "SELECT * FROM posts WHERE published = $1 AND id in (SELECT post_id FROM post_category WHERE category_id = $2) ORDER BY created_at DESC OFFSET $3 LIMIT $4"
-	err = connection.DB.Select(&foundPosts, queryString, ownerId, false, offset, limit)
+	err = connection.DB.Select(&foundPosts, queryString, true, categoryId, offset, limit)
 	if err != nil {
 		log.Println("Error in postModel.GetUserUnPublishedPosts(): ", err)
 		return false, nil, err

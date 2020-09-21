@@ -5,10 +5,42 @@ package cyberProto;
 option go_package = ".;cyberProto";
 
 service Cyber {
+  // User rpc
   rpc GetUserById (GetUserByIdRequest) returns (GetUserByIdResponse);
   rpc GetAllUsers (GetAllUsersRequest) returns (GetAllUsersResponse);
   rpc EditUser (EditUserRequest) returns (EditUserResponse);
   rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
+
+  // Post rpc
+  rpc AddNewPost (AddNewPostRequest) returns (AddNewPostResponse);
+  rpc EditPost (EditPostRequest) returns (EditPostResponse);
+  rpc DeletePost (DeletePostRequest) returns (DeletePostResponse);
+  rpc PublishPost (PublishPostRequest) returns (PublishPostResponse);
+  rpc UnPublishPost (UnPublishPostRequest) returns (UnPublishPostResponse);
+  rpc UpVotePost (UpVotePostRequest) returns (UpVotePostResponse);
+  rpc GetPostById (GetPostByIdRequest) returns (GetPostByIdResponse);
+  rpc GetUserPublishedPosts (GetUserPublishedPostsRequest) returns (GetUserPublishedPostsResponse);
+  rpc GetUserAllPosts (GetUserAllPostsRequest) returns (GetUserAllPostsResponse);
+  rpc GetUserUnPublishedPosts (GetUserUnPublishedPostsRequest) returns (GetUserUnPublishedPostsResponse);
+  rpc GetCategoryPosts (GetCategoryPostsRequest) returns (GetCategoryPostsResponse);
+
+  // Comment rpc
+  rpc AddNewComment (AddNewCommentRequest) returns (AddNewCommentResponse);
+  rpc EditComment (EditCommentRequest) returns (EditCommentResponse);
+  rpc DeleteComment (DeleteCommentRequest) returns (DeleteCommentResponse);
+  rpc UpVoteComment (UpVoteCommentRequest) returns (UpVoteCommentResponse);
+  rpc DownVoteComment (DownVoteCommentRequest) returns (DownVoteCommentResponse);
+  rpc GetPostComments (GetPostCommentsRequest) returns (GetPostCommentsResponse);
+  rpc GetUserComments (GetUserCommentsRequest) returns (GetUserCommentsResponse);
+
+  // Category rpc
+  rpc AddNewCategory (AddNewCategoryRequest) returns (AddNewCategoryResponse);
+  rpc EditCategory (EditCategoryRequest) returns (EditCategoryResponse);
+  rpc DeleteCategory (DeleteCategoryRequest) returns (DeleteCategoryResponse);
+  rpc AddPostToCategory (AddPostToCategoryRequest) returns (AddPostToCategoryResponse);
+  rpc RemovePostFromCategory (RemovePostFromCategoryRequest) returns (RemovePostFromCategoryResponse);
+  rpc GetAllCategories (GetAllCategoriesRequest) returns (GetAllCategoriesResponse);
+  rpc GetPostCategories (GetPostCategoriesRequest) returns (GetPostCategoriesResponse);
 }
 
 message User {
@@ -26,6 +58,36 @@ message User {
   bool is_admin = 12;
   int64 created_at = 13;
   int64 updated_at = 14;
+}
+
+message Post {
+  int32 id = 1;
+  int32 author_id = 2;
+  int32 parent_id = 3;
+  string title = 4;
+  bool published = 5;
+  int32 up_vote = 6;
+  string content = 7;
+  int32 created_at = 8;
+  int32 updated_at = 9;
+  int32 published_at = 10;
+}
+
+message Comment {
+  int32 id = 1;
+  int32 post_id = 2;
+  int32 author_id = 3;
+  string content = 4;
+  int32 up_vote = 5;
+  int32 created_at = 6;
+  int32 updated_at = 7;
+}
+
+message Category {
+  int32 id = 1;
+  string title = 2;
+  string slug = 3;
+  string content = 4;
 }
 
 message GetUserByIdRequest {
@@ -67,4 +129,250 @@ message DeleteUserRequest {
 message DeleteUserResponse {
   bool success = 1;
   User user = 2;
+}
+
+message AddNewPostRequest {
+  Post new_post = 1;
+}
+
+message AddNewPostResponse {
+  bool success = 1;
+  Post new_post = 2;
+}
+
+message EditPostRequest {
+  Post edited_post = 1;
+}
+
+message EditPostResponse {
+  bool success = 1;
+  Post edited_post = 2;
+}
+
+message DeletePostRequest {
+  int32 requestor_id = 1;
+  int32 post_id = 2;
+}
+
+message DeletePostResponse {
+  bool success = 1;
+  Post deleted_post = 2;
+}
+
+message PublishPostRequest {
+  int32 requestor_id = 1;
+  int32 post_id = 2;
+}
+
+message PublishPostResponse {
+  bool success = 1;
+  Post published_post = 2;
+}
+
+message UnPublishPostRequest {
+  int32 requestor_id = 1;
+  int32 post_id = 2;
+}
+
+message UnPublishPostResponse {
+  bool success = 1;
+  Post un_published_post = 2;
+}
+
+message UpVotePostRequest {
+  int32 up_voter_id = 1;
+  int32 post_id =2;
+}
+
+message UpVotePostResponse {
+  bool success = 1;
+  int32 new_up_vote = 2;
+}
+
+message GetPostByIdRequest {
+  int32 requester_id = 1;
+  int32 post_id = 2;
+}
+
+message GetPostByIdResponse {
+  bool success = 1;
+  Post found_post = 2;
+}
+
+message GetUserPublishedPostsRequest {
+  int32 requester_id = 1;
+  int32 user_id = 2;
+  int32 offset = 3;
+  int32 limit = 4;
+}
+
+message GetUserPublishedPostsResponse {
+  bool success = 1;
+  repeated Post found_posts = 2;
+}
+
+message GetUserAllPostsRequest {
+  int32 owner_id = 1;
+  int32 offset = 2;
+  int32 limit = 3;
+}
+
+message GetUserAllPostsResponse {
+  bool success = 1;
+  repeated Post found_posts = 2;
+}
+
+message GetUserUnPublishedPostsRequest {
+  int32 owner_id = 1;
+  int32 offset = 2;
+  int32 limit = 3;
+}
+
+message GetUserUnPublishedPostsResponse {
+  bool success = 1;
+  repeated Post found_posts = 2;
+}
+
+message GetCategoryPostsRequest {
+  int32 category_id = 1;
+  int32 offset = 2;
+  int32 limit = 3;
+}
+
+message GetCategoryPostsResponse {
+  bool success = 1;
+  repeated Post found_posts = 2;
+}
+
+message GetPostCommentsRequest {
+  int32 post_id = 1;
+  int32 offset = 2;
+  int32 limit = 3;
+}
+
+message GetPostCommentsResponse {
+  bool success = 1;
+  repeated Comment found_comments = 2;
+}
+
+message GetUserCommentsRequest {
+  int32 author_id = 1;
+  int32 offset = 2;
+  int32 limit = 3;
+}
+
+message GetUserCommentsResponse {
+  bool success = 1;
+  repeated Comment found_comments = 2;
+}
+
+message AddNewCommentRequest {
+  Comment new_comment = 1;
+}
+
+message AddNewCommentResponse {
+  bool success = 1;
+  int32 comment_id = 2;
+}
+
+message EditCommentRequest {
+  Comment new_comment = 1;
+}
+
+message EditCommentResponse {
+  bool success = 1;
+  Comment edited_comment = 2;
+}
+
+message DeleteCommentRequest {
+  int32 author_id = 1;
+  int32 comment_id = 2;
+}
+
+message DeleteCommentResponse {
+  bool success = 1;
+  Comment deleted_comment = 2;
+}
+
+message UpVoteCommentRequest {
+  int32 comment_id = 1;
+}
+
+message UpVoteCommentResponse {
+  bool success = 1;
+  int32 new_up_votes = 2;
+}
+
+message DownVoteCommentRequest {
+  int32 comment_id = 1;
+}
+
+message DownVoteCommentResponse {
+  bool success = 1;
+  int32 new_up_votes = 2;
+}
+
+message AddNewCategoryRequest {
+  Category new_category = 1;
+}
+
+message AddNewCategoryResponse {
+  bool success = 1;
+  int32 category_id = 2;
+}
+
+message EditCategoryRequest {
+  Category new_category = 1;
+}
+
+message EditCategoryResponse {
+  bool success = 1;
+  Category edited_category = 2;
+}
+
+message DeleteCategoryRequest {
+  int32 category_id = 1;
+}
+
+message DeleteCategoryResponse {
+  bool success = 1;
+  Category deleted_category = 2;
+}
+
+message AddPostToCategoryRequest {
+  int32 category_id = 1;
+  int32 post_id = 2;
+}
+
+message AddPostToCategoryResponse {
+  bool success = 1;
+  int32 post_id = 2;
+}
+
+message RemovePostFromCategoryRequest {
+  int32 category_id = 1;
+  int32 post_id = 2;
+}
+
+message RemovePostFromCategoryResponse {
+  bool success = 1;
+  int32 post_id = 2;
+}
+
+message GetAllCategoriesRequest {
+  int32 requester_id = 1;
+}
+
+message GetAllCategoriesResponse {
+  bool success = 1;
+  repeated Category all_categories = 2;
+}
+
+message GetPostCategoriesRequest {
+  int32 post_id = 1;
+}
+
+message GetPostCategoriesResponse {
+  bool success = 1;
+  repeated Category post_categories = 2;
 }

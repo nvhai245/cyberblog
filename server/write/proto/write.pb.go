@@ -180,6 +180,291 @@ func (x *NewUser) GetUpdatedAt() int64 {
 	return 0
 }
 
+type Post struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id          int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	AuthorId    int32  `protobuf:"varint,2,opt,name=author_id,json=authorId,proto3" json:"author_id,omitempty"`
+	ParentId    int32  `protobuf:"varint,3,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
+	Title       string `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
+	Published   bool   `protobuf:"varint,5,opt,name=published,proto3" json:"published,omitempty"`
+	UpVote      int32  `protobuf:"varint,6,opt,name=up_vote,json=upVote,proto3" json:"up_vote,omitempty"`
+	Content     string `protobuf:"bytes,7,opt,name=content,proto3" json:"content,omitempty"`
+	CreatedAt   int32  `protobuf:"varint,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt   int32  `protobuf:"varint,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	PublishedAt int32  `protobuf:"varint,10,opt,name=published_at,json=publishedAt,proto3" json:"published_at,omitempty"`
+}
+
+func (x *Post) Reset() {
+	*x = Post{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Post) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Post) ProtoMessage() {}
+
+func (x *Post) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Post.ProtoReflect.Descriptor instead.
+func (*Post) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *Post) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *Post) GetAuthorId() int32 {
+	if x != nil {
+		return x.AuthorId
+	}
+	return 0
+}
+
+func (x *Post) GetParentId() int32 {
+	if x != nil {
+		return x.ParentId
+	}
+	return 0
+}
+
+func (x *Post) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *Post) GetPublished() bool {
+	if x != nil {
+		return x.Published
+	}
+	return false
+}
+
+func (x *Post) GetUpVote() int32 {
+	if x != nil {
+		return x.UpVote
+	}
+	return 0
+}
+
+func (x *Post) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *Post) GetCreatedAt() int32 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
+func (x *Post) GetUpdatedAt() int32 {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return 0
+}
+
+func (x *Post) GetPublishedAt() int32 {
+	if x != nil {
+		return x.PublishedAt
+	}
+	return 0
+}
+
+type Comment struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id        int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	PostId    int32  `protobuf:"varint,2,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
+	AuthorId  int32  `protobuf:"varint,3,opt,name=author_id,json=authorId,proto3" json:"author_id,omitempty"`
+	Content   string `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
+	UpVote    int32  `protobuf:"varint,5,opt,name=up_vote,json=upVote,proto3" json:"up_vote,omitempty"`
+	CreatedAt int32  `protobuf:"varint,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt int32  `protobuf:"varint,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+}
+
+func (x *Comment) Reset() {
+	*x = Comment{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Comment) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Comment) ProtoMessage() {}
+
+func (x *Comment) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Comment.ProtoReflect.Descriptor instead.
+func (*Comment) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *Comment) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *Comment) GetPostId() int32 {
+	if x != nil {
+		return x.PostId
+	}
+	return 0
+}
+
+func (x *Comment) GetAuthorId() int32 {
+	if x != nil {
+		return x.AuthorId
+	}
+	return 0
+}
+
+func (x *Comment) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *Comment) GetUpVote() int32 {
+	if x != nil {
+		return x.UpVote
+	}
+	return 0
+}
+
+func (x *Comment) GetCreatedAt() int32 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
+func (x *Comment) GetUpdatedAt() int32 {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return 0
+}
+
+type Category struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id      int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Title   string `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	Slug    string `protobuf:"bytes,3,opt,name=slug,proto3" json:"slug,omitempty"`
+	Content string `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
+}
+
+func (x *Category) Reset() {
+	*x = Category{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Category) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Category) ProtoMessage() {}
+
+func (x *Category) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Category.ProtoReflect.Descriptor instead.
+func (*Category) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *Category) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *Category) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *Category) GetSlug() string {
+	if x != nil {
+		return x.Slug
+	}
+	return ""
+}
+
+func (x *Category) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
 type SaveUserRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -192,7 +477,7 @@ type SaveUserRequest struct {
 func (x *SaveUserRequest) Reset() {
 	*x = SaveUserRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_write_proto_msgTypes[1]
+		mi := &file_write_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -205,7 +490,7 @@ func (x *SaveUserRequest) String() string {
 func (*SaveUserRequest) ProtoMessage() {}
 
 func (x *SaveUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_write_proto_msgTypes[1]
+	mi := &file_write_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -218,7 +503,7 @@ func (x *SaveUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SaveUserRequest.ProtoReflect.Descriptor instead.
 func (*SaveUserRequest) Descriptor() ([]byte, []int) {
-	return file_write_proto_rawDescGZIP(), []int{1}
+	return file_write_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *SaveUserRequest) GetUser() *NewUser {
@@ -247,7 +532,7 @@ type SaveUserResponse struct {
 func (x *SaveUserResponse) Reset() {
 	*x = SaveUserResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_write_proto_msgTypes[2]
+		mi := &file_write_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -260,7 +545,7 @@ func (x *SaveUserResponse) String() string {
 func (*SaveUserResponse) ProtoMessage() {}
 
 func (x *SaveUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_write_proto_msgTypes[2]
+	mi := &file_write_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -273,7 +558,7 @@ func (x *SaveUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SaveUserResponse.ProtoReflect.Descriptor instead.
 func (*SaveUserResponse) Descriptor() ([]byte, []int) {
-	return file_write_proto_rawDescGZIP(), []int{2}
+	return file_write_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *SaveUserResponse) GetUser() *NewUser {
@@ -303,7 +588,7 @@ type EditUserRequest struct {
 func (x *EditUserRequest) Reset() {
 	*x = EditUserRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_write_proto_msgTypes[3]
+		mi := &file_write_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -316,7 +601,7 @@ func (x *EditUserRequest) String() string {
 func (*EditUserRequest) ProtoMessage() {}
 
 func (x *EditUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_write_proto_msgTypes[3]
+	mi := &file_write_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -329,7 +614,7 @@ func (x *EditUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EditUserRequest.ProtoReflect.Descriptor instead.
 func (*EditUserRequest) Descriptor() ([]byte, []int) {
-	return file_write_proto_rawDescGZIP(), []int{3}
+	return file_write_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *EditUserRequest) GetRequestorEmail() string {
@@ -365,7 +650,7 @@ type EditUserResponse struct {
 func (x *EditUserResponse) Reset() {
 	*x = EditUserResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_write_proto_msgTypes[4]
+		mi := &file_write_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -378,7 +663,7 @@ func (x *EditUserResponse) String() string {
 func (*EditUserResponse) ProtoMessage() {}
 
 func (x *EditUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_write_proto_msgTypes[4]
+	mi := &file_write_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -391,7 +676,7 @@ func (x *EditUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EditUserResponse.ProtoReflect.Descriptor instead.
 func (*EditUserResponse) Descriptor() ([]byte, []int) {
-	return file_write_proto_rawDescGZIP(), []int{4}
+	return file_write_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *EditUserResponse) GetSuccess() bool {
@@ -421,7 +706,7 @@ type DeleteUserRequest struct {
 func (x *DeleteUserRequest) Reset() {
 	*x = DeleteUserRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_write_proto_msgTypes[5]
+		mi := &file_write_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -434,7 +719,7 @@ func (x *DeleteUserRequest) String() string {
 func (*DeleteUserRequest) ProtoMessage() {}
 
 func (x *DeleteUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_write_proto_msgTypes[5]
+	mi := &file_write_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -447,7 +732,7 @@ func (x *DeleteUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteUserRequest.ProtoReflect.Descriptor instead.
 func (*DeleteUserRequest) Descriptor() ([]byte, []int) {
-	return file_write_proto_rawDescGZIP(), []int{5}
+	return file_write_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DeleteUserRequest) GetRequestorEmail() string {
@@ -483,7 +768,7 @@ type DeleteUserResponse struct {
 func (x *DeleteUserResponse) Reset() {
 	*x = DeleteUserResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_write_proto_msgTypes[6]
+		mi := &file_write_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -496,7 +781,7 @@ func (x *DeleteUserResponse) String() string {
 func (*DeleteUserResponse) ProtoMessage() {}
 
 func (x *DeleteUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_write_proto_msgTypes[6]
+	mi := &file_write_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -509,7 +794,7 @@ func (x *DeleteUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteUserResponse.ProtoReflect.Descriptor instead.
 func (*DeleteUserResponse) Descriptor() ([]byte, []int) {
-	return file_write_proto_rawDescGZIP(), []int{6}
+	return file_write_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *DeleteUserResponse) GetSuccess() bool {
@@ -524,6 +809,1694 @@ func (x *DeleteUserResponse) GetUser() *NewUser {
 		return x.User
 	}
 	return nil
+}
+
+type AddNewPostRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	NewPost *Post `protobuf:"bytes,1,opt,name=new_post,json=newPost,proto3" json:"new_post,omitempty"`
+}
+
+func (x *AddNewPostRequest) Reset() {
+	*x = AddNewPostRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddNewPostRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddNewPostRequest) ProtoMessage() {}
+
+func (x *AddNewPostRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddNewPostRequest.ProtoReflect.Descriptor instead.
+func (*AddNewPostRequest) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *AddNewPostRequest) GetNewPost() *Post {
+	if x != nil {
+		return x.NewPost
+	}
+	return nil
+}
+
+type AddNewPostResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success bool  `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	NewPost *Post `protobuf:"bytes,2,opt,name=new_post,json=newPost,proto3" json:"new_post,omitempty"`
+}
+
+func (x *AddNewPostResponse) Reset() {
+	*x = AddNewPostResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddNewPostResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddNewPostResponse) ProtoMessage() {}
+
+func (x *AddNewPostResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddNewPostResponse.ProtoReflect.Descriptor instead.
+func (*AddNewPostResponse) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *AddNewPostResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *AddNewPostResponse) GetNewPost() *Post {
+	if x != nil {
+		return x.NewPost
+	}
+	return nil
+}
+
+type EditPostRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	EditedPost *Post `protobuf:"bytes,1,opt,name=edited_post,json=editedPost,proto3" json:"edited_post,omitempty"`
+}
+
+func (x *EditPostRequest) Reset() {
+	*x = EditPostRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[12]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EditPostRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EditPostRequest) ProtoMessage() {}
+
+func (x *EditPostRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[12]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EditPostRequest.ProtoReflect.Descriptor instead.
+func (*EditPostRequest) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *EditPostRequest) GetEditedPost() *Post {
+	if x != nil {
+		return x.EditedPost
+	}
+	return nil
+}
+
+type EditPostResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success    bool  `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	EditedPost *Post `protobuf:"bytes,2,opt,name=edited_post,json=editedPost,proto3" json:"edited_post,omitempty"`
+}
+
+func (x *EditPostResponse) Reset() {
+	*x = EditPostResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EditPostResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EditPostResponse) ProtoMessage() {}
+
+func (x *EditPostResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EditPostResponse.ProtoReflect.Descriptor instead.
+func (*EditPostResponse) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *EditPostResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *EditPostResponse) GetEditedPost() *Post {
+	if x != nil {
+		return x.EditedPost
+	}
+	return nil
+}
+
+type DeletePostRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	RequestorId int32 `protobuf:"varint,1,opt,name=requestor_id,json=requestorId,proto3" json:"requestor_id,omitempty"`
+	PostId      int32 `protobuf:"varint,2,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
+}
+
+func (x *DeletePostRequest) Reset() {
+	*x = DeletePostRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[14]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeletePostRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeletePostRequest) ProtoMessage() {}
+
+func (x *DeletePostRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[14]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeletePostRequest.ProtoReflect.Descriptor instead.
+func (*DeletePostRequest) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *DeletePostRequest) GetRequestorId() int32 {
+	if x != nil {
+		return x.RequestorId
+	}
+	return 0
+}
+
+func (x *DeletePostRequest) GetPostId() int32 {
+	if x != nil {
+		return x.PostId
+	}
+	return 0
+}
+
+type DeletePostResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success     bool  `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	DeletedPost *Post `protobuf:"bytes,2,opt,name=deleted_post,json=deletedPost,proto3" json:"deleted_post,omitempty"`
+}
+
+func (x *DeletePostResponse) Reset() {
+	*x = DeletePostResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[15]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeletePostResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeletePostResponse) ProtoMessage() {}
+
+func (x *DeletePostResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[15]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeletePostResponse.ProtoReflect.Descriptor instead.
+func (*DeletePostResponse) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *DeletePostResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *DeletePostResponse) GetDeletedPost() *Post {
+	if x != nil {
+		return x.DeletedPost
+	}
+	return nil
+}
+
+type PublishPostRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	RequestorId int32 `protobuf:"varint,1,opt,name=requestor_id,json=requestorId,proto3" json:"requestor_id,omitempty"`
+	PostId      int32 `protobuf:"varint,2,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
+}
+
+func (x *PublishPostRequest) Reset() {
+	*x = PublishPostRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[16]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PublishPostRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PublishPostRequest) ProtoMessage() {}
+
+func (x *PublishPostRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[16]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PublishPostRequest.ProtoReflect.Descriptor instead.
+func (*PublishPostRequest) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *PublishPostRequest) GetRequestorId() int32 {
+	if x != nil {
+		return x.RequestorId
+	}
+	return 0
+}
+
+func (x *PublishPostRequest) GetPostId() int32 {
+	if x != nil {
+		return x.PostId
+	}
+	return 0
+}
+
+type PublishPostResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success       bool  `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	PublishedPost *Post `protobuf:"bytes,2,opt,name=published_post,json=publishedPost,proto3" json:"published_post,omitempty"`
+}
+
+func (x *PublishPostResponse) Reset() {
+	*x = PublishPostResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[17]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PublishPostResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PublishPostResponse) ProtoMessage() {}
+
+func (x *PublishPostResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[17]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PublishPostResponse.ProtoReflect.Descriptor instead.
+func (*PublishPostResponse) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *PublishPostResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *PublishPostResponse) GetPublishedPost() *Post {
+	if x != nil {
+		return x.PublishedPost
+	}
+	return nil
+}
+
+type UnPublishPostRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	RequestorId int32 `protobuf:"varint,1,opt,name=requestor_id,json=requestorId,proto3" json:"requestor_id,omitempty"`
+	PostId      int32 `protobuf:"varint,2,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
+}
+
+func (x *UnPublishPostRequest) Reset() {
+	*x = UnPublishPostRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[18]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UnPublishPostRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UnPublishPostRequest) ProtoMessage() {}
+
+func (x *UnPublishPostRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[18]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UnPublishPostRequest.ProtoReflect.Descriptor instead.
+func (*UnPublishPostRequest) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *UnPublishPostRequest) GetRequestorId() int32 {
+	if x != nil {
+		return x.RequestorId
+	}
+	return 0
+}
+
+func (x *UnPublishPostRequest) GetPostId() int32 {
+	if x != nil {
+		return x.PostId
+	}
+	return 0
+}
+
+type UnPublishPostResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success         bool  `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	UnPublishedPost *Post `protobuf:"bytes,2,opt,name=un_published_post,json=unPublishedPost,proto3" json:"un_published_post,omitempty"`
+}
+
+func (x *UnPublishPostResponse) Reset() {
+	*x = UnPublishPostResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[19]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UnPublishPostResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UnPublishPostResponse) ProtoMessage() {}
+
+func (x *UnPublishPostResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[19]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UnPublishPostResponse.ProtoReflect.Descriptor instead.
+func (*UnPublishPostResponse) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *UnPublishPostResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *UnPublishPostResponse) GetUnPublishedPost() *Post {
+	if x != nil {
+		return x.UnPublishedPost
+	}
+	return nil
+}
+
+type UpVotePostRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	UpVoterId int32 `protobuf:"varint,1,opt,name=up_voter_id,json=upVoterId,proto3" json:"up_voter_id,omitempty"`
+	PostId    int32 `protobuf:"varint,2,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
+}
+
+func (x *UpVotePostRequest) Reset() {
+	*x = UpVotePostRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[20]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpVotePostRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpVotePostRequest) ProtoMessage() {}
+
+func (x *UpVotePostRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[20]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpVotePostRequest.ProtoReflect.Descriptor instead.
+func (*UpVotePostRequest) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *UpVotePostRequest) GetUpVoterId() int32 {
+	if x != nil {
+		return x.UpVoterId
+	}
+	return 0
+}
+
+func (x *UpVotePostRequest) GetPostId() int32 {
+	if x != nil {
+		return x.PostId
+	}
+	return 0
+}
+
+type UpVotePostResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success   bool  `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	NewUpVote int32 `protobuf:"varint,2,opt,name=new_up_vote,json=newUpVote,proto3" json:"new_up_vote,omitempty"`
+}
+
+func (x *UpVotePostResponse) Reset() {
+	*x = UpVotePostResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[21]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpVotePostResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpVotePostResponse) ProtoMessage() {}
+
+func (x *UpVotePostResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[21]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpVotePostResponse.ProtoReflect.Descriptor instead.
+func (*UpVotePostResponse) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *UpVotePostResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *UpVotePostResponse) GetNewUpVote() int32 {
+	if x != nil {
+		return x.NewUpVote
+	}
+	return 0
+}
+
+type AddNewCommentRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	NewComment *Comment `protobuf:"bytes,1,opt,name=new_comment,json=newComment,proto3" json:"new_comment,omitempty"`
+}
+
+func (x *AddNewCommentRequest) Reset() {
+	*x = AddNewCommentRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[22]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddNewCommentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddNewCommentRequest) ProtoMessage() {}
+
+func (x *AddNewCommentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[22]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddNewCommentRequest.ProtoReflect.Descriptor instead.
+func (*AddNewCommentRequest) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *AddNewCommentRequest) GetNewComment() *Comment {
+	if x != nil {
+		return x.NewComment
+	}
+	return nil
+}
+
+type AddNewCommentResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success   bool  `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	CommentId int32 `protobuf:"varint,2,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
+}
+
+func (x *AddNewCommentResponse) Reset() {
+	*x = AddNewCommentResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[23]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddNewCommentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddNewCommentResponse) ProtoMessage() {}
+
+func (x *AddNewCommentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[23]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddNewCommentResponse.ProtoReflect.Descriptor instead.
+func (*AddNewCommentResponse) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *AddNewCommentResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *AddNewCommentResponse) GetCommentId() int32 {
+	if x != nil {
+		return x.CommentId
+	}
+	return 0
+}
+
+type EditCommentRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	NewComment *Comment `protobuf:"bytes,1,opt,name=new_comment,json=newComment,proto3" json:"new_comment,omitempty"`
+}
+
+func (x *EditCommentRequest) Reset() {
+	*x = EditCommentRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[24]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EditCommentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EditCommentRequest) ProtoMessage() {}
+
+func (x *EditCommentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[24]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EditCommentRequest.ProtoReflect.Descriptor instead.
+func (*EditCommentRequest) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *EditCommentRequest) GetNewComment() *Comment {
+	if x != nil {
+		return x.NewComment
+	}
+	return nil
+}
+
+type EditCommentResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success       bool     `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	EditedComment *Comment `protobuf:"bytes,2,opt,name=edited_comment,json=editedComment,proto3" json:"edited_comment,omitempty"`
+}
+
+func (x *EditCommentResponse) Reset() {
+	*x = EditCommentResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[25]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EditCommentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EditCommentResponse) ProtoMessage() {}
+
+func (x *EditCommentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[25]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EditCommentResponse.ProtoReflect.Descriptor instead.
+func (*EditCommentResponse) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *EditCommentResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *EditCommentResponse) GetEditedComment() *Comment {
+	if x != nil {
+		return x.EditedComment
+	}
+	return nil
+}
+
+type DeleteCommentRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	AuthorId  int32 `protobuf:"varint,1,opt,name=author_id,json=authorId,proto3" json:"author_id,omitempty"`
+	CommentId int32 `protobuf:"varint,2,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
+}
+
+func (x *DeleteCommentRequest) Reset() {
+	*x = DeleteCommentRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[26]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteCommentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteCommentRequest) ProtoMessage() {}
+
+func (x *DeleteCommentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[26]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteCommentRequest.ProtoReflect.Descriptor instead.
+func (*DeleteCommentRequest) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *DeleteCommentRequest) GetAuthorId() int32 {
+	if x != nil {
+		return x.AuthorId
+	}
+	return 0
+}
+
+func (x *DeleteCommentRequest) GetCommentId() int32 {
+	if x != nil {
+		return x.CommentId
+	}
+	return 0
+}
+
+type DeleteCommentResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success        bool     `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	DeletedComment *Comment `protobuf:"bytes,2,opt,name=deleted_comment,json=deletedComment,proto3" json:"deleted_comment,omitempty"`
+}
+
+func (x *DeleteCommentResponse) Reset() {
+	*x = DeleteCommentResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[27]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteCommentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteCommentResponse) ProtoMessage() {}
+
+func (x *DeleteCommentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[27]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteCommentResponse.ProtoReflect.Descriptor instead.
+func (*DeleteCommentResponse) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *DeleteCommentResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *DeleteCommentResponse) GetDeletedComment() *Comment {
+	if x != nil {
+		return x.DeletedComment
+	}
+	return nil
+}
+
+type UpVoteCommentRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CommentId int32 `protobuf:"varint,1,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
+}
+
+func (x *UpVoteCommentRequest) Reset() {
+	*x = UpVoteCommentRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[28]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpVoteCommentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpVoteCommentRequest) ProtoMessage() {}
+
+func (x *UpVoteCommentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[28]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpVoteCommentRequest.ProtoReflect.Descriptor instead.
+func (*UpVoteCommentRequest) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *UpVoteCommentRequest) GetCommentId() int32 {
+	if x != nil {
+		return x.CommentId
+	}
+	return 0
+}
+
+type UpVoteCommentResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success    bool  `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	NewUpVotes int32 `protobuf:"varint,2,opt,name=new_up_votes,json=newUpVotes,proto3" json:"new_up_votes,omitempty"`
+}
+
+func (x *UpVoteCommentResponse) Reset() {
+	*x = UpVoteCommentResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[29]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpVoteCommentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpVoteCommentResponse) ProtoMessage() {}
+
+func (x *UpVoteCommentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[29]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpVoteCommentResponse.ProtoReflect.Descriptor instead.
+func (*UpVoteCommentResponse) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *UpVoteCommentResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *UpVoteCommentResponse) GetNewUpVotes() int32 {
+	if x != nil {
+		return x.NewUpVotes
+	}
+	return 0
+}
+
+type DownVoteCommentRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CommentId int32 `protobuf:"varint,1,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
+}
+
+func (x *DownVoteCommentRequest) Reset() {
+	*x = DownVoteCommentRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[30]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DownVoteCommentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DownVoteCommentRequest) ProtoMessage() {}
+
+func (x *DownVoteCommentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[30]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DownVoteCommentRequest.ProtoReflect.Descriptor instead.
+func (*DownVoteCommentRequest) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *DownVoteCommentRequest) GetCommentId() int32 {
+	if x != nil {
+		return x.CommentId
+	}
+	return 0
+}
+
+type DownVoteCommentResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success    bool  `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	NewUpVotes int32 `protobuf:"varint,2,opt,name=new_up_votes,json=newUpVotes,proto3" json:"new_up_votes,omitempty"`
+}
+
+func (x *DownVoteCommentResponse) Reset() {
+	*x = DownVoteCommentResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[31]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DownVoteCommentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DownVoteCommentResponse) ProtoMessage() {}
+
+func (x *DownVoteCommentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[31]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DownVoteCommentResponse.ProtoReflect.Descriptor instead.
+func (*DownVoteCommentResponse) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *DownVoteCommentResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *DownVoteCommentResponse) GetNewUpVotes() int32 {
+	if x != nil {
+		return x.NewUpVotes
+	}
+	return 0
+}
+
+type AddNewCategoryRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	NewCategory *Category `protobuf:"bytes,1,opt,name=new_category,json=newCategory,proto3" json:"new_category,omitempty"`
+}
+
+func (x *AddNewCategoryRequest) Reset() {
+	*x = AddNewCategoryRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[32]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddNewCategoryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddNewCategoryRequest) ProtoMessage() {}
+
+func (x *AddNewCategoryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[32]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddNewCategoryRequest.ProtoReflect.Descriptor instead.
+func (*AddNewCategoryRequest) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *AddNewCategoryRequest) GetNewCategory() *Category {
+	if x != nil {
+		return x.NewCategory
+	}
+	return nil
+}
+
+type AddNewCategoryResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success    bool  `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	CategoryId int32 `protobuf:"varint,2,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
+}
+
+func (x *AddNewCategoryResponse) Reset() {
+	*x = AddNewCategoryResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[33]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddNewCategoryResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddNewCategoryResponse) ProtoMessage() {}
+
+func (x *AddNewCategoryResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[33]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddNewCategoryResponse.ProtoReflect.Descriptor instead.
+func (*AddNewCategoryResponse) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *AddNewCategoryResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *AddNewCategoryResponse) GetCategoryId() int32 {
+	if x != nil {
+		return x.CategoryId
+	}
+	return 0
+}
+
+type EditCategoryRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	NewCategory *Category `protobuf:"bytes,1,opt,name=new_category,json=newCategory,proto3" json:"new_category,omitempty"`
+}
+
+func (x *EditCategoryRequest) Reset() {
+	*x = EditCategoryRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[34]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EditCategoryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EditCategoryRequest) ProtoMessage() {}
+
+func (x *EditCategoryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[34]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EditCategoryRequest.ProtoReflect.Descriptor instead.
+func (*EditCategoryRequest) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *EditCategoryRequest) GetNewCategory() *Category {
+	if x != nil {
+		return x.NewCategory
+	}
+	return nil
+}
+
+type EditCategoryResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success        bool      `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	EditedCategory *Category `protobuf:"bytes,2,opt,name=edited_category,json=editedCategory,proto3" json:"edited_category,omitempty"`
+}
+
+func (x *EditCategoryResponse) Reset() {
+	*x = EditCategoryResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[35]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EditCategoryResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EditCategoryResponse) ProtoMessage() {}
+
+func (x *EditCategoryResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[35]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EditCategoryResponse.ProtoReflect.Descriptor instead.
+func (*EditCategoryResponse) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *EditCategoryResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *EditCategoryResponse) GetEditedCategory() *Category {
+	if x != nil {
+		return x.EditedCategory
+	}
+	return nil
+}
+
+type DeleteCategoryRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CategoryId int32 `protobuf:"varint,1,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
+}
+
+func (x *DeleteCategoryRequest) Reset() {
+	*x = DeleteCategoryRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[36]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteCategoryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteCategoryRequest) ProtoMessage() {}
+
+func (x *DeleteCategoryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[36]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteCategoryRequest.ProtoReflect.Descriptor instead.
+func (*DeleteCategoryRequest) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *DeleteCategoryRequest) GetCategoryId() int32 {
+	if x != nil {
+		return x.CategoryId
+	}
+	return 0
+}
+
+type DeleteCategoryResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success         bool      `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	DeletedCategory *Category `protobuf:"bytes,2,opt,name=deleted_category,json=deletedCategory,proto3" json:"deleted_category,omitempty"`
+}
+
+func (x *DeleteCategoryResponse) Reset() {
+	*x = DeleteCategoryResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[37]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteCategoryResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteCategoryResponse) ProtoMessage() {}
+
+func (x *DeleteCategoryResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[37]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteCategoryResponse.ProtoReflect.Descriptor instead.
+func (*DeleteCategoryResponse) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *DeleteCategoryResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *DeleteCategoryResponse) GetDeletedCategory() *Category {
+	if x != nil {
+		return x.DeletedCategory
+	}
+	return nil
+}
+
+type AddPostToCategoryRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CategoryId int32 `protobuf:"varint,1,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
+	PostId     int32 `protobuf:"varint,2,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
+}
+
+func (x *AddPostToCategoryRequest) Reset() {
+	*x = AddPostToCategoryRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[38]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddPostToCategoryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddPostToCategoryRequest) ProtoMessage() {}
+
+func (x *AddPostToCategoryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[38]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddPostToCategoryRequest.ProtoReflect.Descriptor instead.
+func (*AddPostToCategoryRequest) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *AddPostToCategoryRequest) GetCategoryId() int32 {
+	if x != nil {
+		return x.CategoryId
+	}
+	return 0
+}
+
+func (x *AddPostToCategoryRequest) GetPostId() int32 {
+	if x != nil {
+		return x.PostId
+	}
+	return 0
+}
+
+type AddPostToCategoryResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success bool  `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	PostId  int32 `protobuf:"varint,2,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
+}
+
+func (x *AddPostToCategoryResponse) Reset() {
+	*x = AddPostToCategoryResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[39]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddPostToCategoryResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddPostToCategoryResponse) ProtoMessage() {}
+
+func (x *AddPostToCategoryResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[39]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddPostToCategoryResponse.ProtoReflect.Descriptor instead.
+func (*AddPostToCategoryResponse) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *AddPostToCategoryResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *AddPostToCategoryResponse) GetPostId() int32 {
+	if x != nil {
+		return x.PostId
+	}
+	return 0
+}
+
+type RemovePostFromCategoryRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CategoryId int32 `protobuf:"varint,1,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
+	PostId     int32 `protobuf:"varint,2,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
+}
+
+func (x *RemovePostFromCategoryRequest) Reset() {
+	*x = RemovePostFromCategoryRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[40]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RemovePostFromCategoryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RemovePostFromCategoryRequest) ProtoMessage() {}
+
+func (x *RemovePostFromCategoryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[40]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RemovePostFromCategoryRequest.ProtoReflect.Descriptor instead.
+func (*RemovePostFromCategoryRequest) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *RemovePostFromCategoryRequest) GetCategoryId() int32 {
+	if x != nil {
+		return x.CategoryId
+	}
+	return 0
+}
+
+func (x *RemovePostFromCategoryRequest) GetPostId() int32 {
+	if x != nil {
+		return x.PostId
+	}
+	return 0
+}
+
+type RemovePostFromCategoryResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success bool  `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	PostId  int32 `protobuf:"varint,2,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
+}
+
+func (x *RemovePostFromCategoryResponse) Reset() {
+	*x = RemovePostFromCategoryResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_write_proto_msgTypes[41]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RemovePostFromCategoryResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RemovePostFromCategoryResponse) ProtoMessage() {}
+
+func (x *RemovePostFromCategoryResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_write_proto_msgTypes[41]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RemovePostFromCategoryResponse.ProtoReflect.Descriptor instead.
+func (*RemovePostFromCategoryResponse) Descriptor() ([]byte, []int) {
+	return file_write_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *RemovePostFromCategoryResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *RemovePostFromCategoryResponse) GetPostId() int32 {
+	if x != nil {
+		return x.PostId
+	}
+	return 0
 }
 
 var File_write_proto protoreflect.FileDescriptor
@@ -554,46 +2527,254 @@ var file_write_proto_rawDesc = []byte{
 	0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x63, 0x72,
 	0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x75, 0x70, 0x64, 0x61, 0x74,
 	0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x0e, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x75, 0x70, 0x64,
-	0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x22, 0x4e, 0x0a, 0x0f, 0x53, 0x61, 0x76, 0x65, 0x55, 0x73,
-	0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x27, 0x0a, 0x04, 0x75, 0x73, 0x65,
-	0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50,
-	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4e, 0x65, 0x77, 0x55, 0x73, 0x65, 0x72, 0x52, 0x04, 0x75, 0x73,
-	0x65, 0x72, 0x12, 0x12, 0x0a, 0x04, 0x68, 0x61, 0x73, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x04, 0x68, 0x61, 0x73, 0x68, 0x22, 0x55, 0x0a, 0x10, 0x53, 0x61, 0x76, 0x65, 0x55, 0x73,
-	0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x27, 0x0a, 0x04, 0x75, 0x73,
-	0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65,
-	0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4e, 0x65, 0x77, 0x55, 0x73, 0x65, 0x72, 0x52, 0x04, 0x75,
-	0x73, 0x65, 0x72, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x22, 0x91, 0x01,
-	0x0a, 0x0f, 0x45, 0x64, 0x69, 0x74, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x12, 0x27, 0x0a, 0x0f, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x5f, 0x65,
-	0x6d, 0x61, 0x69, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x72, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x6f, 0x72, 0x45, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x2c, 0x0a, 0x12, 0x72, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x5f, 0x69, 0x73, 0x5f, 0x61, 0x64, 0x6d, 0x69, 0x6e,
-	0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x10, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x6f,
-	0x72, 0x49, 0x73, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x12, 0x27, 0x0a, 0x04, 0x75, 0x73, 0x65, 0x72,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72,
+	0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x22, 0x98, 0x02, 0x0a, 0x04, 0x50, 0x6f, 0x73, 0x74, 0x12,
+	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x12,
+	0x1b, 0x0a, 0x09, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x05, 0x52, 0x08, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x49, 0x64, 0x12, 0x1b, 0x0a, 0x09,
+	0x70, 0x61, 0x72, 0x65, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52,
+	0x08, 0x70, 0x61, 0x72, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x69, 0x74,
+	0x6c, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x12,
+	0x1c, 0x0a, 0x09, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x65, 0x64, 0x18, 0x05, 0x20, 0x01,
+	0x28, 0x08, 0x52, 0x09, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x65, 0x64, 0x12, 0x17, 0x0a,
+	0x07, 0x75, 0x70, 0x5f, 0x76, 0x6f, 0x74, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06,
+	0x75, 0x70, 0x56, 0x6f, 0x74, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e,
+	0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74,
+	0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x08,
+	0x20, 0x01, 0x28, 0x05, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12,
+	0x1d, 0x0a, 0x0a, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x09, 0x20,
+	0x01, 0x28, 0x05, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x21,
+	0x0a, 0x0c, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x0a,
+	0x20, 0x01, 0x28, 0x05, 0x52, 0x0b, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x65, 0x64, 0x41,
+	0x74, 0x22, 0xc0, 0x01, 0x0a, 0x07, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x0e, 0x0a,
+	0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x12, 0x17, 0x0a,
+	0x07, 0x70, 0x6f, 0x73, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06,
+	0x70, 0x6f, 0x73, 0x74, 0x49, 0x64, 0x12, 0x1b, 0x0a, 0x09, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72,
+	0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x61, 0x75, 0x74, 0x68, 0x6f,
+	0x72, 0x49, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x04,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x12, 0x17, 0x0a,
+	0x07, 0x75, 0x70, 0x5f, 0x76, 0x6f, 0x74, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06,
+	0x75, 0x70, 0x56, 0x6f, 0x74, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x64, 0x5f, 0x61, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x05, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64,
+	0x5f, 0x61, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x05, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74,
+	0x65, 0x64, 0x41, 0x74, 0x22, 0x5e, 0x0a, 0x08, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79,
+	0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x02, 0x69, 0x64,
+	0x12, 0x14, 0x0a, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x73, 0x6c, 0x75, 0x67, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x73, 0x6c, 0x75, 0x67, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f,
+	0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6f, 0x6e,
+	0x74, 0x65, 0x6e, 0x74, 0x22, 0x4e, 0x0a, 0x0f, 0x53, 0x61, 0x76, 0x65, 0x55, 0x73, 0x65, 0x72,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x27, 0x0a, 0x04, 0x75, 0x73, 0x65, 0x72, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f,
+	0x74, 0x6f, 0x2e, 0x4e, 0x65, 0x77, 0x55, 0x73, 0x65, 0x72, 0x52, 0x04, 0x75, 0x73, 0x65, 0x72,
+	0x12, 0x12, 0x0a, 0x04, 0x68, 0x61, 0x73, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
+	0x68, 0x61, 0x73, 0x68, 0x22, 0x55, 0x0a, 0x10, 0x53, 0x61, 0x76, 0x65, 0x55, 0x73, 0x65, 0x72,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x27, 0x0a, 0x04, 0x75, 0x73, 0x65, 0x72,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72,
 	0x6f, 0x74, 0x6f, 0x2e, 0x4e, 0x65, 0x77, 0x55, 0x73, 0x65, 0x72, 0x52, 0x04, 0x75, 0x73, 0x65,
-	0x72, 0x22, 0x55, 0x0a, 0x10, 0x45, 0x64, 0x69, 0x74, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x12,
-	0x27, 0x0a, 0x04, 0x75, 0x73, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e,
-	0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4e, 0x65, 0x77, 0x55, 0x73,
-	0x65, 0x72, 0x52, 0x04, 0x75, 0x73, 0x65, 0x72, 0x22, 0x83, 0x01, 0x0a, 0x11, 0x44, 0x65, 0x6c,
-	0x65, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x27,
-	0x0a, 0x0f, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x5f, 0x65, 0x6d, 0x61, 0x69,
-	0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x6f, 0x72, 0x45, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x2c, 0x0a, 0x12, 0x72, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x6f, 0x72, 0x5f, 0x69, 0x73, 0x5f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x08, 0x52, 0x10, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x49, 0x73,
-	0x41, 0x64, 0x6d, 0x69, 0x6e, 0x12, 0x17, 0x0a, 0x07, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x22, 0x57,
-	0x0a, 0x12, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70,
+	0x72, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x22, 0x91, 0x01, 0x0a, 0x0f,
+	0x45, 0x64, 0x69, 0x74, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
+	0x27, 0x0a, 0x0f, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x5f, 0x65, 0x6d, 0x61,
+	0x69, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x6f, 0x72, 0x45, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x2c, 0x0a, 0x12, 0x72, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x6f, 0x72, 0x5f, 0x69, 0x73, 0x5f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x08, 0x52, 0x10, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x49,
+	0x73, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x12, 0x27, 0x0a, 0x04, 0x75, 0x73, 0x65, 0x72, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74,
+	0x6f, 0x2e, 0x4e, 0x65, 0x77, 0x55, 0x73, 0x65, 0x72, 0x52, 0x04, 0x75, 0x73, 0x65, 0x72, 0x22,
+	0x55, 0x0a, 0x10, 0x45, 0x64, 0x69, 0x74, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x27, 0x0a,
+	0x04, 0x75, 0x73, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x77, 0x72,
+	0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4e, 0x65, 0x77, 0x55, 0x73, 0x65, 0x72,
+	0x52, 0x04, 0x75, 0x73, 0x65, 0x72, 0x22, 0x83, 0x01, 0x0a, 0x11, 0x44, 0x65, 0x6c, 0x65, 0x74,
+	0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x27, 0x0a, 0x0f,
+	0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x5f, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x6f, 0x72,
+	0x45, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x2c, 0x0a, 0x12, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x6f, 0x72, 0x5f, 0x69, 0x73, 0x5f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x08, 0x52, 0x10, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x49, 0x73, 0x41, 0x64,
+	0x6d, 0x69, 0x6e, 0x12, 0x17, 0x0a, 0x07, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x22, 0x57, 0x0a, 0x12,
+	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x27, 0x0a, 0x04,
+	0x75, 0x73, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x77, 0x72, 0x69,
+	0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4e, 0x65, 0x77, 0x55, 0x73, 0x65, 0x72, 0x52,
+	0x04, 0x75, 0x73, 0x65, 0x72, 0x22, 0x40, 0x0a, 0x11, 0x41, 0x64, 0x64, 0x4e, 0x65, 0x77, 0x50,
+	0x6f, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x2b, 0x0a, 0x08, 0x6e, 0x65,
+	0x77, 0x5f, 0x70, 0x6f, 0x73, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x77,
+	0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x07,
+	0x6e, 0x65, 0x77, 0x50, 0x6f, 0x73, 0x74, 0x22, 0x5b, 0x0a, 0x12, 0x41, 0x64, 0x64, 0x4e, 0x65,
+	0x77, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a,
+	0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07,
+	0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x2b, 0x0a, 0x08, 0x6e, 0x65, 0x77, 0x5f, 0x70,
+	0x6f, 0x73, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x77, 0x72, 0x69, 0x74,
+	0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x07, 0x6e, 0x65, 0x77,
+	0x50, 0x6f, 0x73, 0x74, 0x22, 0x44, 0x0a, 0x0f, 0x45, 0x64, 0x69, 0x74, 0x50, 0x6f, 0x73, 0x74,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x31, 0x0a, 0x0b, 0x65, 0x64, 0x69, 0x74, 0x65,
+	0x64, 0x5f, 0x70, 0x6f, 0x73, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x77,
+	0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x0a,
+	0x65, 0x64, 0x69, 0x74, 0x65, 0x64, 0x50, 0x6f, 0x73, 0x74, 0x22, 0x5f, 0x0a, 0x10, 0x45, 0x64,
+	0x69, 0x74, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18,
+	0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52,
+	0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x31, 0x0a, 0x0b, 0x65, 0x64, 0x69, 0x74,
+	0x65, 0x64, 0x5f, 0x70, 0x6f, 0x73, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e,
+	0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x52,
+	0x0a, 0x65, 0x64, 0x69, 0x74, 0x65, 0x64, 0x50, 0x6f, 0x73, 0x74, 0x22, 0x4f, 0x0a, 0x11, 0x44,
+	0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x12, 0x21, 0x0a, 0x0c, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x5f, 0x69, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0b, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x6f,
+	0x72, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x70, 0x6f, 0x73, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x70, 0x6f, 0x73, 0x74, 0x49, 0x64, 0x22, 0x63, 0x0a, 0x12,
+	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x33, 0x0a, 0x0c,
+	0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x5f, 0x70, 0x6f, 0x73, 0x74, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x10, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e,
+	0x50, 0x6f, 0x73, 0x74, 0x52, 0x0b, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x50, 0x6f, 0x73,
+	0x74, 0x22, 0x50, 0x0a, 0x12, 0x50, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x50, 0x6f, 0x73, 0x74,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x21, 0x0a, 0x0c, 0x72, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x6f, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0b, 0x72,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x70, 0x6f,
+	0x73, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x70, 0x6f, 0x73,
+	0x74, 0x49, 0x64, 0x22, 0x68, 0x0a, 0x13, 0x50, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x50, 0x6f,
+	0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75,
+	0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63,
+	0x63, 0x65, 0x73, 0x73, 0x12, 0x37, 0x0a, 0x0e, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x65,
+	0x64, 0x5f, 0x70, 0x6f, 0x73, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x77,
+	0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x0d,
+	0x70, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x65, 0x64, 0x50, 0x6f, 0x73, 0x74, 0x22, 0x52, 0x0a,
+	0x14, 0x55, 0x6e, 0x50, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x21, 0x0a, 0x0c, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x6f, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0b, 0x72, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x70, 0x6f, 0x73, 0x74,
+	0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x70, 0x6f, 0x73, 0x74, 0x49,
+	0x64, 0x22, 0x6f, 0x0a, 0x15, 0x55, 0x6e, 0x50, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x50, 0x6f,
+	0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75,
+	0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63,
+	0x63, 0x65, 0x73, 0x73, 0x12, 0x3c, 0x0a, 0x11, 0x75, 0x6e, 0x5f, 0x70, 0x75, 0x62, 0x6c, 0x69,
+	0x73, 0x68, 0x65, 0x64, 0x5f, 0x70, 0x6f, 0x73, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x10, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x50, 0x6f, 0x73,
+	0x74, 0x52, 0x0f, 0x75, 0x6e, 0x50, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x65, 0x64, 0x50, 0x6f,
+	0x73, 0x74, 0x22, 0x4c, 0x0a, 0x11, 0x55, 0x70, 0x56, 0x6f, 0x74, 0x65, 0x50, 0x6f, 0x73, 0x74,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1e, 0x0a, 0x0b, 0x75, 0x70, 0x5f, 0x76, 0x6f,
+	0x74, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x09, 0x75, 0x70,
+	0x56, 0x6f, 0x74, 0x65, 0x72, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x70, 0x6f, 0x73, 0x74, 0x5f,
+	0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x70, 0x6f, 0x73, 0x74, 0x49, 0x64,
+	0x22, 0x4e, 0x0a, 0x12, 0x55, 0x70, 0x56, 0x6f, 0x74, 0x65, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73,
+	0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73,
+	0x12, 0x1e, 0x0a, 0x0b, 0x6e, 0x65, 0x77, 0x5f, 0x75, 0x70, 0x5f, 0x76, 0x6f, 0x74, 0x65, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x09, 0x6e, 0x65, 0x77, 0x55, 0x70, 0x56, 0x6f, 0x74, 0x65,
+	0x22, 0x4c, 0x0a, 0x14, 0x41, 0x64, 0x64, 0x4e, 0x65, 0x77, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e,
+	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x34, 0x0a, 0x0b, 0x6e, 0x65, 0x77, 0x5f,
+	0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e,
+	0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x43, 0x6f, 0x6d, 0x6d, 0x65,
+	0x6e, 0x74, 0x52, 0x0a, 0x6e, 0x65, 0x77, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x22, 0x50,
+	0x0a, 0x15, 0x41, 0x64, 0x64, 0x4e, 0x65, 0x77, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65,
+	0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73,
+	0x73, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x09, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x64,
+	0x22, 0x4a, 0x0a, 0x12, 0x45, 0x64, 0x69, 0x74, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x34, 0x0a, 0x0b, 0x6e, 0x65, 0x77, 0x5f, 0x63, 0x6f,
+	0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x77, 0x72,
+	0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74,
+	0x52, 0x0a, 0x6e, 0x65, 0x77, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x22, 0x6b, 0x0a, 0x13,
+	0x45, 0x64, 0x69, 0x74, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x3a, 0x0a,
+	0x0e, 0x65, 0x64, 0x69, 0x74, 0x65, 0x64, 0x5f, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f,
+	0x74, 0x6f, 0x2e, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x0d, 0x65, 0x64, 0x69, 0x74,
+	0x65, 0x64, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x22, 0x52, 0x0a, 0x14, 0x44, 0x65, 0x6c,
+	0x65, 0x74, 0x65, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x12, 0x1b, 0x0a, 0x09, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x49, 0x64, 0x12, 0x1d,
+	0x0a, 0x0a, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x05, 0x52, 0x09, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x22, 0x6f, 0x0a,
+	0x15, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73,
+	0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73,
+	0x12, 0x3c, 0x0a, 0x0f, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x5f, 0x63, 0x6f, 0x6d, 0x6d,
+	0x65, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x77, 0x72, 0x69, 0x74,
+	0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x0e,
+	0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x22, 0x35,
+	0x0a, 0x14, 0x55, 0x70, 0x56, 0x6f, 0x74, 0x65, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e,
+	0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x09, 0x63, 0x6f, 0x6d, 0x6d,
+	0x65, 0x6e, 0x74, 0x49, 0x64, 0x22, 0x53, 0x0a, 0x15, 0x55, 0x70, 0x56, 0x6f, 0x74, 0x65, 0x43,
+	0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18,
+	0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52,
+	0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x20, 0x0a, 0x0c, 0x6e, 0x65, 0x77, 0x5f,
+	0x75, 0x70, 0x5f, 0x76, 0x6f, 0x74, 0x65, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a,
+	0x6e, 0x65, 0x77, 0x55, 0x70, 0x56, 0x6f, 0x74, 0x65, 0x73, 0x22, 0x37, 0x0a, 0x16, 0x44, 0x6f,
+	0x77, 0x6e, 0x56, 0x6f, 0x74, 0x65, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x5f,
+	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x09, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e,
+	0x74, 0x49, 0x64, 0x22, 0x55, 0x0a, 0x17, 0x44, 0x6f, 0x77, 0x6e, 0x56, 0x6f, 0x74, 0x65, 0x43,
+	0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18,
+	0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52,
+	0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x20, 0x0a, 0x0c, 0x6e, 0x65, 0x77, 0x5f,
+	0x75, 0x70, 0x5f, 0x76, 0x6f, 0x74, 0x65, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a,
+	0x6e, 0x65, 0x77, 0x55, 0x70, 0x56, 0x6f, 0x74, 0x65, 0x73, 0x22, 0x50, 0x0a, 0x15, 0x41, 0x64,
+	0x64, 0x4e, 0x65, 0x77, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x12, 0x37, 0x0a, 0x0c, 0x6e, 0x65, 0x77, 0x5f, 0x63, 0x61, 0x74, 0x65, 0x67,
+	0x6f, 0x72, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x77, 0x72, 0x69, 0x74,
+	0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52,
+	0x0b, 0x6e, 0x65, 0x77, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x22, 0x53, 0x0a, 0x16,
+	0x41, 0x64, 0x64, 0x4e, 0x65, 0x77, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73,
+	0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73,
+	0x12, 0x1f, 0x0a, 0x0b, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x69, 0x64, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x49,
+	0x64, 0x22, 0x4e, 0x0a, 0x13, 0x45, 0x64, 0x69, 0x74, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72,
+	0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x37, 0x0a, 0x0c, 0x6e, 0x65, 0x77, 0x5f,
+	0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14,
+	0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x43, 0x61, 0x74, 0x65,
+	0x67, 0x6f, 0x72, 0x79, 0x52, 0x0b, 0x6e, 0x65, 0x77, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72,
+	0x79, 0x22, 0x6f, 0x0a, 0x14, 0x45, 0x64, 0x69, 0x74, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72,
+	0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63,
+	0x63, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63,
+	0x65, 0x73, 0x73, 0x12, 0x3d, 0x0a, 0x0f, 0x65, 0x64, 0x69, 0x74, 0x65, 0x64, 0x5f, 0x63, 0x61,
+	0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x77,
+	0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f,
+	0x72, 0x79, 0x52, 0x0e, 0x65, 0x64, 0x69, 0x74, 0x65, 0x64, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f,
+	0x72, 0x79, 0x22, 0x38, 0x0a, 0x15, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x61, 0x74, 0x65,
+	0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1f, 0x0a, 0x0b, 0x63,
+	0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05,
+	0x52, 0x0a, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x49, 0x64, 0x22, 0x73, 0x0a, 0x16,
+	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73,
+	0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73,
+	0x12, 0x3f, 0x0a, 0x10, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x5f, 0x63, 0x61, 0x74, 0x65,
+	0x67, 0x6f, 0x72, 0x79, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x77, 0x72, 0x69,
+	0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79,
+	0x52, 0x0f, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72,
+	0x79, 0x22, 0x54, 0x0a, 0x18, 0x41, 0x64, 0x64, 0x50, 0x6f, 0x73, 0x74, 0x54, 0x6f, 0x43, 0x61,
+	0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1f, 0x0a,
+	0x0b, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x05, 0x52, 0x0a, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x49, 0x64, 0x12, 0x17,
+	0x0a, 0x07, 0x70, 0x6f, 0x73, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52,
+	0x06, 0x70, 0x6f, 0x73, 0x74, 0x49, 0x64, 0x22, 0x4e, 0x0a, 0x19, 0x41, 0x64, 0x64, 0x50, 0x6f,
+	0x73, 0x74, 0x54, 0x6f, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x73, 0x70,
 	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x27,
-	0x0a, 0x04, 0x75, 0x73, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x77,
-	0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4e, 0x65, 0x77, 0x55, 0x73, 0x65,
-	0x72, 0x52, 0x04, 0x75, 0x73, 0x65, 0x72, 0x32, 0xe2, 0x01, 0x0a, 0x05, 0x57, 0x72, 0x69, 0x74,
+	0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x17,
+	0x0a, 0x07, 0x70, 0x6f, 0x73, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52,
+	0x06, 0x70, 0x6f, 0x73, 0x74, 0x49, 0x64, 0x22, 0x59, 0x0a, 0x1d, 0x52, 0x65, 0x6d, 0x6f, 0x76,
+	0x65, 0x50, 0x6f, 0x73, 0x74, 0x46, 0x72, 0x6f, 0x6d, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72,
+	0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1f, 0x0a, 0x0b, 0x63, 0x61, 0x74, 0x65,
+	0x67, 0x6f, 0x72, 0x79, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x63,
+	0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x70, 0x6f, 0x73,
+	0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x70, 0x6f, 0x73, 0x74,
+	0x49, 0x64, 0x22, 0x53, 0x0a, 0x1e, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x50, 0x6f, 0x73, 0x74,
+	0x46, 0x72, 0x6f, 0x6d, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x17,
+	0x0a, 0x07, 0x70, 0x6f, 0x73, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52,
+	0x06, 0x70, 0x6f, 0x73, 0x74, 0x49, 0x64, 0x32, 0xbc, 0x0c, 0x0a, 0x05, 0x57, 0x72, 0x69, 0x74,
 	0x65, 0x12, 0x45, 0x0a, 0x08, 0x53, 0x61, 0x76, 0x65, 0x55, 0x73, 0x65, 0x72, 0x12, 0x1b, 0x2e,
 	0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x53, 0x61, 0x76, 0x65, 0x55,
 	0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1c, 0x2e, 0x77, 0x72, 0x69,
@@ -607,9 +2788,94 @@ var file_write_proto_rawDesc = []byte{
 	0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74,
 	0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1e, 0x2e, 0x77,
 	0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65,
-	0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x0e, 0x5a, 0x0c,
-	0x2e, 0x3b, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4b, 0x0a, 0x0a,
+	0x41, 0x64, 0x64, 0x4e, 0x65, 0x77, 0x50, 0x6f, 0x73, 0x74, 0x12, 0x1d, 0x2e, 0x77, 0x72, 0x69,
+	0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x64, 0x64, 0x4e, 0x65, 0x77, 0x50, 0x6f,
+	0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1e, 0x2e, 0x77, 0x72, 0x69, 0x74,
+	0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x64, 0x64, 0x4e, 0x65, 0x77, 0x50, 0x6f, 0x73,
+	0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x45, 0x0a, 0x08, 0x45, 0x64, 0x69,
+	0x74, 0x50, 0x6f, 0x73, 0x74, 0x12, 0x1b, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f,
+	0x74, 0x6f, 0x2e, 0x45, 0x64, 0x69, 0x74, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x1c, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e,
+	0x45, 0x64, 0x69, 0x74, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x12, 0x4b, 0x0a, 0x0a, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x6f, 0x73, 0x74, 0x12, 0x1d,
+	0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x44, 0x65, 0x6c, 0x65,
+	0x74, 0x65, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1e, 0x2e,
+	0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74,
+	0x65, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4e, 0x0a,
+	0x0b, 0x50, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x50, 0x6f, 0x73, 0x74, 0x12, 0x1e, 0x2e, 0x77,
+	0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x50, 0x75, 0x62, 0x6c, 0x69, 0x73,
+	0x68, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1f, 0x2e, 0x77,
+	0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x50, 0x75, 0x62, 0x6c, 0x69, 0x73,
+	0x68, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x54, 0x0a,
+	0x0d, 0x55, 0x6e, 0x50, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x50, 0x6f, 0x73, 0x74, 0x12, 0x20,
+	0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x55, 0x6e, 0x50, 0x75,
+	0x62, 0x6c, 0x69, 0x73, 0x68, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x21, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x55, 0x6e,
+	0x50, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x4b, 0x0a, 0x0a, 0x55, 0x70, 0x56, 0x6f, 0x74, 0x65, 0x50, 0x6f, 0x73,
+	0x74, 0x12, 0x1d, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x55,
+	0x70, 0x56, 0x6f, 0x74, 0x65, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x1e, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x55, 0x70,
+	0x56, 0x6f, 0x74, 0x65, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x12, 0x54, 0x0a, 0x0d, 0x41, 0x64, 0x64, 0x4e, 0x65, 0x77, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e,
+	0x74, 0x12, 0x20, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41,
+	0x64, 0x64, 0x4e, 0x65, 0x77, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f,
+	0x2e, 0x41, 0x64, 0x64, 0x4e, 0x65, 0x77, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4e, 0x0a, 0x0b, 0x45, 0x64, 0x69, 0x74, 0x43, 0x6f,
+	0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x1e, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f,
+	0x74, 0x6f, 0x2e, 0x45, 0x64, 0x69, 0x74, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1f, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f,
+	0x74, 0x6f, 0x2e, 0x45, 0x64, 0x69, 0x74, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x54, 0x0a, 0x0d, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65,
+	0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x20, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50,
+	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x6f, 0x6d, 0x6d, 0x65,
+	0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x77, 0x72, 0x69, 0x74,
+	0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x6f, 0x6d,
+	0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x54, 0x0a, 0x0d,
+	0x55, 0x70, 0x56, 0x6f, 0x74, 0x65, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x20, 0x2e,
+	0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x55, 0x70, 0x56, 0x6f, 0x74,
+	0x65, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x21, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x55, 0x70, 0x56,
+	0x6f, 0x74, 0x65, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x5a, 0x0a, 0x0f, 0x44, 0x6f, 0x77, 0x6e, 0x56, 0x6f, 0x74, 0x65, 0x43, 0x6f,
+	0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x22, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f,
+	0x74, 0x6f, 0x2e, 0x44, 0x6f, 0x77, 0x6e, 0x56, 0x6f, 0x74, 0x65, 0x43, 0x6f, 0x6d, 0x6d, 0x65,
+	0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x23, 0x2e, 0x77, 0x72, 0x69, 0x74,
+	0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x44, 0x6f, 0x77, 0x6e, 0x56, 0x6f, 0x74, 0x65, 0x43,
+	0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x57,
+	0x0a, 0x0e, 0x41, 0x64, 0x64, 0x4e, 0x65, 0x77, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79,
+	0x12, 0x21, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x64,
+	0x64, 0x4e, 0x65, 0x77, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f,
+	0x2e, 0x41, 0x64, 0x64, 0x4e, 0x65, 0x77, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x51, 0x0a, 0x0c, 0x45, 0x64, 0x69, 0x74, 0x43,
+	0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x12, 0x1f, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50,
+	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x45, 0x64, 0x69, 0x74, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72,
+	0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x20, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65,
+	0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x45, 0x64, 0x69, 0x74, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f,
+	0x72, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x57, 0x0a, 0x0e, 0x44, 0x65,
+	0x6c, 0x65, 0x74, 0x65, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x12, 0x21, 0x2e, 0x77,
+	0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65,
+	0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x22, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x44, 0x65, 0x6c,
+	0x65, 0x74, 0x65, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x60, 0x0a, 0x11, 0x41, 0x64, 0x64, 0x50, 0x6f, 0x73, 0x74, 0x54, 0x6f,
+	0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x12, 0x24, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65,
+	0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x64, 0x64, 0x50, 0x6f, 0x73, 0x74, 0x54, 0x6f, 0x43,
+	0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x25,
+	0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x64, 0x64, 0x50,
+	0x6f, 0x73, 0x74, 0x54, 0x6f, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x6f, 0x0a, 0x16, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x50,
+	0x6f, 0x73, 0x74, 0x46, 0x72, 0x6f, 0x6d, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x12,
+	0x29, 0x2e, 0x77, 0x72, 0x69, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x52, 0x65, 0x6d,
+	0x6f, 0x76, 0x65, 0x50, 0x6f, 0x73, 0x74, 0x46, 0x72, 0x6f, 0x6d, 0x43, 0x61, 0x74, 0x65, 0x67,
+	0x6f, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2a, 0x2e, 0x77, 0x72, 0x69,
+	0x74, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x50, 0x6f,
+	0x73, 0x74, 0x46, 0x72, 0x6f, 0x6d, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x0e, 0x5a, 0x0c, 0x2e, 0x3b, 0x77, 0x72, 0x69, 0x74,
+	0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -624,33 +2890,115 @@ func file_write_proto_rawDescGZIP() []byte {
 	return file_write_proto_rawDescData
 }
 
-var file_write_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_write_proto_msgTypes = make([]protoimpl.MessageInfo, 42)
 var file_write_proto_goTypes = []interface{}{
-	(*NewUser)(nil),            // 0: writeProto.NewUser
-	(*SaveUserRequest)(nil),    // 1: writeProto.SaveUserRequest
-	(*SaveUserResponse)(nil),   // 2: writeProto.SaveUserResponse
-	(*EditUserRequest)(nil),    // 3: writeProto.EditUserRequest
-	(*EditUserResponse)(nil),   // 4: writeProto.EditUserResponse
-	(*DeleteUserRequest)(nil),  // 5: writeProto.DeleteUserRequest
-	(*DeleteUserResponse)(nil), // 6: writeProto.DeleteUserResponse
+	(*NewUser)(nil),                        // 0: writeProto.NewUser
+	(*Post)(nil),                           // 1: writeProto.Post
+	(*Comment)(nil),                        // 2: writeProto.Comment
+	(*Category)(nil),                       // 3: writeProto.Category
+	(*SaveUserRequest)(nil),                // 4: writeProto.SaveUserRequest
+	(*SaveUserResponse)(nil),               // 5: writeProto.SaveUserResponse
+	(*EditUserRequest)(nil),                // 6: writeProto.EditUserRequest
+	(*EditUserResponse)(nil),               // 7: writeProto.EditUserResponse
+	(*DeleteUserRequest)(nil),              // 8: writeProto.DeleteUserRequest
+	(*DeleteUserResponse)(nil),             // 9: writeProto.DeleteUserResponse
+	(*AddNewPostRequest)(nil),              // 10: writeProto.AddNewPostRequest
+	(*AddNewPostResponse)(nil),             // 11: writeProto.AddNewPostResponse
+	(*EditPostRequest)(nil),                // 12: writeProto.EditPostRequest
+	(*EditPostResponse)(nil),               // 13: writeProto.EditPostResponse
+	(*DeletePostRequest)(nil),              // 14: writeProto.DeletePostRequest
+	(*DeletePostResponse)(nil),             // 15: writeProto.DeletePostResponse
+	(*PublishPostRequest)(nil),             // 16: writeProto.PublishPostRequest
+	(*PublishPostResponse)(nil),            // 17: writeProto.PublishPostResponse
+	(*UnPublishPostRequest)(nil),           // 18: writeProto.UnPublishPostRequest
+	(*UnPublishPostResponse)(nil),          // 19: writeProto.UnPublishPostResponse
+	(*UpVotePostRequest)(nil),              // 20: writeProto.UpVotePostRequest
+	(*UpVotePostResponse)(nil),             // 21: writeProto.UpVotePostResponse
+	(*AddNewCommentRequest)(nil),           // 22: writeProto.AddNewCommentRequest
+	(*AddNewCommentResponse)(nil),          // 23: writeProto.AddNewCommentResponse
+	(*EditCommentRequest)(nil),             // 24: writeProto.EditCommentRequest
+	(*EditCommentResponse)(nil),            // 25: writeProto.EditCommentResponse
+	(*DeleteCommentRequest)(nil),           // 26: writeProto.DeleteCommentRequest
+	(*DeleteCommentResponse)(nil),          // 27: writeProto.DeleteCommentResponse
+	(*UpVoteCommentRequest)(nil),           // 28: writeProto.UpVoteCommentRequest
+	(*UpVoteCommentResponse)(nil),          // 29: writeProto.UpVoteCommentResponse
+	(*DownVoteCommentRequest)(nil),         // 30: writeProto.DownVoteCommentRequest
+	(*DownVoteCommentResponse)(nil),        // 31: writeProto.DownVoteCommentResponse
+	(*AddNewCategoryRequest)(nil),          // 32: writeProto.AddNewCategoryRequest
+	(*AddNewCategoryResponse)(nil),         // 33: writeProto.AddNewCategoryResponse
+	(*EditCategoryRequest)(nil),            // 34: writeProto.EditCategoryRequest
+	(*EditCategoryResponse)(nil),           // 35: writeProto.EditCategoryResponse
+	(*DeleteCategoryRequest)(nil),          // 36: writeProto.DeleteCategoryRequest
+	(*DeleteCategoryResponse)(nil),         // 37: writeProto.DeleteCategoryResponse
+	(*AddPostToCategoryRequest)(nil),       // 38: writeProto.AddPostToCategoryRequest
+	(*AddPostToCategoryResponse)(nil),      // 39: writeProto.AddPostToCategoryResponse
+	(*RemovePostFromCategoryRequest)(nil),  // 40: writeProto.RemovePostFromCategoryRequest
+	(*RemovePostFromCategoryResponse)(nil), // 41: writeProto.RemovePostFromCategoryResponse
 }
 var file_write_proto_depIdxs = []int32{
-	0, // 0: writeProto.SaveUserRequest.user:type_name -> writeProto.NewUser
-	0, // 1: writeProto.SaveUserResponse.user:type_name -> writeProto.NewUser
-	0, // 2: writeProto.EditUserRequest.user:type_name -> writeProto.NewUser
-	0, // 3: writeProto.EditUserResponse.user:type_name -> writeProto.NewUser
-	0, // 4: writeProto.DeleteUserResponse.user:type_name -> writeProto.NewUser
-	1, // 5: writeProto.Write.SaveUser:input_type -> writeProto.SaveUserRequest
-	3, // 6: writeProto.Write.EditUser:input_type -> writeProto.EditUserRequest
-	5, // 7: writeProto.Write.DeleteUser:input_type -> writeProto.DeleteUserRequest
-	2, // 8: writeProto.Write.SaveUser:output_type -> writeProto.SaveUserResponse
-	4, // 9: writeProto.Write.EditUser:output_type -> writeProto.EditUserResponse
-	6, // 10: writeProto.Write.DeleteUser:output_type -> writeProto.DeleteUserResponse
-	8, // [8:11] is the sub-list for method output_type
-	5, // [5:8] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	0,  // 0: writeProto.SaveUserRequest.user:type_name -> writeProto.NewUser
+	0,  // 1: writeProto.SaveUserResponse.user:type_name -> writeProto.NewUser
+	0,  // 2: writeProto.EditUserRequest.user:type_name -> writeProto.NewUser
+	0,  // 3: writeProto.EditUserResponse.user:type_name -> writeProto.NewUser
+	0,  // 4: writeProto.DeleteUserResponse.user:type_name -> writeProto.NewUser
+	1,  // 5: writeProto.AddNewPostRequest.new_post:type_name -> writeProto.Post
+	1,  // 6: writeProto.AddNewPostResponse.new_post:type_name -> writeProto.Post
+	1,  // 7: writeProto.EditPostRequest.edited_post:type_name -> writeProto.Post
+	1,  // 8: writeProto.EditPostResponse.edited_post:type_name -> writeProto.Post
+	1,  // 9: writeProto.DeletePostResponse.deleted_post:type_name -> writeProto.Post
+	1,  // 10: writeProto.PublishPostResponse.published_post:type_name -> writeProto.Post
+	1,  // 11: writeProto.UnPublishPostResponse.un_published_post:type_name -> writeProto.Post
+	2,  // 12: writeProto.AddNewCommentRequest.new_comment:type_name -> writeProto.Comment
+	2,  // 13: writeProto.EditCommentRequest.new_comment:type_name -> writeProto.Comment
+	2,  // 14: writeProto.EditCommentResponse.edited_comment:type_name -> writeProto.Comment
+	2,  // 15: writeProto.DeleteCommentResponse.deleted_comment:type_name -> writeProto.Comment
+	3,  // 16: writeProto.AddNewCategoryRequest.new_category:type_name -> writeProto.Category
+	3,  // 17: writeProto.EditCategoryRequest.new_category:type_name -> writeProto.Category
+	3,  // 18: writeProto.EditCategoryResponse.edited_category:type_name -> writeProto.Category
+	3,  // 19: writeProto.DeleteCategoryResponse.deleted_category:type_name -> writeProto.Category
+	4,  // 20: writeProto.Write.SaveUser:input_type -> writeProto.SaveUserRequest
+	6,  // 21: writeProto.Write.EditUser:input_type -> writeProto.EditUserRequest
+	8,  // 22: writeProto.Write.DeleteUser:input_type -> writeProto.DeleteUserRequest
+	10, // 23: writeProto.Write.AddNewPost:input_type -> writeProto.AddNewPostRequest
+	12, // 24: writeProto.Write.EditPost:input_type -> writeProto.EditPostRequest
+	14, // 25: writeProto.Write.DeletePost:input_type -> writeProto.DeletePostRequest
+	16, // 26: writeProto.Write.PublishPost:input_type -> writeProto.PublishPostRequest
+	18, // 27: writeProto.Write.UnPublishPost:input_type -> writeProto.UnPublishPostRequest
+	20, // 28: writeProto.Write.UpVotePost:input_type -> writeProto.UpVotePostRequest
+	22, // 29: writeProto.Write.AddNewComment:input_type -> writeProto.AddNewCommentRequest
+	24, // 30: writeProto.Write.EditComment:input_type -> writeProto.EditCommentRequest
+	26, // 31: writeProto.Write.DeleteComment:input_type -> writeProto.DeleteCommentRequest
+	28, // 32: writeProto.Write.UpVoteComment:input_type -> writeProto.UpVoteCommentRequest
+	30, // 33: writeProto.Write.DownVoteComment:input_type -> writeProto.DownVoteCommentRequest
+	32, // 34: writeProto.Write.AddNewCategory:input_type -> writeProto.AddNewCategoryRequest
+	34, // 35: writeProto.Write.EditCategory:input_type -> writeProto.EditCategoryRequest
+	36, // 36: writeProto.Write.DeleteCategory:input_type -> writeProto.DeleteCategoryRequest
+	38, // 37: writeProto.Write.AddPostToCategory:input_type -> writeProto.AddPostToCategoryRequest
+	40, // 38: writeProto.Write.RemovePostFromCategory:input_type -> writeProto.RemovePostFromCategoryRequest
+	5,  // 39: writeProto.Write.SaveUser:output_type -> writeProto.SaveUserResponse
+	7,  // 40: writeProto.Write.EditUser:output_type -> writeProto.EditUserResponse
+	9,  // 41: writeProto.Write.DeleteUser:output_type -> writeProto.DeleteUserResponse
+	11, // 42: writeProto.Write.AddNewPost:output_type -> writeProto.AddNewPostResponse
+	13, // 43: writeProto.Write.EditPost:output_type -> writeProto.EditPostResponse
+	15, // 44: writeProto.Write.DeletePost:output_type -> writeProto.DeletePostResponse
+	17, // 45: writeProto.Write.PublishPost:output_type -> writeProto.PublishPostResponse
+	19, // 46: writeProto.Write.UnPublishPost:output_type -> writeProto.UnPublishPostResponse
+	21, // 47: writeProto.Write.UpVotePost:output_type -> writeProto.UpVotePostResponse
+	23, // 48: writeProto.Write.AddNewComment:output_type -> writeProto.AddNewCommentResponse
+	25, // 49: writeProto.Write.EditComment:output_type -> writeProto.EditCommentResponse
+	27, // 50: writeProto.Write.DeleteComment:output_type -> writeProto.DeleteCommentResponse
+	29, // 51: writeProto.Write.UpVoteComment:output_type -> writeProto.UpVoteCommentResponse
+	31, // 52: writeProto.Write.DownVoteComment:output_type -> writeProto.DownVoteCommentResponse
+	33, // 53: writeProto.Write.AddNewCategory:output_type -> writeProto.AddNewCategoryResponse
+	35, // 54: writeProto.Write.EditCategory:output_type -> writeProto.EditCategoryResponse
+	37, // 55: writeProto.Write.DeleteCategory:output_type -> writeProto.DeleteCategoryResponse
+	39, // 56: writeProto.Write.AddPostToCategory:output_type -> writeProto.AddPostToCategoryResponse
+	41, // 57: writeProto.Write.RemovePostFromCategory:output_type -> writeProto.RemovePostFromCategoryResponse
+	39, // [39:58] is the sub-list for method output_type
+	20, // [20:39] is the sub-list for method input_type
+	20, // [20:20] is the sub-list for extension type_name
+	20, // [20:20] is the sub-list for extension extendee
+	0,  // [0:20] is the sub-list for field type_name
 }
 
 func init() { file_write_proto_init() }
@@ -672,7 +3020,7 @@ func file_write_proto_init() {
 			}
 		}
 		file_write_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SaveUserRequest); i {
+			switch v := v.(*Post); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -684,7 +3032,7 @@ func file_write_proto_init() {
 			}
 		}
 		file_write_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SaveUserResponse); i {
+			switch v := v.(*Comment); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -696,7 +3044,7 @@ func file_write_proto_init() {
 			}
 		}
 		file_write_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*EditUserRequest); i {
+			switch v := v.(*Category); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -708,7 +3056,7 @@ func file_write_proto_init() {
 			}
 		}
 		file_write_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*EditUserResponse); i {
+			switch v := v.(*SaveUserRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -720,7 +3068,7 @@ func file_write_proto_init() {
 			}
 		}
 		file_write_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteUserRequest); i {
+			switch v := v.(*SaveUserResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -732,7 +3080,427 @@ func file_write_proto_init() {
 			}
 		}
 		file_write_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EditUserRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EditUserResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteUserRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteUserResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddNewPostRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddNewPostResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EditPostRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EditPostResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeletePostRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeletePostResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PublishPostRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PublishPostResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UnPublishPostRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UnPublishPostResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpVotePostRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpVotePostResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddNewCommentRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddNewCommentResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EditCommentRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EditCommentResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteCommentRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteCommentResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpVoteCommentRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpVoteCommentResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DownVoteCommentRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DownVoteCommentResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddNewCategoryRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddNewCategoryResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EditCategoryRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EditCategoryResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteCategoryRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteCategoryResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[38].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddPostToCategoryRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[39].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddPostToCategoryResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[40].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RemovePostFromCategoryRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_write_proto_msgTypes[41].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RemovePostFromCategoryResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -750,7 +3518,7 @@ func file_write_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_write_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   42,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -776,9 +3544,29 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type WriteClient interface {
+	// User rpc
 	SaveUser(ctx context.Context, in *SaveUserRequest, opts ...grpc.CallOption) (*SaveUserResponse, error)
 	EditUser(ctx context.Context, in *EditUserRequest, opts ...grpc.CallOption) (*EditUserResponse, error)
 	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserResponse, error)
+	// Post rpc
+	AddNewPost(ctx context.Context, in *AddNewPostRequest, opts ...grpc.CallOption) (*AddNewPostResponse, error)
+	EditPost(ctx context.Context, in *EditPostRequest, opts ...grpc.CallOption) (*EditPostResponse, error)
+	DeletePost(ctx context.Context, in *DeletePostRequest, opts ...grpc.CallOption) (*DeletePostResponse, error)
+	PublishPost(ctx context.Context, in *PublishPostRequest, opts ...grpc.CallOption) (*PublishPostResponse, error)
+	UnPublishPost(ctx context.Context, in *UnPublishPostRequest, opts ...grpc.CallOption) (*UnPublishPostResponse, error)
+	UpVotePost(ctx context.Context, in *UpVotePostRequest, opts ...grpc.CallOption) (*UpVotePostResponse, error)
+	// Comment rpc
+	AddNewComment(ctx context.Context, in *AddNewCommentRequest, opts ...grpc.CallOption) (*AddNewCommentResponse, error)
+	EditComment(ctx context.Context, in *EditCommentRequest, opts ...grpc.CallOption) (*EditCommentResponse, error)
+	DeleteComment(ctx context.Context, in *DeleteCommentRequest, opts ...grpc.CallOption) (*DeleteCommentResponse, error)
+	UpVoteComment(ctx context.Context, in *UpVoteCommentRequest, opts ...grpc.CallOption) (*UpVoteCommentResponse, error)
+	DownVoteComment(ctx context.Context, in *DownVoteCommentRequest, opts ...grpc.CallOption) (*DownVoteCommentResponse, error)
+	// Category rpc
+	AddNewCategory(ctx context.Context, in *AddNewCategoryRequest, opts ...grpc.CallOption) (*AddNewCategoryResponse, error)
+	EditCategory(ctx context.Context, in *EditCategoryRequest, opts ...grpc.CallOption) (*EditCategoryResponse, error)
+	DeleteCategory(ctx context.Context, in *DeleteCategoryRequest, opts ...grpc.CallOption) (*DeleteCategoryResponse, error)
+	AddPostToCategory(ctx context.Context, in *AddPostToCategoryRequest, opts ...grpc.CallOption) (*AddPostToCategoryResponse, error)
+	RemovePostFromCategory(ctx context.Context, in *RemovePostFromCategoryRequest, opts ...grpc.CallOption) (*RemovePostFromCategoryResponse, error)
 }
 
 type writeClient struct {
@@ -816,11 +3604,175 @@ func (c *writeClient) DeleteUser(ctx context.Context, in *DeleteUserRequest, opt
 	return out, nil
 }
 
+func (c *writeClient) AddNewPost(ctx context.Context, in *AddNewPostRequest, opts ...grpc.CallOption) (*AddNewPostResponse, error) {
+	out := new(AddNewPostResponse)
+	err := c.cc.Invoke(ctx, "/writeProto.Write/AddNewPost", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *writeClient) EditPost(ctx context.Context, in *EditPostRequest, opts ...grpc.CallOption) (*EditPostResponse, error) {
+	out := new(EditPostResponse)
+	err := c.cc.Invoke(ctx, "/writeProto.Write/EditPost", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *writeClient) DeletePost(ctx context.Context, in *DeletePostRequest, opts ...grpc.CallOption) (*DeletePostResponse, error) {
+	out := new(DeletePostResponse)
+	err := c.cc.Invoke(ctx, "/writeProto.Write/DeletePost", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *writeClient) PublishPost(ctx context.Context, in *PublishPostRequest, opts ...grpc.CallOption) (*PublishPostResponse, error) {
+	out := new(PublishPostResponse)
+	err := c.cc.Invoke(ctx, "/writeProto.Write/PublishPost", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *writeClient) UnPublishPost(ctx context.Context, in *UnPublishPostRequest, opts ...grpc.CallOption) (*UnPublishPostResponse, error) {
+	out := new(UnPublishPostResponse)
+	err := c.cc.Invoke(ctx, "/writeProto.Write/UnPublishPost", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *writeClient) UpVotePost(ctx context.Context, in *UpVotePostRequest, opts ...grpc.CallOption) (*UpVotePostResponse, error) {
+	out := new(UpVotePostResponse)
+	err := c.cc.Invoke(ctx, "/writeProto.Write/UpVotePost", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *writeClient) AddNewComment(ctx context.Context, in *AddNewCommentRequest, opts ...grpc.CallOption) (*AddNewCommentResponse, error) {
+	out := new(AddNewCommentResponse)
+	err := c.cc.Invoke(ctx, "/writeProto.Write/AddNewComment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *writeClient) EditComment(ctx context.Context, in *EditCommentRequest, opts ...grpc.CallOption) (*EditCommentResponse, error) {
+	out := new(EditCommentResponse)
+	err := c.cc.Invoke(ctx, "/writeProto.Write/EditComment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *writeClient) DeleteComment(ctx context.Context, in *DeleteCommentRequest, opts ...grpc.CallOption) (*DeleteCommentResponse, error) {
+	out := new(DeleteCommentResponse)
+	err := c.cc.Invoke(ctx, "/writeProto.Write/DeleteComment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *writeClient) UpVoteComment(ctx context.Context, in *UpVoteCommentRequest, opts ...grpc.CallOption) (*UpVoteCommentResponse, error) {
+	out := new(UpVoteCommentResponse)
+	err := c.cc.Invoke(ctx, "/writeProto.Write/UpVoteComment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *writeClient) DownVoteComment(ctx context.Context, in *DownVoteCommentRequest, opts ...grpc.CallOption) (*DownVoteCommentResponse, error) {
+	out := new(DownVoteCommentResponse)
+	err := c.cc.Invoke(ctx, "/writeProto.Write/DownVoteComment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *writeClient) AddNewCategory(ctx context.Context, in *AddNewCategoryRequest, opts ...grpc.CallOption) (*AddNewCategoryResponse, error) {
+	out := new(AddNewCategoryResponse)
+	err := c.cc.Invoke(ctx, "/writeProto.Write/AddNewCategory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *writeClient) EditCategory(ctx context.Context, in *EditCategoryRequest, opts ...grpc.CallOption) (*EditCategoryResponse, error) {
+	out := new(EditCategoryResponse)
+	err := c.cc.Invoke(ctx, "/writeProto.Write/EditCategory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *writeClient) DeleteCategory(ctx context.Context, in *DeleteCategoryRequest, opts ...grpc.CallOption) (*DeleteCategoryResponse, error) {
+	out := new(DeleteCategoryResponse)
+	err := c.cc.Invoke(ctx, "/writeProto.Write/DeleteCategory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *writeClient) AddPostToCategory(ctx context.Context, in *AddPostToCategoryRequest, opts ...grpc.CallOption) (*AddPostToCategoryResponse, error) {
+	out := new(AddPostToCategoryResponse)
+	err := c.cc.Invoke(ctx, "/writeProto.Write/AddPostToCategory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *writeClient) RemovePostFromCategory(ctx context.Context, in *RemovePostFromCategoryRequest, opts ...grpc.CallOption) (*RemovePostFromCategoryResponse, error) {
+	out := new(RemovePostFromCategoryResponse)
+	err := c.cc.Invoke(ctx, "/writeProto.Write/RemovePostFromCategory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WriteServer is the server API for Write service.
 type WriteServer interface {
+	// User rpc
 	SaveUser(context.Context, *SaveUserRequest) (*SaveUserResponse, error)
 	EditUser(context.Context, *EditUserRequest) (*EditUserResponse, error)
 	DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserResponse, error)
+	// Post rpc
+	AddNewPost(context.Context, *AddNewPostRequest) (*AddNewPostResponse, error)
+	EditPost(context.Context, *EditPostRequest) (*EditPostResponse, error)
+	DeletePost(context.Context, *DeletePostRequest) (*DeletePostResponse, error)
+	PublishPost(context.Context, *PublishPostRequest) (*PublishPostResponse, error)
+	UnPublishPost(context.Context, *UnPublishPostRequest) (*UnPublishPostResponse, error)
+	UpVotePost(context.Context, *UpVotePostRequest) (*UpVotePostResponse, error)
+	// Comment rpc
+	AddNewComment(context.Context, *AddNewCommentRequest) (*AddNewCommentResponse, error)
+	EditComment(context.Context, *EditCommentRequest) (*EditCommentResponse, error)
+	DeleteComment(context.Context, *DeleteCommentRequest) (*DeleteCommentResponse, error)
+	UpVoteComment(context.Context, *UpVoteCommentRequest) (*UpVoteCommentResponse, error)
+	DownVoteComment(context.Context, *DownVoteCommentRequest) (*DownVoteCommentResponse, error)
+	// Category rpc
+	AddNewCategory(context.Context, *AddNewCategoryRequest) (*AddNewCategoryResponse, error)
+	EditCategory(context.Context, *EditCategoryRequest) (*EditCategoryResponse, error)
+	DeleteCategory(context.Context, *DeleteCategoryRequest) (*DeleteCategoryResponse, error)
+	AddPostToCategory(context.Context, *AddPostToCategoryRequest) (*AddPostToCategoryResponse, error)
+	RemovePostFromCategory(context.Context, *RemovePostFromCategoryRequest) (*RemovePostFromCategoryResponse, error)
 }
 
 // UnimplementedWriteServer can be embedded to have forward compatible implementations.
@@ -835,6 +3787,54 @@ func (*UnimplementedWriteServer) EditUser(context.Context, *EditUserRequest) (*E
 }
 func (*UnimplementedWriteServer) DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteUser not implemented")
+}
+func (*UnimplementedWriteServer) AddNewPost(context.Context, *AddNewPostRequest) (*AddNewPostResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddNewPost not implemented")
+}
+func (*UnimplementedWriteServer) EditPost(context.Context, *EditPostRequest) (*EditPostResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EditPost not implemented")
+}
+func (*UnimplementedWriteServer) DeletePost(context.Context, *DeletePostRequest) (*DeletePostResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeletePost not implemented")
+}
+func (*UnimplementedWriteServer) PublishPost(context.Context, *PublishPostRequest) (*PublishPostResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PublishPost not implemented")
+}
+func (*UnimplementedWriteServer) UnPublishPost(context.Context, *UnPublishPostRequest) (*UnPublishPostResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UnPublishPost not implemented")
+}
+func (*UnimplementedWriteServer) UpVotePost(context.Context, *UpVotePostRequest) (*UpVotePostResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpVotePost not implemented")
+}
+func (*UnimplementedWriteServer) AddNewComment(context.Context, *AddNewCommentRequest) (*AddNewCommentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddNewComment not implemented")
+}
+func (*UnimplementedWriteServer) EditComment(context.Context, *EditCommentRequest) (*EditCommentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EditComment not implemented")
+}
+func (*UnimplementedWriteServer) DeleteComment(context.Context, *DeleteCommentRequest) (*DeleteCommentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteComment not implemented")
+}
+func (*UnimplementedWriteServer) UpVoteComment(context.Context, *UpVoteCommentRequest) (*UpVoteCommentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpVoteComment not implemented")
+}
+func (*UnimplementedWriteServer) DownVoteComment(context.Context, *DownVoteCommentRequest) (*DownVoteCommentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DownVoteComment not implemented")
+}
+func (*UnimplementedWriteServer) AddNewCategory(context.Context, *AddNewCategoryRequest) (*AddNewCategoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddNewCategory not implemented")
+}
+func (*UnimplementedWriteServer) EditCategory(context.Context, *EditCategoryRequest) (*EditCategoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EditCategory not implemented")
+}
+func (*UnimplementedWriteServer) DeleteCategory(context.Context, *DeleteCategoryRequest) (*DeleteCategoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCategory not implemented")
+}
+func (*UnimplementedWriteServer) AddPostToCategory(context.Context, *AddPostToCategoryRequest) (*AddPostToCategoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddPostToCategory not implemented")
+}
+func (*UnimplementedWriteServer) RemovePostFromCategory(context.Context, *RemovePostFromCategoryRequest) (*RemovePostFromCategoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemovePostFromCategory not implemented")
 }
 
 func RegisterWriteServer(s *grpc.Server, srv WriteServer) {
@@ -895,6 +3895,294 @@ func _Write_DeleteUser_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Write_AddNewPost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddNewPostRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WriteServer).AddNewPost(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/writeProto.Write/AddNewPost",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WriteServer).AddNewPost(ctx, req.(*AddNewPostRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Write_EditPost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EditPostRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WriteServer).EditPost(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/writeProto.Write/EditPost",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WriteServer).EditPost(ctx, req.(*EditPostRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Write_DeletePost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeletePostRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WriteServer).DeletePost(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/writeProto.Write/DeletePost",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WriteServer).DeletePost(ctx, req.(*DeletePostRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Write_PublishPost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PublishPostRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WriteServer).PublishPost(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/writeProto.Write/PublishPost",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WriteServer).PublishPost(ctx, req.(*PublishPostRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Write_UnPublishPost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnPublishPostRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WriteServer).UnPublishPost(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/writeProto.Write/UnPublishPost",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WriteServer).UnPublishPost(ctx, req.(*UnPublishPostRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Write_UpVotePost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpVotePostRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WriteServer).UpVotePost(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/writeProto.Write/UpVotePost",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WriteServer).UpVotePost(ctx, req.(*UpVotePostRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Write_AddNewComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddNewCommentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WriteServer).AddNewComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/writeProto.Write/AddNewComment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WriteServer).AddNewComment(ctx, req.(*AddNewCommentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Write_EditComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EditCommentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WriteServer).EditComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/writeProto.Write/EditComment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WriteServer).EditComment(ctx, req.(*EditCommentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Write_DeleteComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteCommentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WriteServer).DeleteComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/writeProto.Write/DeleteComment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WriteServer).DeleteComment(ctx, req.(*DeleteCommentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Write_UpVoteComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpVoteCommentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WriteServer).UpVoteComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/writeProto.Write/UpVoteComment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WriteServer).UpVoteComment(ctx, req.(*UpVoteCommentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Write_DownVoteComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DownVoteCommentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WriteServer).DownVoteComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/writeProto.Write/DownVoteComment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WriteServer).DownVoteComment(ctx, req.(*DownVoteCommentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Write_AddNewCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddNewCategoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WriteServer).AddNewCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/writeProto.Write/AddNewCategory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WriteServer).AddNewCategory(ctx, req.(*AddNewCategoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Write_EditCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EditCategoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WriteServer).EditCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/writeProto.Write/EditCategory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WriteServer).EditCategory(ctx, req.(*EditCategoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Write_DeleteCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteCategoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WriteServer).DeleteCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/writeProto.Write/DeleteCategory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WriteServer).DeleteCategory(ctx, req.(*DeleteCategoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Write_AddPostToCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddPostToCategoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WriteServer).AddPostToCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/writeProto.Write/AddPostToCategory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WriteServer).AddPostToCategory(ctx, req.(*AddPostToCategoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Write_RemovePostFromCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemovePostFromCategoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WriteServer).RemovePostFromCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/writeProto.Write/RemovePostFromCategory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WriteServer).RemovePostFromCategory(ctx, req.(*RemovePostFromCategoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Write_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "writeProto.Write",
 	HandlerType: (*WriteServer)(nil),
@@ -910,6 +4198,70 @@ var _Write_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteUser",
 			Handler:    _Write_DeleteUser_Handler,
+		},
+		{
+			MethodName: "AddNewPost",
+			Handler:    _Write_AddNewPost_Handler,
+		},
+		{
+			MethodName: "EditPost",
+			Handler:    _Write_EditPost_Handler,
+		},
+		{
+			MethodName: "DeletePost",
+			Handler:    _Write_DeletePost_Handler,
+		},
+		{
+			MethodName: "PublishPost",
+			Handler:    _Write_PublishPost_Handler,
+		},
+		{
+			MethodName: "UnPublishPost",
+			Handler:    _Write_UnPublishPost_Handler,
+		},
+		{
+			MethodName: "UpVotePost",
+			Handler:    _Write_UpVotePost_Handler,
+		},
+		{
+			MethodName: "AddNewComment",
+			Handler:    _Write_AddNewComment_Handler,
+		},
+		{
+			MethodName: "EditComment",
+			Handler:    _Write_EditComment_Handler,
+		},
+		{
+			MethodName: "DeleteComment",
+			Handler:    _Write_DeleteComment_Handler,
+		},
+		{
+			MethodName: "UpVoteComment",
+			Handler:    _Write_UpVoteComment_Handler,
+		},
+		{
+			MethodName: "DownVoteComment",
+			Handler:    _Write_DownVoteComment_Handler,
+		},
+		{
+			MethodName: "AddNewCategory",
+			Handler:    _Write_AddNewCategory_Handler,
+		},
+		{
+			MethodName: "EditCategory",
+			Handler:    _Write_EditCategory_Handler,
+		},
+		{
+			MethodName: "DeleteCategory",
+			Handler:    _Write_DeleteCategory_Handler,
+		},
+		{
+			MethodName: "AddPostToCategory",
+			Handler:    _Write_AddPostToCategory_Handler,
+		},
+		{
+			MethodName: "RemovePostFromCategory",
+			Handler:    _Write_RemovePostFromCategory_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

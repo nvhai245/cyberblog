@@ -21,10 +21,56 @@ message User {
   int64 updated_at = 14;
 }
 
+message Post {
+  int32 id = 1;
+  int32 author_id = 2;
+  int32 parent_id = 3;
+  string title = 4;
+  bool published = 5;
+  int32 up_vote = 6;
+  string content = 7;
+  int32 created_at = 8;
+  int32 updated_at = 9;
+  int32 published_at = 10;
+}
+
+message Comment {
+  int32 id = 1;
+  int32 post_id = 2;
+  int32 author_id = 3;
+  string content = 4;
+  int32 up_vote = 5;
+  int32 created_at = 6;
+  int32 updated_at = 7;
+}
+
+message Category {
+  int32 id = 1;
+  string title = 2;
+  string slug = 3;
+  string content = 4;
+}
+
 service Read {
+  // User rpc
   rpc GetUser (GetUserRequest) returns (GetUserResponse);
   rpc GetUserById (GetUserByIdRequest) returns (GetUserByIdResponse);
   rpc GetAllUsers (GetAllUsersRequest) returns (GetAllUsersResponse);
+
+  // Post rpc
+  rpc GetPostById (GetPostByIdRequest) returns (GetPostByIdResponse);
+  rpc GetUserPublishedPosts (GetUserPublishedPostsRequest) returns (GetUserPublishedPostsResponse);
+  rpc GetUserAllPosts (GetUserAllPostsRequest) returns (GetUserAllPostsResponse);
+  rpc GetUserUnPublishedPosts (GetUserUnPublishedPostsRequest) returns (GetUserUnPublishedPostsResponse);
+  rpc GetCategoryPosts (GetCategoryPostsRequest) returns (GetCategoryPostsResponse);
+
+  // Comment rpc
+  rpc GetPostComments (GetPostCommentsRequest) returns (GetPostCommentsResponse);
+  rpc GetUserComments (GetUserCommentsRequest) returns (GetUserCommentsResponse);
+
+  // Category rpc
+  rpc GetAllCategories (GetAllCategoriesRequest) returns (GetAllCategoriesResponse);
+  rpc GetPostCategories (GetPostCategoriesRequest) returns (GetPostCategoriesResponse);
 }
 
 message GetUserRequest {
@@ -49,7 +95,102 @@ message GetAllUsersRequest {
   int32 admin_id = 1;
 }
 
-message GetAllUsersResponse{
+message GetAllUsersResponse {
   bool success = 1;
   repeated User users = 2;
+}
+
+message GetPostByIdRequest {
+  int32 requester_id = 1;
+  int32 post_id = 2;
+}
+
+message GetPostByIdResponse {
+  bool success = 1;
+  Post found_post = 2;
+}
+
+message GetUserPublishedPostsRequest {
+  int32 requester_id = 1;
+  int32 user_id = 2;
+  int32 offset = 3;
+  int32 limit = 4;
+}
+
+message GetUserPublishedPostsResponse {
+  bool success = 1;
+  repeated Post found_posts = 2;
+}
+
+message GetUserAllPostsRequest {
+  int32 owner_id = 1;
+  int32 offset = 2;
+  int32 limit = 3;
+}
+
+message GetUserAllPostsResponse {
+  bool success = 1;
+  repeated Post found_posts = 2;
+}
+
+message GetUserUnPublishedPostsRequest {
+  int32 owner_id = 1;
+  int32 offset = 2;
+  int32 limit = 3;
+}
+
+message GetUserUnPublishedPostsResponse {
+  bool success = 1;
+  repeated Post found_posts = 2;
+}
+
+message GetCategoryPostsRequest {
+  int32 category_id = 1;
+  int32 offset = 2;
+  int32 limit = 3;
+}
+
+message GetCategoryPostsResponse {
+  bool success = 1;
+  repeated Post found_posts = 2;
+}
+
+message GetPostCommentsRequest {
+  int32 post_id = 1;
+  int32 offset = 2;
+  int32 limit = 3;
+}
+
+message GetPostCommentsResponse {
+  bool success = 1;
+  repeated Comment found_comments = 2;
+}
+
+message GetUserCommentsRequest {
+  int32 author_id = 1;
+  int32 offset = 2;
+  int32 limit = 3;
+}
+
+message GetUserCommentsResponse {
+  bool success = 1;
+  repeated Comment found_comments = 2;
+}
+
+message GetAllCategoriesRequest {
+  int32 requester_id = 1;
+}
+
+message GetAllCategoriesResponse {
+  bool success = 1;
+  repeated Category all_categories = 2;
+}
+
+message GetPostCategoriesRequest {
+  int32 post_id = 1;
+}
+
+message GetPostCategoriesResponse {
+  bool success = 1;
+  repeated Category post_categories = 2;
 }

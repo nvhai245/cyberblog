@@ -157,7 +157,7 @@ func UnPublish(requestorId int32, postId int32) (success bool, unPublishedPost *
 }
 
 // UpVote func
-func UpVote(postId int32) (success bool, newUpVotes int32) {
+func UpVote(upVoterId int32, postId int32) (success bool, newUpVotes int32) {
 	queryString := "UPDATE posts SET up_vote = up_vote + 1 WHERE id = $1 RETURNING up_vote"
 	rows, err := connection.DB.Queryx(queryString, postId)
 	if err != nil {
