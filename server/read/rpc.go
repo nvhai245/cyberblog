@@ -2,10 +2,11 @@ package main
 
 import (
 	"context"
-	"github.com/nvhai245/cyberblog/server/read/controller"
+	categoryController "github.com/nvhai245/cyberblog/server/read/controller/category"
+	commentController "github.com/nvhai245/cyberblog/server/read/controller/comment"
+	postController "github.com/nvhai245/cyberblog/server/read/controller/post"
+	"github.com/nvhai245/cyberblog/server/read/controller/user"
 	pb "github.com/nvhai245/cyberblog/server/read/proto"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
 	"log"
 	_ "log"
 )
@@ -16,7 +17,7 @@ type ReadServer struct {
 }
 
 func (*ReadServer) GetUser(ctx context.Context, req *pb.GetUserRequest) (*pb.GetUserResponse, error) {
-	res := controller.GetUser(req)
+	res := userController.GetUser(req)
 	if res.GetUser() == nil {
 		log.Println("controller.GetUser(): Can't find user with given email!")
 	}
@@ -24,7 +25,7 @@ func (*ReadServer) GetUser(ctx context.Context, req *pb.GetUserRequest) (*pb.Get
 }
 
 func (*ReadServer) GetUserById(ctx context.Context, req *pb.GetUserByIdRequest) (*pb.GetUserByIdResponse, error) {
-	res := controller.GetUserById(req)
+	res := userController.GetUserById(req)
 	if res.GetSuccess() == false {
 		log.Println("controller.GetUserById(): Can't find user with given id!")
 	}
@@ -32,7 +33,7 @@ func (*ReadServer) GetUserById(ctx context.Context, req *pb.GetUserByIdRequest) 
 }
 
 func (*ReadServer) GetAllUsers(ctx context.Context, req *pb.GetAllUsersRequest) (*pb.GetAllUsersResponse, error) {
-	res := controller.GetAllUsers(req)
+	res := userController.GetAllUsers(req)
 	if res.GetSuccess() == false {
 		log.Println("controller.GetAllUsers(): Can't get all users!")
 	}
@@ -40,37 +41,37 @@ func (*ReadServer) GetAllUsers(ctx context.Context, req *pb.GetAllUsersRequest) 
 }
 
 func (*ReadServer) GetPostById(ctx context.Context, req *pb.GetPostByIdRequest) (*pb.GetPostByIdResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPostById not implemented")
+	return postController.GetPostById(req)
 }
 
 func (*ReadServer) GetUserPublishedPosts(ctx context.Context, req *pb.GetUserPublishedPostsRequest) (*pb.GetUserPublishedPostsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUserPublishedPosts not implemented")
+	return postController.GetUserPublishedPosts(req)
 }
 
 func (*ReadServer) GetUserAllPosts(ctx context.Context, req *pb.GetUserAllPostsRequest) (*pb.GetUserAllPostsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUserAllPosts not implemented")
+	return postController.GetUserAllPosts(req)
 }
 
 func (*ReadServer) GetUserUnPublishedPosts(ctx context.Context, req *pb.GetUserUnPublishedPostsRequest) (*pb.GetUserUnPublishedPostsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUserUnPublishedPosts not implemented")
+	return postController.GetUserUnPublishedPosts(req)
 }
 
 func (*ReadServer) GetCategoryPosts(ctx context.Context, req *pb.GetCategoryPostsRequest) (*pb.GetCategoryPostsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCategoryPosts not implemented")
+	return postController.GetCategoryPosts(req)
 }
 
 func (*ReadServer) GetPostComments(ctx context.Context, req *pb.GetPostCommentsRequest) (*pb.GetPostCommentsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPostComments not implemented")
+	return commentController.GetPostComments(req)
 }
 
 func (*ReadServer) GetUserComments(ctx context.Context, req *pb.GetUserCommentsRequest) (*pb.GetUserCommentsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUserComments not implemented")
+	return commentController.GetUserComments(req)
 }
 
 func (*ReadServer) GetAllCategories(ctx context.Context, req *pb.GetAllCategoriesRequest) (*pb.GetAllCategoriesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAllCategories not implemented")
+	return categoryController.GetAllCategories(req)
 }
 
 func (*ReadServer) GetPostCategories(ctx context.Context, req *pb.GetPostCategoriesRequest) (*pb.GetPostCategoriesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPostCategories not implemented")
+	return categoryController.GetPostCategories(req)
 }

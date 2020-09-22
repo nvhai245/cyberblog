@@ -181,29 +181,3 @@ func UpVote(upVoterId int32, postId int32) (success bool, newUpVotes int32) {
 	}
 	return true, newUpVotes
 }
-
-// DownVote func
-func DownVote(postId int32) (success bool, newUpVotes int32) {
-	queryString := "UPDATE posts SET up_vote = up_vote - 1 WHERE id = $1 RETURNING up_vote"
-	rows, err := connection.DB.Queryx(queryString, postId)
-	if err != nil {
-		log.Println("Error in postModel.DownVote(): ", err)
-		return false, 0
-	}
-	defer rows.Close()
-	for rows.Next() {
-		if rows.Err() == sql.ErrNoRows {
-			log.Println("Error in postModel.DownVote(): no rows returned!", err)
-			return false, 0
-		}
-		err = rows.Scan(&newUpVotes)
-		if err != nil {
-			log.Println("Error in postModel.DownVote(): rows.Scan()", err)
-			return false, 0
-		}
-	}
-	if structs.IsZero(newUpVotes) {
-		return false, 0
-	}
-	return true, newUpVotes
-}

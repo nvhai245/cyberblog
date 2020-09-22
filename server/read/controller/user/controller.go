@@ -1,4 +1,4 @@
-package controller
+package userController
 
 import (
 	"github.com/nvhai245/cyberblog/server/read/model/user"

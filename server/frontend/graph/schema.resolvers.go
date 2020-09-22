@@ -6,10 +6,12 @@ package graph
 import (
 	"context"
 	"fmt"
+	readPb "github.com/nvhai245/cyberblog/server/read/proto"
+	writePb "github.com/nvhai245/cyberblog/server/write/proto"
 	"log"
+	"time"
 
 	authPb "github.com/nvhai245/cyberblog/server/auth/proto"
-	cyberPb "github.com/nvhai245/cyberblog/server/cyber/proto"
 	"github.com/nvhai245/cyberblog/server/frontend/connection"
 	"github.com/nvhai245/cyberblog/server/frontend/graph/generated"
 	"github.com/nvhai245/cyberblog/server/frontend/graph/model"
@@ -89,9 +91,8 @@ func (r *mutationResolver) GetUserByID(ctx context.Context, requestorID int, use
 	if !checkResponse.GetValid() {
 		return nil, fmt.Errorf("UNAUTHORIZED!")
 	}
-	res, err := connection.CyberClient.GetUserById(context.Background(), &cyberPb.GetUserByIdRequest{
-		RequestorId: int32(requestorID),
-		UserId:      int32(userID),
+	res, err := connection.ReadClient.GetUserById(context.Background(), &readPb.GetUserByIdRequest{
+		UserId: int32(userID),
 	})
 	if err != nil {
 		log.Println("Error in rpc CyberClient.GetUserById(): ", err)
@@ -103,7 +104,7 @@ func (r *mutationResolver) GetUserByID(ctx context.Context, requestorID int, use
 	}
 	response := &model.GetUserByIDResponse{
 		Message: "User found!",
-		User:    helper.CyberUserToGraphUser(foundUser),
+		User:    helper.ReadUserToGraphUser(foundUser),
 	}
 	// ****************************************************************************************************************
 
@@ -126,7 +127,7 @@ func (r *mutationResolver) GetAllUsers(ctx context.Context, adminID int) (*model
 		return nil, fmt.Errorf("YOU ARE NOT AN ADMIN!")
 	}
 
-	res, err := connection.CyberClient.GetAllUsers(context.Background(), &cyberPb.GetAllUsersRequest{
+	res, err := connection.ReadClient.GetAllUsers(context.Background(), &readPb.GetAllUsersRequest{
 		AdminId: int32(adminID),
 	})
 	if err != nil {
@@ -139,7 +140,7 @@ func (r *mutationResolver) GetAllUsers(ctx context.Context, adminID int) (*model
 	}
 	var users []*model.User
 	for _, foundUser := range foundUsers {
-		user := helper.CyberUserToGraphUser(foundUser)
+		user := helper.ReadUserToGraphUser(foundUser)
 		users = append(users, user)
 	}
 	response := &model.GetAllUsersResponse{
@@ -165,10 +166,10 @@ func (r *mutationResolver) EditUser(ctx context.Context, userID int, editedUser 
 	if !checkResponse.GetValid() {
 		return nil, fmt.Errorf("UNAUTHORIZED!")
 	}
-	res, err := connection.CyberClient.EditUser(context.Background(), &cyberPb.EditUserRequest{
+	res, err := connection.WriteClient.EditUser(context.Background(), &writePb.EditUserRequest{
 		RequestorEmail:   checkResponse.GetEmail(),
 		RequestorIsAdmin: checkResponse.GetIsAdmin(),
-		User: &cyberPb.User{
+		User: &writePb.NewUser{
 			Id:        int32(userID),
 			Username:  userToEdit.Username,
 			FirstName: userToEdit.FirstName,
@@ -179,6 +180,7 @@ func (r *mutationResolver) EditUser(ctx context.Context, userID int, editedUser 
 			Facebook:  userToEdit.Facebook,
 			Instagram: userToEdit.Instagram,
 			Twitter:   userToEdit.Twitter,
+			UpdatedAt: time.Now().Unix(),
 		},
 	})
 	if err != nil {
@@ -191,7 +193,7 @@ func (r *mutationResolver) EditUser(ctx context.Context, userID int, editedUser 
 	}
 	response := &model.EditUserResponse{
 		Message: "User edited!",
-		User:    helper.CyberUserToGraphUser(foundUser),
+		User:    helper.WriteUserToGraphUser(foundUser),
 	}
 	// ****************************************************************************************************************
 
@@ -214,7 +216,7 @@ func (r *mutationResolver) DeleteUser(ctx context.Context, adminID int, userID i
 		return nil, fmt.Errorf("YOU ARE NOT AN ADMIN!")
 	}
 	//	TODO: call to cyber
-	res, err := connection.CyberClient.DeleteUser(context.Background(), &cyberPb.DeleteUserRequest{
+	res, err := connection.WriteClient.DeleteUser(context.Background(), &writePb.DeleteUserRequest{
 		RequestorEmail:   checkResponse.GetEmail(),
 		RequestorIsAdmin: checkResponse.GetIsAdmin(),
 		UserId:           int32(userID),
@@ -230,7 +232,7 @@ func (r *mutationResolver) DeleteUser(ctx context.Context, adminID int, userID i
 
 	return &model.DeleteUserResponse{
 		Message: "User deleted!",
-		User:    helper.CyberUserToGraphUser(res.GetUser()),
+		User:    helper.WriteUserToGraphUser(res.GetUser()),
 	}, nil
 }
 

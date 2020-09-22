@@ -4,8 +4,9 @@ import (
 	"flag"
 	"github.com/gorilla/sessions"
 	"github.com/joho/godotenv"
-	cyberPb "github.com/nvhai245/cyberblog/server/cyber/proto"
 	"github.com/nvhai245/cyberblog/server/frontend/middleware"
+	readPb "github.com/nvhai245/cyberblog/server/read/proto"
+	writePb "github.com/nvhai245/cyberblog/server/write/proto"
 	"log"
 	"net/http"
 	"os"
@@ -53,15 +54,25 @@ func main() {
 	defer authConn.Close()
 	connection.AuthClient = authPb.NewAuthClient(authConn)
 
-	// Cyber
-	cyberConn, err := grpc.Dial(os.Getenv("CYBER_HOST"), grpc.WithInsecure(), grpc.WithBlock())
+	// Read
+	readConn, err := grpc.Dial(os.Getenv("READ_SERVICE_HOST"), grpc.WithInsecure(), grpc.WithBlock())
 	if err != nil {
 		log.Println(err)
 	} else {
-		log.Println("Connected to Cyber")
+		log.Println("Connected to Read service")
 	}
-	defer cyberConn.Close()
-	connection.CyberClient = cyberPb.NewCyberClient(cyberConn)
+	defer readConn.Close()
+	connection.ReadClient = readPb.NewReadClient(readConn)
+
+	// Write
+	writeConn, err := grpc.Dial(os.Getenv("WRITE_SERVICE_HOST"), grpc.WithInsecure(), grpc.WithBlock())
+	if err != nil {
+		log.Println(err)
+	} else {
+		log.Println("Connected to Write service")
+	}
+	defer readConn.Close()
+	connection.WriteClient = writePb.NewWriteClient(writeConn)
 
 	log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))

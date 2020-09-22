@@ -2,10 +2,11 @@ package main
 
 import (
 	"context"
+	categoryController "github.com/nvhai245/cyberblog/server/write/controller/category"
+	commentController "github.com/nvhai245/cyberblog/server/write/controller/comment"
+	postController "github.com/nvhai245/cyberblog/server/write/controller/post"
 	"github.com/nvhai245/cyberblog/server/write/controller/user"
 	pb "github.com/nvhai245/cyberblog/server/write/proto"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
 )
 
 // WriteServer for rpc
@@ -32,65 +33,65 @@ func (*WriteServer) DeleteUser(ctx context.Context, req *pb.DeleteUserRequest) (
 }
 
 func (*WriteServer) AddNewPost(ctx context.Context, req *pb.AddNewPostRequest) (*pb.AddNewPostResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddNewPost not implemented")
+	return postController.AddPost(req)
 }
 
 func (*WriteServer) EditPost(ctx context.Context, req *pb.EditPostRequest) (*pb.EditPostResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method EditPost not implemented")
+	return postController.EditPost(req)
 }
 
 func (*WriteServer) DeletePost(ctx context.Context, req *pb.DeletePostRequest) (*pb.DeletePostResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeletePost not implemented")
+	return postController.DeletePost(req)
 }
 
 func (*WriteServer) PublishPost(ctx context.Context, req *pb.PublishPostRequest) (*pb.PublishPostResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PublishPost not implemented")
+	return postController.PublishPost(req)
 }
 
 func (*WriteServer) UnPublishPost(ctx context.Context, req *pb.UnPublishPostRequest) (*pb.UnPublishPostResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UnPublishPost not implemented")
+	return postController.UnPublishPost(req)
 }
 
 func (*WriteServer) UpVotePost(ctx context.Context, req *pb.UpVotePostRequest) (*pb.UpVotePostResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpVotePost not implemented")
+	return postController.UpVotePost(req)
 }
 
 func (*WriteServer) AddNewComment(ctx context.Context, req *pb.AddNewCommentRequest) (*pb.AddNewCommentResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddNewComment not implemented")
+	return commentController.AddComment(req)
 }
 
 func (*WriteServer) EditComment(ctx context.Context, req *pb.EditCommentRequest) (*pb.EditCommentResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method EditComment not implemented")
+	return commentController.EditComment(req)
 }
 
 func (*WriteServer) DeleteComment(ctx context.Context, req *pb.DeleteCommentRequest) (*pb.DeleteCommentResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteComment not implemented")
+	return commentController.DeleteComment(req)
 }
 
 func (*WriteServer) UpVoteComment(ctx context.Context, req *pb.UpVoteCommentRequest) (*pb.UpVoteCommentResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpVoteComment not implemented")
+	return commentController.UpVoteComment(req)
 }
 
 func (*WriteServer) DownVoteComment(ctx context.Context, req *pb.DownVoteCommentRequest) (*pb.DownVoteCommentResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DownVoteComment not implemented")
+	return commentController.DownVoteComment(req)
 }
 
 func (*WriteServer) AddNewCategory(ctx context.Context, req *pb.AddNewCategoryRequest) (*pb.AddNewCategoryResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddNewCategory not implemented")
+	return categoryController.AddNewCategory(req)
 }
 
 func (*WriteServer) EditCategory(ctx context.Context, req *pb.EditCategoryRequest) (*pb.EditCategoryResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method EditCategory not implemented")
+	return categoryController.EditCategory(req)
 }
 
 func (*WriteServer) DeleteCategory(ctx context.Context, req *pb.DeleteCategoryRequest) (*pb.DeleteCategoryResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteCategory not implemented")
+	return categoryController.DeleteCategory(req)
 }
 
 func (*WriteServer) AddPostToCategory(ctx context.Context, req *pb.AddPostToCategoryRequest) (*pb.AddPostToCategoryResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddPostToCategory not implemented")
+	return categoryController.AddPostToCategory(req)
 }
 
 func (*WriteServer) RemovePostFromCategory(ctx context.Context, req *pb.RemovePostFromCategoryRequest) (*pb.RemovePostFromCategoryResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RemovePostFromCategory not implemented")
+	return categoryController.RemovePostFromCategory(req)
 }
