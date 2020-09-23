@@ -18,6 +18,55 @@ type User {
     updatedAt: Int!
 }
 
+type Post {
+    id: Int!
+    authorID: Int!
+    parentID: Int!
+    title: String!
+    published: Boolean!
+    upVote: Int!
+    content: String!
+    createdAt: Int!
+    updatedAt: Int!
+    publishedAt: Int!
+}
+
+type Comment {
+    id: Int!
+    postID: Int!
+    authorID: Int!
+    content: String!
+    upVote: Int!
+    createdAt: Int!
+    updatedAt: Int!
+}
+
+input NewComment {
+    postID: Int!
+    authorID: Int!
+    content: String!
+}
+
+type Category {
+    id: Int!
+    title: String!
+    slug: String!
+    content: String!
+    createdAt: Int!
+    updatedAt: Int!
+}
+
+input NewCategory {
+    title: String!
+    slug: String!
+    content: String!
+}
+
+type PostCategory {
+    postID: Int!
+    categoryID: Int!
+}
+
 type AuthResponse {
     message: String!
     user: User!
@@ -33,6 +82,13 @@ input EditedUser {
     facebook: String!
     instagram: String!
     twitter: String!
+}
+
+input NewPost {
+    authorID: Int!
+    parentID: Int!
+    title: String!
+    content: String!
 }
 
 type Token {
@@ -64,11 +120,80 @@ type DeleteUserResponse {
     user: User!
 }
 
+type getPostByIdResponse {
+    message: String!
+    post: Post!
+}
+
+type getPostsResponse {
+    message: String!
+    posts: [Post!]!
+}
+
+type getCommentsResponse {
+    message: String!
+    comments: [Comment!]!
+}
+
+type getCategoriesResponse {
+    message: String!
+    categories: [Category!]!
+}
+
+type getCategoryResponse {
+    message: String!
+    category: Category!
+}
+
+type upVotes {
+    message: String!
+    newUpVotes: Int!
+}
+
+type addNewCommentResponse {
+    message: String!
+    commentID: Int!
+}
+
+type postCategoryResponse {
+    message: String!
+    postID: Int!
+}
+
 type Mutation {
     register(email: String!, password: String!): AuthResponse!
     login(email: String!, password: String!): AuthResponse!
     getUserById(requestorId: Int!, userId: Int!): getUserByIdResponse!
     getAllUsers(adminId: Int!): getAllUsersResponse!
-    EditUser(userId: Int!, editedUser: EditedUser!): EditUserResponse!
-    DeleteUser(adminId: Int!, userId: Int!): DeleteUserResponse!
+    editUser(userId: Int!, editedUser: EditedUser!): EditUserResponse!
+    deleteUser(adminId: Int!, userId: Int!): DeleteUserResponse!
+
+    getPostById(requesterId: Int!, postId: Int!): getPostByIdResponse!
+    getUserAllPosts(ownerId: Int!, offset: Int!, limit: Int!): getPostsResponse!
+    getUserPublishedPosts(ownerId: Int!, offset: Int!, limit: Int!): getPostsResponse!
+    getUserUnPublishedPosts(ownerId: Int!, offset: Int!, limit: Int!): getPostsResponse!
+    getCategoryPosts(categoryId: Int!, offset: Int!, limit: Int!): getPostsResponse!
+    addNewPost(newPost: NewPost!): getPostByIdResponse!
+    editPost(newPost: NewPost!): getPostByIdResponse!
+    deletePost(requesterId: Int!, postId: Int!): getPostByIdResponse!
+    publishPost(requesterId: Int!, postId: Int!): getPostByIdResponse!
+    unPublishPost(requesterId: Int!, postId: Int!): getPostByIdResponse!
+    upVotePost(upVoterId: Int!, postId: Int!): upVotes!
+
+    getPostComments(postId: Int!, offset: Int!, limit: Int!): getCommentsResponse!
+    getUserComments(authorId: Int!, offset: Int!, limit: Int!): getCommentsResponse!
+    addComment(newComment: NewComment!): addNewCommentResponse!
+    editComment(newComment: NewComment!): addNewCommentResponse!
+    deleteComment(authorId: Int!, commentId: Int!): addNewCommentResponse!
+    upVoteComment(commentId: Int!): upVotes!
+    downVoteComment(commentId: Int!): upVotes!
+
+
+    getAllCategories(requesterId: Int!): getCategoriesResponse!
+    getPostCategories(requesterId: Int!): getCategoriesResponse!
+    addNewCategory(newCategory: NewCategory!): getCategoryResponse!
+    editCategory(newCategory: NewCategory!): getCategoryResponse!
+    deleteCategory(categoryId: Int!): getCategoryResponse!
+    addPostToCategory(categoryId: Int!, postId: Int!): postCategoryResponse!
+    removePostFromCategory(categoryId: Int!, postId: Int!): postCategoryResponse!
 }

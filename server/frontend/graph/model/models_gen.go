@@ -7,6 +7,25 @@ type AuthResponse struct {
 	User    *User  `json:"user"`
 }
 
+type Category struct {
+	ID        int    `json:"id"`
+	Title     string `json:"title"`
+	Slug      string `json:"slug"`
+	Content   string `json:"content"`
+	CreatedAt int    `json:"createdAt"`
+	UpdatedAt int    `json:"updatedAt"`
+}
+
+type Comment struct {
+	ID        int    `json:"id"`
+	PostID    int    `json:"postID"`
+	AuthorID  int    `json:"authorID"`
+	Content   string `json:"content"`
+	UpVote    int    `json:"upVote"`
+	CreatedAt int    `json:"createdAt"`
+	UpdatedAt int    `json:"updatedAt"`
+}
+
 type DeleteUserResponse struct {
 	Message string `json:"message"`
 	User    *User  `json:"user"`
@@ -27,6 +46,43 @@ type EditedUser struct {
 	Facebook  string `json:"facebook"`
 	Instagram string `json:"instagram"`
 	Twitter   string `json:"twitter"`
+}
+
+type NewCategory struct {
+	Title   string `json:"title"`
+	Slug    string `json:"slug"`
+	Content string `json:"content"`
+}
+
+type NewComment struct {
+	PostID   int    `json:"postID"`
+	AuthorID int    `json:"authorID"`
+	Content  string `json:"content"`
+}
+
+type NewPost struct {
+	AuthorID int    `json:"authorID"`
+	ParentID int    `json:"parentID"`
+	Title    string `json:"title"`
+	Content  string `json:"content"`
+}
+
+type Post struct {
+	ID          int    `json:"id"`
+	AuthorID    int    `json:"authorID"`
+	ParentID    int    `json:"parentID"`
+	Title       string `json:"title"`
+	Published   bool   `json:"published"`
+	UpVote      int    `json:"upVote"`
+	Content     string `json:"content"`
+	CreatedAt   int    `json:"createdAt"`
+	UpdatedAt   int    `json:"updatedAt"`
+	PublishedAt int    `json:"publishedAt"`
+}
+
+type PostCategory struct {
+	PostID     int `json:"postID"`
+	CategoryID int `json:"categoryID"`
 }
 
 type Token struct {
@@ -51,12 +107,52 @@ type User struct {
 	UpdatedAt int    `json:"updatedAt"`
 }
 
+type AddNewCommentResponse struct {
+	Message   string `json:"message"`
+	CommentID int    `json:"commentID"`
+}
+
 type GetAllUsersResponse struct {
 	Message string  `json:"message"`
 	Users   []*User `json:"users"`
 }
 
+type GetCategoriesResponse struct {
+	Message    string      `json:"message"`
+	Categories []*Category `json:"categories"`
+}
+
+type GetCategoryResponse struct {
+	Message  string    `json:"message"`
+	Category *Category `json:"category"`
+}
+
+type GetCommentsResponse struct {
+	Message  string     `json:"message"`
+	Comments []*Comment `json:"comments"`
+}
+
+type GetPostByIDResponse struct {
+	Message string `json:"message"`
+	Post    *Post  `json:"post"`
+}
+
+type GetPostsResponse struct {
+	Message string  `json:"message"`
+	Posts   []*Post `json:"posts"`
+}
+
 type GetUserByIDResponse struct {
 	Message string `json:"message"`
 	User    *User  `json:"user"`
+}
+
+type PostCategoryResponse struct {
+	Message string `json:"message"`
+	PostID  int    `json:"postID"`
+}
+
+type UpVotes struct {
+	Message    string `json:"message"`
+	NewUpVotes int    `json:"newUpVotes"`
 }

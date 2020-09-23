@@ -25,7 +25,6 @@ create table if not exists category (
 id serial primary key,
 title text not null,
 slug text not null,
-post_id integer not null,
 content text default 'Viết nội dung cho thể loại này.',
 created_at integer default date_part('epoch', now()),
 updated_at integer
