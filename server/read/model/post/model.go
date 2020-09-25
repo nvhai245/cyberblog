@@ -21,7 +21,8 @@ type Post struct {
 }
 
 // GetPostById func
-func GetPostById(requesterId int32, postId int32) (success bool, foundPost *Post, err error) {
+func GetPostById(requesterId int32, postId int32) (bool, *Post, error) {
+	foundPost := &Post{}
 	queryString := "SELECT * FROM posts WHERE id = $1"
 	rows, err := connection.DB.Queryx(queryString, postId)
 	if err != nil {
@@ -34,13 +35,13 @@ func GetPostById(requesterId int32, postId int32) (success bool, foundPost *Post
 			log.Println("Error in model.GetUserByEmail(): ", rows.Err())
 			return false, nil, err
 		}
-		err = rows.StructScan(&foundPost)
+		err = rows.StructScan(foundPost)
 		if err != nil {
 			log.Println("Error in postModel.GetPostById(): rows.StructScan()", err)
 			return false, nil, err
 		}
 	}
-	if !foundPost.Published && foundPost.AuthorId != requesterId {
+	if foundPost == nil || (!foundPost.Published && foundPost.AuthorId != requesterId) {
 		err = fmt.Errorf("this post is not published, only the creator can view its content")
 		return false, nil, err
 	}

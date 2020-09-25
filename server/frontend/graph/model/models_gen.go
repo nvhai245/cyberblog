@@ -61,6 +61,7 @@ type NewComment struct {
 }
 
 type NewPost struct {
+	ID       int    `json:"id"`
 	AuthorID int    `json:"authorID"`
 	ParentID int    `json:"parentID"`
 	Title    string `json:"title"`

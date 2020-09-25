@@ -85,6 +85,7 @@ input EditedUser {
 }
 
 input NewPost {
+    id: Int!
     authorID: Int!
     parentID: Int!
     title: String!
@@ -170,7 +171,7 @@ type Mutation {
 
     getPostById(requesterId: Int!, postId: Int!): getPostByIdResponse!
     getUserAllPosts(ownerId: Int!, offset: Int!, limit: Int!): getPostsResponse!
-    getUserPublishedPosts(ownerId: Int!, offset: Int!, limit: Int!): getPostsResponse!
+    getUserPublishedPosts(requesterId: Int!, userId: Int!, offset: Int!, limit: Int!): getPostsResponse!
     getUserUnPublishedPosts(ownerId: Int!, offset: Int!, limit: Int!): getPostsResponse!
     getCategoryPosts(categoryId: Int!, offset: Int!, limit: Int!): getPostsResponse!
     addNewPost(newPost: NewPost!): getPostByIdResponse!

@@ -100,7 +100,7 @@ type ComplexityRoot struct {
 		GetUserAllPosts         func(childComplexity int, ownerID int, offset int, limit int) int
 		GetUserByID             func(childComplexity int, requestorID int, userID int) int
 		GetUserComments         func(childComplexity int, authorID int, offset int, limit int) int
-		GetUserPublishedPosts   func(childComplexity int, ownerID int, offset int, limit int) int
+		GetUserPublishedPosts   func(childComplexity int, requesterID int, userID int, offset int, limit int) int
 		GetUserUnPublishedPosts func(childComplexity int, ownerID int, offset int, limit int) int
 		Login                   func(childComplexity int, email string, password string) int
 		PublishPost             func(childComplexity int, requesterID int, postID int) int
@@ -215,7 +215,7 @@ type MutationResolver interface {
 	DeleteUser(ctx context.Context, adminID int, userID int) (*model.DeleteUserResponse, error)
 	GetPostByID(ctx context.Context, requesterID int, postID int) (*model.GetPostByIDResponse, error)
 	GetUserAllPosts(ctx context.Context, ownerID int, offset int, limit int) (*model.GetPostsResponse, error)
-	GetUserPublishedPosts(ctx context.Context, ownerID int, offset int, limit int) (*model.GetPostsResponse, error)
+	GetUserPublishedPosts(ctx context.Context, requesterID int, userID int, offset int, limit int) (*model.GetPostsResponse, error)
 	GetUserUnPublishedPosts(ctx context.Context, ownerID int, offset int, limit int) (*model.GetPostsResponse, error)
 	GetCategoryPosts(ctx context.Context, categoryID int, offset int, limit int) (*model.GetPostsResponse, error)
 	AddNewPost(ctx context.Context, newPost model.NewPost) (*model.GetPostByIDResponse, error)
@@ -665,7 +665,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.GetUserPublishedPosts(childComplexity, args["ownerId"].(int), args["offset"].(int), args["limit"].(int)), true
+		return e.complexity.Mutation.GetUserPublishedPosts(childComplexity, args["requesterId"].(int), args["userId"].(int), args["offset"].(int), args["limit"].(int)), true
 
 	case "Mutation.getUserUnPublishedPosts":
 		if e.complexity.Mutation.GetUserUnPublishedPosts == nil {
@@ -1257,6 +1257,7 @@ input EditedUser {
 }
 
 input NewPost {
+    id: Int!
     authorID: Int!
     parentID: Int!
     title: String!
@@ -1342,7 +1343,7 @@ type Mutation {
 
     getPostById(requesterId: Int!, postId: Int!): getPostByIdResponse!
     getUserAllPosts(ownerId: Int!, offset: Int!, limit: Int!): getPostsResponse!
-    getUserPublishedPosts(ownerId: Int!, offset: Int!, limit: Int!): getPostsResponse!
+    getUserPublishedPosts(requesterId: Int!, userId: Int!, offset: Int!, limit: Int!): getPostsResponse!
     getUserUnPublishedPosts(ownerId: Int!, offset: Int!, limit: Int!): getPostsResponse!
     getCategoryPosts(categoryId: Int!, offset: Int!, limit: Int!): getPostsResponse!
     addNewPost(newPost: NewPost!): getPostByIdResponse!
@@ -1808,29 +1809,37 @@ func (ec *executionContext) field_Mutation_getUserPublishedPosts_args(ctx contex
 	var err error
 	args := map[string]interface{}{}
 	var arg0 int
-	if tmp, ok := rawArgs["ownerId"]; ok {
+	if tmp, ok := rawArgs["requesterId"]; ok {
 		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
 	}
-	args["ownerId"] = arg0
+	args["requesterId"] = arg0
 	var arg1 int
-	if tmp, ok := rawArgs["offset"]; ok {
+	if tmp, ok := rawArgs["userId"]; ok {
 		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
 	}
-	args["offset"] = arg1
+	args["userId"] = arg1
 	var arg2 int
-	if tmp, ok := rawArgs["limit"]; ok {
+	if tmp, ok := rawArgs["offset"]; ok {
 		arg2, err = ec.unmarshalNInt2int(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
 	}
-	args["limit"] = arg2
+	args["offset"] = arg2
+	var arg3 int
+	if tmp, ok := rawArgs["limit"]; ok {
+		arg3, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["limit"] = arg3
 	return args, nil
 }
 
@@ -3058,7 +3067,7 @@ func (ec *executionContext) _Mutation_getUserPublishedPosts(ctx context.Context,
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().GetUserPublishedPosts(rctx, args["ownerId"].(int), args["offset"].(int), args["limit"].(int))
+		return ec.resolvers.Mutation().GetUserPublishedPosts(rctx, args["requesterId"].(int), args["userId"].(int), args["offset"].(int), args["limit"].(int))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -6899,6 +6908,12 @@ func (ec *executionContext) unmarshalInputNewPost(ctx context.Context, obj inter
 
 	for k, v := range asMap {
 		switch k {
+		case "id":
+			var err error
+			it.ID, err = ec.unmarshalNInt2int(ctx, v)
+			if err != nil {
+				return it, err
+			}
 		case "authorID":
 			var err error
 			it.AuthorID, err = ec.unmarshalNInt2int(ctx, v)

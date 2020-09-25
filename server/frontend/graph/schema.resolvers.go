@@ -7,6 +7,7 @@ import (
 	"context"
 	"fmt"
 
+	postController "github.com/nvhai245/cyberblog/server/frontend/controller/post"
 	userController "github.com/nvhai245/cyberblog/server/frontend/controller/user"
 	"github.com/nvhai245/cyberblog/server/frontend/graph/generated"
 	"github.com/nvhai245/cyberblog/server/frontend/graph/model"
@@ -37,47 +38,47 @@ func (r *mutationResolver) DeleteUser(ctx context.Context, adminID int, userID i
 }
 
 func (r *mutationResolver) GetPostByID(ctx context.Context, requesterID int, postID int) (*model.GetPostByIDResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	return postController.GetPostByID(ctx, requesterID, postID)
 }
 
 func (r *mutationResolver) GetUserAllPosts(ctx context.Context, ownerID int, offset int, limit int) (*model.GetPostsResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	return postController.GetUserAllPosts(ctx, ownerID, offset, limit)
 }
 
-func (r *mutationResolver) GetUserPublishedPosts(ctx context.Context, ownerID int, offset int, limit int) (*model.GetPostsResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+func (r *mutationResolver) GetUserPublishedPosts(ctx context.Context, requesterID int, userID int, offset int, limit int) (*model.GetPostsResponse, error) {
+	return postController.GetUserPublishedPosts(ctx, requesterID, userID, offset, limit)
 }
 
 func (r *mutationResolver) GetUserUnPublishedPosts(ctx context.Context, ownerID int, offset int, limit int) (*model.GetPostsResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	return postController.GetUserUnPublishedPosts(ctx, ownerID, offset, limit)
 }
 
 func (r *mutationResolver) GetCategoryPosts(ctx context.Context, categoryID int, offset int, limit int) (*model.GetPostsResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	return postController.GetCategoryPosts(ctx, categoryID, offset, limit)
 }
 
 func (r *mutationResolver) AddNewPost(ctx context.Context, newPost model.NewPost) (*model.GetPostByIDResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	return postController.AddNewPost(ctx, newPost)
 }
 
 func (r *mutationResolver) EditPost(ctx context.Context, newPost model.NewPost) (*model.GetPostByIDResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	return postController.EditPost(ctx, newPost)
 }
 
 func (r *mutationResolver) DeletePost(ctx context.Context, requesterID int, postID int) (*model.GetPostByIDResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	return postController.DeletePost(ctx, requesterID, postID)
 }
 
 func (r *mutationResolver) PublishPost(ctx context.Context, requesterID int, postID int) (*model.GetPostByIDResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	return postController.PublishPost(ctx, requesterID, postID)
 }
 
 func (r *mutationResolver) UnPublishPost(ctx context.Context, requesterID int, postID int) (*model.GetPostByIDResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	return postController.UnPublishPost(ctx, requesterID, postID)
 }
 
 func (r *mutationResolver) UpVotePost(ctx context.Context, upVoterID int, postID int) (*model.UpVotes, error) {
-	panic(fmt.Errorf("not implemented"))
+	return postController.UpVotePost(ctx, upVoterID, postID)
 }
 
 func (r *mutationResolver) GetPostComments(ctx context.Context, postID int, offset int, limit int) (*model.GetCommentsResponse, error) {

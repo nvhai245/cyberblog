@@ -49,7 +49,7 @@ func EditPost(req *pb.EditPostRequest) (*pb.EditPostResponse, error) {
 	postToEdit := protoPostToModelPost(req.GetEditedPost())
 	success, editedPost := postModel.Update(postToEdit)
 	if success == false {
-		err := fmt.Errorf("Error in postController.EditPost(): failed to publish post")
+		err := fmt.Errorf("Error in postController.EditPost(): failed to edit post")
 		log.Println(err)
 		return nil, err
 	}
