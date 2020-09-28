@@ -42,6 +42,7 @@ type Comment {
 }
 
 input NewComment {
+    id: Int!
     postID: Int!
     authorID: Int!
     content: String!
@@ -57,6 +58,7 @@ type Category {
 }
 
 input NewCategory {
+    id: Int!
     title: String!
     slug: String!
     content: String!
@@ -191,7 +193,7 @@ type Mutation {
 
 
     getAllCategories(requesterId: Int!): getCategoriesResponse!
-    getPostCategories(requesterId: Int!): getCategoriesResponse!
+    getPostCategories(postId: Int!): getCategoriesResponse!
     addNewCategory(newCategory: NewCategory!): getCategoryResponse!
     editCategory(newCategory: NewCategory!): getCategoryResponse!
     deleteCategory(categoryId: Int!): getCategoryResponse!

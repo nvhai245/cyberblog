@@ -83,7 +83,7 @@ func UnPublishPost(req *pb.UnPublishPostRequest) (*pb.UnPublishPostResponse, err
 	log.Printf("postController.UnPublishPost(), [Request]: %+v", req)
 	success, unPublishedPost := postModel.UnPublish(req.GetRequestorId(), req.GetPostId())
 	if success == false {
-		err := fmt.Errorf("Error in postController.UnPublishPost(): failed to publish post")
+		err := fmt.Errorf("Error in postController.UnPublishPost(): failed to unpublish post")
 		log.Println(err)
 		return nil, err
 	}
@@ -100,7 +100,7 @@ func UpVotePost(req *pb.UpVotePostRequest) (*pb.UpVotePostResponse, error) {
 	log.Printf("postController.UpVotePost(), [Request]: %+v", req)
 	success, newUpVote := postModel.UpVote(req.GetUpVoterId(), req.GetPostId())
 	if success == false {
-		err := fmt.Errorf("Error in postController.UpVotePost(): failed to publish post")
+		err := fmt.Errorf("Error in postController.UpVotePost(): failed to upvote post")
 		log.Println(err)
 		return nil, err
 	}

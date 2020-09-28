@@ -95,7 +95,7 @@ type ComplexityRoot struct {
 		GetAllUsers             func(childComplexity int, adminID int) int
 		GetCategoryPosts        func(childComplexity int, categoryID int, offset int, limit int) int
 		GetPostByID             func(childComplexity int, requesterID int, postID int) int
-		GetPostCategories       func(childComplexity int, requesterID int) int
+		GetPostCategories       func(childComplexity int, postID int) int
 		GetPostComments         func(childComplexity int, postID int, offset int, limit int) int
 		GetUserAllPosts         func(childComplexity int, ownerID int, offset int, limit int) int
 		GetUserByID             func(childComplexity int, requestorID int, userID int) int
@@ -232,7 +232,7 @@ type MutationResolver interface {
 	UpVoteComment(ctx context.Context, commentID int) (*model.UpVotes, error)
 	DownVoteComment(ctx context.Context, commentID int) (*model.UpVotes, error)
 	GetAllCategories(ctx context.Context, requesterID int) (*model.GetCategoriesResponse, error)
-	GetPostCategories(ctx context.Context, requesterID int) (*model.GetCategoriesResponse, error)
+	GetPostCategories(ctx context.Context, postID int) (*model.GetCategoriesResponse, error)
 	AddNewCategory(ctx context.Context, newCategory model.NewCategory) (*model.GetCategoryResponse, error)
 	EditCategory(ctx context.Context, newCategory model.NewCategory) (*model.GetCategoryResponse, error)
 	DeleteCategory(ctx context.Context, categoryID int) (*model.GetCategoryResponse, error)
@@ -605,7 +605,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.GetPostCategories(childComplexity, args["requesterId"].(int)), true
+		return e.complexity.Mutation.GetPostCategories(childComplexity, args["postId"].(int)), true
 
 	case "Mutation.getPostComments":
 		if e.complexity.Mutation.GetPostComments == nil {
@@ -1214,6 +1214,7 @@ type Comment {
 }
 
 input NewComment {
+    id: Int!
     postID: Int!
     authorID: Int!
     content: String!
@@ -1229,6 +1230,7 @@ type Category {
 }
 
 input NewCategory {
+    id: Int!
     title: String!
     slug: String!
     content: String!
@@ -1363,7 +1365,7 @@ type Mutation {
 
 
     getAllCategories(requesterId: Int!): getCategoriesResponse!
-    getPostCategories(requesterId: Int!): getCategoriesResponse!
+    getPostCategories(postId: Int!): getCategoriesResponse!
     addNewCategory(newCategory: NewCategory!): getCategoryResponse!
     editCategory(newCategory: NewCategory!): getCategoryResponse!
     deleteCategory(categoryId: Int!): getCategoryResponse!
@@ -1683,13 +1685,13 @@ func (ec *executionContext) field_Mutation_getPostCategories_args(ctx context.Co
 	var err error
 	args := map[string]interface{}{}
 	var arg0 int
-	if tmp, ok := rawArgs["requesterId"]; ok {
+	if tmp, ok := rawArgs["postId"]; ok {
 		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
 	}
-	args["requesterId"] = arg0
+	args["postId"] = arg0
 	return args, nil
 }
 
@@ -3764,7 +3766,7 @@ func (ec *executionContext) _Mutation_getPostCategories(ctx context.Context, fie
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().GetPostCategories(rctx, args["requesterId"].(int))
+		return ec.resolvers.Mutation().GetPostCategories(rctx, args["postId"].(int))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -6848,6 +6850,12 @@ func (ec *executionContext) unmarshalInputNewCategory(ctx context.Context, obj i
 
 	for k, v := range asMap {
 		switch k {
+		case "id":
+			var err error
+			it.ID, err = ec.unmarshalNInt2int(ctx, v)
+			if err != nil {
+				return it, err
+			}
 		case "title":
 			var err error
 			it.Title, err = ec.unmarshalNString2string(ctx, v)
@@ -6878,6 +6886,12 @@ func (ec *executionContext) unmarshalInputNewComment(ctx context.Context, obj in
 
 	for k, v := range asMap {
 		switch k {
+		case "id":
+			var err error
+			it.ID, err = ec.unmarshalNInt2int(ctx, v)
+			if err != nil {
+				return it, err
+			}
 		case "postID":
 			var err error
 			it.PostID, err = ec.unmarshalNInt2int(ctx, v)

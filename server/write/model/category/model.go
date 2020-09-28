@@ -41,8 +41,9 @@ func Insert(newCategory *Category) (success bool, categoryId int32) {
 }
 
 // Update func
-func Update(newCategory *Category) (success bool, updatedCategory *Category) {
-	queryString := `UPDATE categories SET (title, slug, content, updated_at) = (:Title, :Slug, :Content :UpdatedAt) WHERE id = :ID RETURNING *`
+func Update(newCategory *Category) (bool, *Category) {
+	updatedCategory := &Category{}
+	queryString := `UPDATE categories SET (title, slug, content) = (:Title, :Slug, :Content) WHERE id = :ID RETURNING *`
 	rows, err := connection.DB.NamedQuery(queryString, structs.Map(newCategory))
 	if err != nil {
 		log.Println("Error in categoryModel.Update(): ", err)
@@ -69,7 +70,7 @@ func Update(newCategory *Category) (success bool, updatedCategory *Category) {
 // Delete func
 func Delete(categoryId int32) (bool, *Category) {
 	deletedCategory := Category{}
-	queryString := "DELETE FROM categories WHERE id = $1"
+	queryString := "DELETE FROM categories WHERE id = $1 RETURNING *"
 	rows, err := connection.DB.Queryx(queryString, categoryId)
 	if err != nil {
 		log.Println("Error in categoryModel.Delete(): ", err)
@@ -90,7 +91,7 @@ func Delete(categoryId int32) (bool, *Category) {
 	if structs.IsZero(deletedCategory) {
 		return false, &deletedCategory
 	}
-	return false, nil
+	return true, &deletedCategory
 }
 
 // AddPostToCategory func

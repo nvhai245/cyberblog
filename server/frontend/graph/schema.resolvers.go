@@ -5,8 +5,9 @@ package graph
 
 import (
 	"context"
-	"fmt"
+	commentController "github.com/nvhai245/cyberblog/server/frontend/controller/comment"
 
+	categoryController "github.com/nvhai245/cyberblog/server/frontend/controller/category"
 	postController "github.com/nvhai245/cyberblog/server/frontend/controller/post"
 	userController "github.com/nvhai245/cyberblog/server/frontend/controller/user"
 	"github.com/nvhai245/cyberblog/server/frontend/graph/generated"
@@ -82,59 +83,59 @@ func (r *mutationResolver) UpVotePost(ctx context.Context, upVoterID int, postID
 }
 
 func (r *mutationResolver) GetPostComments(ctx context.Context, postID int, offset int, limit int) (*model.GetCommentsResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	return commentController.GetPostComments(ctx, postID, offset, limit)
 }
 
 func (r *mutationResolver) GetUserComments(ctx context.Context, authorID int, offset int, limit int) (*model.GetCommentsResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	return commentController.GetUserComments(ctx, authorID, offset, limit)
 }
 
 func (r *mutationResolver) AddComment(ctx context.Context, newComment model.NewComment) (*model.AddNewCommentResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	return commentController.AddComment(ctx, newComment)
 }
 
 func (r *mutationResolver) EditComment(ctx context.Context, newComment model.NewComment) (*model.AddNewCommentResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	return commentController.EditComment(ctx, newComment)
 }
 
 func (r *mutationResolver) DeleteComment(ctx context.Context, authorID int, commentID int) (*model.AddNewCommentResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	return commentController.DeleteComment(ctx, authorID, commentID)
 }
 
 func (r *mutationResolver) UpVoteComment(ctx context.Context, commentID int) (*model.UpVotes, error) {
-	panic(fmt.Errorf("not implemented"))
+	return commentController.UpVoteComment(ctx, commentID)
 }
 
 func (r *mutationResolver) DownVoteComment(ctx context.Context, commentID int) (*model.UpVotes, error) {
-	panic(fmt.Errorf("not implemented"))
+	return commentController.DownVoteComment(ctx, commentID)
 }
 
 func (r *mutationResolver) GetAllCategories(ctx context.Context, requesterID int) (*model.GetCategoriesResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	return categoryController.GetAllCategories(ctx, requesterID)
 }
 
-func (r *mutationResolver) GetPostCategories(ctx context.Context, requesterID int) (*model.GetCategoriesResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+func (r *mutationResolver) GetPostCategories(ctx context.Context, postID int) (*model.GetCategoriesResponse, error) {
+	return categoryController.GetPostCategories(ctx, postID)
 }
 
 func (r *mutationResolver) AddNewCategory(ctx context.Context, newCategory model.NewCategory) (*model.GetCategoryResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	return categoryController.AddNewCategory(ctx, newCategory)
 }
 
 func (r *mutationResolver) EditCategory(ctx context.Context, newCategory model.NewCategory) (*model.GetCategoryResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	return categoryController.EditCategory(ctx, newCategory)
 }
 
 func (r *mutationResolver) DeleteCategory(ctx context.Context, categoryID int) (*model.GetCategoryResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	return categoryController.DeleteCategory(ctx, categoryID)
 }
 
 func (r *mutationResolver) AddPostToCategory(ctx context.Context, categoryID int, postID int) (*model.PostCategoryResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	return categoryController.AddPostToCategory(ctx, categoryID, postID)
 }
 
 func (r *mutationResolver) RemovePostFromCategory(ctx context.Context, categoryID int, postID int) (*model.PostCategoryResponse, error) {
-	panic(fmt.Errorf("not implemented"))
+	return categoryController.RemovePostFromCategory(ctx, categoryID, postID)
 }
 
 func (r *queryResolver) Users(ctx context.Context) ([]*model.User, error) {

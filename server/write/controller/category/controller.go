@@ -45,7 +45,7 @@ func DeleteCategory(req *pb.DeleteCategoryRequest) (*pb.DeleteCategoryResponse, 
 	log.Printf("commentController.DeleteCategory(), [Request]: %+v", req)
 	success, deletedCtg := categoryModel.Delete(req.GetCategoryId())
 	if success == false {
-		err := fmt.Errorf("Error in categoryController.DeleteCategory(): failed to update category")
+		err := fmt.Errorf("Error in categoryController.DeleteCategory(): failed to delete category")
 		log.Println(err)
 		return nil, err
 	}
@@ -105,6 +105,7 @@ func protoCategoryToModelCategory(protoCtg *pb.Category) *categoryModel.Category
 func modelCategoryToProtoCategory(modelCtg *categoryModel.Category) *pb.Category {
 	if modelCtg == nil {
 		log.Println("Error in categoryController.modelCategoryToProtoCategory(): modelCtg is nil")
+		return nil
 	}
 	protoCtg := &pb.Category{
 		Id:      modelCtg.ID,

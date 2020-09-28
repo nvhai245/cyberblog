@@ -49,12 +49,14 @@ type EditedUser struct {
 }
 
 type NewCategory struct {
+	ID      int    `json:"id"`
 	Title   string `json:"title"`
 	Slug    string `json:"slug"`
 	Content string `json:"content"`
 }
 
 type NewComment struct {
+	ID       int    `json:"id"`
 	PostID   int    `json:"postID"`
 	AuthorID int    `json:"authorID"`
 	Content  string `json:"content"`

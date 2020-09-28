@@ -18,7 +18,7 @@ type Comment struct {
 }
 
 func Insert(newComment *Comment) (success bool, commentId int32) {
-	queryString := `INSERT INTO comments (author_id, post_id, up_vote, content, created_at) VALUES (:AuthorId, :PostId, :UpVote, :Content, :CreatedAt) RETURNING id`
+	queryString := `INSERT INTO comments (author_id, post_id, up_vote, content) VALUES (:AuthorId, :PostId, :UpVote, :Content) RETURNING id`
 	rows, err := connection.DB.NamedQuery(queryString, structs.Map(newComment))
 	if err != nil {
 		log.Println("Error in commentModel.Insert(): ", err)
@@ -35,8 +35,9 @@ func Insert(newComment *Comment) (success bool, commentId int32) {
 	return true, commentId
 }
 
-func Update(newComment *Comment) (success bool, updatedComment *Comment) {
-	queryString := `UPDATE comments SET (content, updated_at) = (:Content, :UpdatedAt) WHERE id = :ID RETURNING *`
+func Update(newComment *Comment) (bool, *Comment) {
+	updatedComment := &Comment{}
+	queryString := `UPDATE comments SET (content, updated_at) = (:Content, :UpdatedAt) WHERE id = :ID AND author_id = :AuthorId RETURNING *`
 	rows, err := connection.DB.NamedQuery(queryString, structs.Map(newComment))
 	if err != nil {
 		log.Println("Error in commentModel.Update(): ", err)
@@ -62,7 +63,7 @@ func Update(newComment *Comment) (success bool, updatedComment *Comment) {
 
 func Delete(authorId int32, commentId int32) (bool, *Comment) {
 	deletedComment := Comment{}
-	queryString := "DELETE FROM comments WHERE id = $1 AND author_id = $2"
+	queryString := "DELETE FROM comments WHERE id = $1 AND author_id = $2 RETURNING *"
 	rows, err := connection.DB.Queryx(queryString, commentId, authorId)
 	if err != nil {
 		log.Println("Error in commentModel.Delete(): ", err)
@@ -83,7 +84,7 @@ func Delete(authorId int32, commentId int32) (bool, *Comment) {
 	if structs.IsZero(deletedComment) {
 		return false, &deletedComment
 	}
-	return false, nil
+	return true, &deletedComment
 }
 
 // UpVote func
@@ -105,9 +106,6 @@ func UpVote(commentId int32) (success bool, newUpVotes int32) {
 			log.Println("Error in commentModel.UpVote(): rows.Scan()", err)
 			return false, 0
 		}
-	}
-	if structs.IsZero(newUpVotes) {
-		return false, 0
 	}
 	return true, newUpVotes
 }
@@ -131,9 +129,6 @@ func DownVote(commentId int32) (success bool, newUpVotes int32) {
 			log.Println("Error in commentModel.DownVote(): rows.Scan()", err)
 			return false, 0
 		}
-	}
-	if structs.IsZero(newUpVotes) {
-		return false, 0
 	}
 	return true, newUpVotes
 }
