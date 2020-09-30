@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="PostgreSQL - xkoppsem@satao.db.elephantsql.com" uuid="552ee7da-221c-4459-a787-5208bace3f45">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <remarks>CyberBlog DB</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://satao.db.elephantsql.com:5432/xkoppsem</jdbc-url>
+    </data-source>
+  </component>
+</project>
