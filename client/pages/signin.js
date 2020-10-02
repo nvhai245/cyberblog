@@ -1,8 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
+import { LOGIN } from '../libs/gql/login'
+import { gql, useMutation, useQuery } from '@apollo/client'
 
 export default function signin() {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value)
+    }
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value)
+    }
+
+    const [login, { data }] = useMutation(LOGIN)
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log("dshfghsdfhasdui**************************")
+        login({
+            variables: {
+                email: email,
+                password: password
+            }
+        })
+        console.log(data)
+    }
+
     const removeNoise = ({ offsetParent, lastElementChild }, type) => {
         let inputNoise;
 
@@ -187,45 +212,45 @@ export default function signin() {
     return (
         <div className={styles.main}>
             <h1>Đăng Nhập</h1>
-            <div className={styles.inputBox}>
-            <div className="editor-field editor-field__textbox">
-                <div className="editor-field__label-container">
-                    <label className="editor-field__label">Email</label>
-                </div>
-
-                <div className="editor-field__container">
-                    <input type="email" className="editor-field__input" onFocus={(e) => generateNoise(e, 'input')}
-                        onBlur={(e) => removeNoise(e, 'input')} style={{fontSize: "1rem"}} />
-                </div>
-                <span className="editor-field__bottom"></span>
-                <div className="editor-field__noise"></div>
-            </div>
-            <div className="editor-field editor-field__textbox">
-                <div className="editor-field__label-container">
-                    <label className="editor-field__label">Mật Khẩu</label>
-                </div>
-
-                <div className="editor-field__container">
-                    <input type="password" class="editor-field__input" onFocus={(e) => generateNoise(e, 'input')}
-                        onBlur={(e) => removeNoise(e, 'input')} />
-                </div>
-                <span className="editor-field__bottom"></span>
-                <div className="editor-field__noise"></div>
-            </div>
-            <div className={styles.authButtons}>
-                <div style={{marginTop: "0.5rem"}} className="btn btn--primary" onMouseOver={(e) => generateNoise(e, 'button')}
-                    onMouseOut={(e) => removeNoise(e, 'button')}>
-                    <div className="btn__container">
-                        Đăng Nhập
+            <form onSubmit={handleSubmit} className={styles.inputBox}>
+                <div className="editor-field editor-field__textbox">
+                    <div className="editor-field__label-container">
+                        <label className="editor-field__label">Email</label>
                     </div>
-                    <div className="btn__bottom"></div>
-                    <div className="btn__noise"></div>
+
+                    <div className="editor-field__container">
+                        <input onChange={handleEmailChange} type="email" className="editor-field__input" onFocus={(e) => generateNoise(e, 'input')}
+                            onBlur={(e) => removeNoise(e, 'input')} style={{ fontSize: "1rem" }} />
+                    </div>
+                    <span className="editor-field__bottom"></span>
+                    <div className="editor-field__noise"></div>
                 </div>
-                <p>
-                    Bạn chưa có tài khoản? <Link href="/register"><a style={{textDecoration: "underline"}}>Đăng ký ngay</a></Link>
-                </p>
-            </div>
-            </div>
+                <div className="editor-field editor-field__textbox">
+                    <div className="editor-field__label-container">
+                        <label className="editor-field__label">Mật Khẩu</label>
+                    </div>
+
+                    <div className="editor-field__container">
+                        <input onChange={handlePasswordChange} type="password" className="editor-field__input" onFocus={(e) => generateNoise(e, 'input')}
+                            onBlur={(e) => removeNoise(e, 'input')} />
+                    </div>
+                    <span className="editor-field__bottom"></span>
+                    <div className="editor-field__noise"></div>
+                </div>
+                <div className={styles.authButtons}>
+                    <div style={{ marginTop: "0.5rem" }} className="btn btn--primary" onMouseOver={(e) => generateNoise(e, 'button')}
+                        onMouseOut={(e) => removeNoise(e, 'button')}>
+                        <button type="submit" className="btn__container">
+                            Đăng Nhập
+                    </button>
+                        <div className="btn__bottom"></div>
+                        <div className="btn__noise"></div>
+                    </div>
+                    <p>
+                        Bạn chưa có tài khoản? <Link href="/register"><a style={{ textDecoration: "underline" }}>Đăng ký ngay</a></Link>
+                    </p>
+                </div>
+            </form>
         </div>
     )
 }

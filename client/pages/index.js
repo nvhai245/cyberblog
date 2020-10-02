@@ -2,24 +2,45 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import AppBar from '../components/AppBar'
+import { initializeApollo } from '../libs/apolloClient'
+import PostPreview from '../components/PostPreview'
+import { GET_CATEGORY_POSTS } from '../libs/gql/allCharacters'
 
-export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Whoops</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <AppBar />
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Whoops
+
+function Home() {
+    return (
+      <div className={styles.container}>
+        <Head>
+          <title>Whoops</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <AppBar />
+        <main className={styles.main}>
+          <h1 className={styles.title}>
+            Whoops
         </h1>
-      </main>
+          <PostPreview />
+        </main>
 
-      <footer className={styles.footer}>
+        <footer className={styles.footer}>
 
-      </footer>
-    </div>
-  )
-}
+        </footer>
+      </div>
+    )
+  }
+
+  export async function getStaticProps(context) {
+    const apolloClient = initializeApollo(null, context)
+    await apolloClient.query({
+      query: GET_CATEGORY_POSTS,
+    })
+    return {
+      props: {
+        initialApolloState: apolloClient.cache.extract(),
+      },
+      revalidate: 1,
+    }
+  }
+
+
+  export default Home;

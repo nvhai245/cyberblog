@@ -5,9 +5,9 @@ package graph
 
 import (
 	"context"
-	commentController "github.com/nvhai245/cyberblog/server/frontend/controller/comment"
 
 	categoryController "github.com/nvhai245/cyberblog/server/frontend/controller/category"
+	commentController "github.com/nvhai245/cyberblog/server/frontend/controller/comment"
 	postController "github.com/nvhai245/cyberblog/server/frontend/controller/post"
 	userController "github.com/nvhai245/cyberblog/server/frontend/controller/user"
 	"github.com/nvhai245/cyberblog/server/frontend/graph/generated"
@@ -22,10 +22,6 @@ func (r *mutationResolver) Login(ctx context.Context, email string, password str
 	return userController.Login(ctx, email, password)
 }
 
-func (r *mutationResolver) GetUserByID(ctx context.Context, requestorID int, userID int) (*model.GetUserByIDResponse, error) {
-	return userController.GetUserByID(ctx, requestorID, userID)
-}
-
 func (r *mutationResolver) GetAllUsers(ctx context.Context, adminID int) (*model.GetAllUsersResponse, error) {
 	return userController.GetAllUsers(ctx, adminID)
 }
@@ -36,26 +32,6 @@ func (r *mutationResolver) EditUser(ctx context.Context, userID int, editedUser 
 
 func (r *mutationResolver) DeleteUser(ctx context.Context, adminID int, userID int) (*model.DeleteUserResponse, error) {
 	return userController.DeleteUser(ctx, adminID, userID)
-}
-
-func (r *mutationResolver) GetPostByID(ctx context.Context, requesterID int, postID int) (*model.GetPostByIDResponse, error) {
-	return postController.GetPostByID(ctx, requesterID, postID)
-}
-
-func (r *mutationResolver) GetUserAllPosts(ctx context.Context, ownerID int, offset int, limit int) (*model.GetPostsResponse, error) {
-	return postController.GetUserAllPosts(ctx, ownerID, offset, limit)
-}
-
-func (r *mutationResolver) GetUserPublishedPosts(ctx context.Context, requesterID int, userID int, offset int, limit int) (*model.GetPostsResponse, error) {
-	return postController.GetUserPublishedPosts(ctx, requesterID, userID, offset, limit)
-}
-
-func (r *mutationResolver) GetUserUnPublishedPosts(ctx context.Context, ownerID int, offset int, limit int) (*model.GetPostsResponse, error) {
-	return postController.GetUserUnPublishedPosts(ctx, ownerID, offset, limit)
-}
-
-func (r *mutationResolver) GetCategoryPosts(ctx context.Context, categoryID int, offset int, limit int) (*model.GetPostsResponse, error) {
-	return postController.GetCategoryPosts(ctx, categoryID, offset, limit)
 }
 
 func (r *mutationResolver) AddNewPost(ctx context.Context, newPost model.NewPost) (*model.GetPostByIDResponse, error) {
@@ -82,14 +58,6 @@ func (r *mutationResolver) UpVotePost(ctx context.Context, upVoterID int, postID
 	return postController.UpVotePost(ctx, upVoterID, postID)
 }
 
-func (r *mutationResolver) GetPostComments(ctx context.Context, postID int, offset int, limit int) (*model.GetCommentsResponse, error) {
-	return commentController.GetPostComments(ctx, postID, offset, limit)
-}
-
-func (r *mutationResolver) GetUserComments(ctx context.Context, authorID int, offset int, limit int) (*model.GetCommentsResponse, error) {
-	return commentController.GetUserComments(ctx, authorID, offset, limit)
-}
-
 func (r *mutationResolver) AddComment(ctx context.Context, newComment model.NewComment) (*model.AddNewCommentResponse, error) {
 	return commentController.AddComment(ctx, newComment)
 }
@@ -108,14 +76,6 @@ func (r *mutationResolver) UpVoteComment(ctx context.Context, commentID int) (*m
 
 func (r *mutationResolver) DownVoteComment(ctx context.Context, commentID int) (*model.UpVotes, error) {
 	return commentController.DownVoteComment(ctx, commentID)
-}
-
-func (r *mutationResolver) GetAllCategories(ctx context.Context, requesterID int) (*model.GetCategoriesResponse, error) {
-	return categoryController.GetAllCategories(ctx, requesterID)
-}
-
-func (r *mutationResolver) GetPostCategories(ctx context.Context, postID int) (*model.GetCategoriesResponse, error) {
-	return categoryController.GetPostCategories(ctx, postID)
 }
 
 func (r *mutationResolver) AddNewCategory(ctx context.Context, newCategory model.NewCategory) (*model.GetCategoryResponse, error) {
@@ -138,8 +98,44 @@ func (r *mutationResolver) RemovePostFromCategory(ctx context.Context, categoryI
 	return categoryController.RemovePostFromCategory(ctx, categoryID, postID)
 }
 
-func (r *queryResolver) Users(ctx context.Context) ([]*model.User, error) {
-	return []*model.User{}, nil
+func (r *queryResolver) GetPostByID(ctx context.Context, requesterID int, postID int) (*model.GetPostByIDResponse, error) {
+	return postController.GetPostByID(ctx, requesterID, postID)
+}
+
+func (r *queryResolver) GetUserPublishedPosts(ctx context.Context, requesterID int, userID int, offset int, limit int) (*model.GetPostsResponse, error) {
+	return postController.GetUserPublishedPosts(ctx, requesterID, userID, offset, limit)
+}
+
+func (r *queryResolver) GetCategoryPosts(ctx context.Context, categoryID int, offset int, limit int) (*model.GetPostsResponse, error) {
+	return postController.GetCategoryPosts(ctx, categoryID, offset, limit)
+}
+
+func (r *queryResolver) GetUserAllPosts(ctx context.Context, ownerID int, offset int, limit int) (*model.GetPostsResponse, error) {
+	return postController.GetUserAllPosts(ctx, ownerID, offset, limit)
+}
+
+func (r *queryResolver) GetUserUnPublishedPosts(ctx context.Context, ownerID int, offset int, limit int) (*model.GetPostsResponse, error) {
+	return postController.GetUserUnPublishedPosts(ctx, ownerID, offset, limit)
+}
+
+func (r *queryResolver) GetPostComments(ctx context.Context, postID int, offset int, limit int) (*model.GetCommentsResponse, error) {
+	return commentController.GetPostComments(ctx, postID, offset, limit)
+}
+
+func (r *queryResolver) GetUserComments(ctx context.Context, authorID int, offset int, limit int) (*model.GetCommentsResponse, error) {
+	return commentController.GetUserComments(ctx, authorID, offset, limit)
+}
+
+func (r *queryResolver) GetAllCategories(ctx context.Context, requesterID int) (*model.GetCategoriesResponse, error) {
+	return categoryController.GetAllCategories(ctx, requesterID)
+}
+
+func (r *queryResolver) GetPostCategories(ctx context.Context, postID int) (*model.GetCategoriesResponse, error) {
+	return categoryController.GetPostCategories(ctx, postID)
+}
+
+func (r *queryResolver) GetUserByID(ctx context.Context, requestorID int, userID int) (*model.GetUserByIDResponse, error) {
+	return userController.GetUserByID(ctx, requestorID, userID)
 }
 
 // Mutation returns generated.MutationResolver implementation.
@@ -150,3 +146,43 @@ func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 
 type mutationResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }
+
+// !!! WARNING !!!
+// The code below was going to be deleted when updating resolvers. It has been copied here so you have
+// one last chance to move it out of harms way if you want. There are two reasons this happens:
+//  - When renaming or deleting a resolver the old code will be put in here. You can safely delete
+//    it when you're done.
+//  - You have helper methods in this file. Move them out to keep these resolver files clean.
+func (r *mutationResolver) GetUserByID(ctx context.Context, requestorID int, userID int) (*model.GetUserByIDResponse, error) {
+	return userController.GetUserByID(ctx, requestorID, userID)
+}
+func (r *mutationResolver) GetPostByID(ctx context.Context, requesterID int, postID int) (*model.GetPostByIDResponse, error) {
+	return postController.GetPostByID(ctx, requesterID, postID)
+}
+func (r *mutationResolver) GetUserAllPosts(ctx context.Context, ownerID int, offset int, limit int) (*model.GetPostsResponse, error) {
+	return postController.GetUserAllPosts(ctx, ownerID, offset, limit)
+}
+func (r *mutationResolver) GetUserPublishedPosts(ctx context.Context, requesterID int, userID int, offset int, limit int) (*model.GetPostsResponse, error) {
+	return postController.GetUserPublishedPosts(ctx, requesterID, userID, offset, limit)
+}
+func (r *mutationResolver) GetUserUnPublishedPosts(ctx context.Context, ownerID int, offset int, limit int) (*model.GetPostsResponse, error) {
+	return postController.GetUserUnPublishedPosts(ctx, ownerID, offset, limit)
+}
+func (r *mutationResolver) GetCategoryPosts(ctx context.Context, categoryID int, offset int, limit int) (*model.GetPostsResponse, error) {
+	return postController.GetCategoryPosts(ctx, categoryID, offset, limit)
+}
+func (r *mutationResolver) GetPostComments(ctx context.Context, postID int, offset int, limit int) (*model.GetCommentsResponse, error) {
+	return commentController.GetPostComments(ctx, postID, offset, limit)
+}
+func (r *mutationResolver) GetUserComments(ctx context.Context, authorID int, offset int, limit int) (*model.GetCommentsResponse, error) {
+	return commentController.GetUserComments(ctx, authorID, offset, limit)
+}
+func (r *mutationResolver) GetAllCategories(ctx context.Context, requesterID int) (*model.GetCategoriesResponse, error) {
+	return categoryController.GetAllCategories(ctx, requesterID)
+}
+func (r *mutationResolver) GetPostCategories(ctx context.Context, postID int) (*model.GetCategoriesResponse, error) {
+	return categoryController.GetPostCategories(ctx, postID)
+}
+func (r *queryResolver) Users(ctx context.Context) ([]*model.User, error) {
+	return []*model.User{}, nil
+}

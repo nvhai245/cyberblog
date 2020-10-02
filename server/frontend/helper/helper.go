@@ -33,6 +33,7 @@ func GetSession(ctx context.Context, name string) *sessions.Session {
 // SaveSession saves the session by writing it to the response
 func SaveSession(ctx context.Context, session *sessions.Session) error {
 	httpContext := ctx.Value(HTTPKey("http")).(HTTP)
+	session.Options.HttpOnly = true
 
 	err := session.Save(httpContext.R, *httpContext.W)
 

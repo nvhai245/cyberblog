@@ -9,9 +9,6 @@ export default function AppBar() {
             <Link href="/signin">
                 <a>Đăng Nhập</a>
             </Link>
-            <Link href="/register">
-                <a>Đăng Ký</a>
-            </Link>
             </div>
         </div>
     )

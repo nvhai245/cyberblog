@@ -99,10 +99,6 @@ type Token {
     expireAt: Int!
 }
 
-type Query {
-    users: [User!]!
-}
-
 type getUserByIdResponse {
     message: String!
     user: User!
@@ -166,16 +162,10 @@ type postCategoryResponse {
 type Mutation {
     register(email: String!, password: String!): AuthResponse!
     login(email: String!, password: String!): AuthResponse!
-    getUserById(requestorId: Int!, userId: Int!): getUserByIdResponse!
     getAllUsers(adminId: Int!): getAllUsersResponse!
     editUser(userId: Int!, editedUser: EditedUser!): EditUserResponse!
     deleteUser(adminId: Int!, userId: Int!): DeleteUserResponse!
 
-    getPostById(requesterId: Int!, postId: Int!): getPostByIdResponse!
-    getUserAllPosts(ownerId: Int!, offset: Int!, limit: Int!): getPostsResponse!
-    getUserPublishedPosts(requesterId: Int!, userId: Int!, offset: Int!, limit: Int!): getPostsResponse!
-    getUserUnPublishedPosts(ownerId: Int!, offset: Int!, limit: Int!): getPostsResponse!
-    getCategoryPosts(categoryId: Int!, offset: Int!, limit: Int!): getPostsResponse!
     addNewPost(newPost: NewPost!): getPostByIdResponse!
     editPost(newPost: NewPost!): getPostByIdResponse!
     deletePost(requesterId: Int!, postId: Int!): getPostByIdResponse!
@@ -183,8 +173,6 @@ type Mutation {
     unPublishPost(requesterId: Int!, postId: Int!): getPostByIdResponse!
     upVotePost(upVoterId: Int!, postId: Int!): upVotes!
 
-    getPostComments(postId: Int!, offset: Int!, limit: Int!): getCommentsResponse!
-    getUserComments(authorId: Int!, offset: Int!, limit: Int!): getCommentsResponse!
     addComment(newComment: NewComment!): addNewCommentResponse!
     editComment(newComment: NewComment!): addNewCommentResponse!
     deleteComment(authorId: Int!, commentId: Int!): addNewCommentResponse!
@@ -192,11 +180,23 @@ type Mutation {
     downVoteComment(commentId: Int!): upVotes!
 
 
-    getAllCategories(requesterId: Int!): getCategoriesResponse!
-    getPostCategories(postId: Int!): getCategoriesResponse!
     addNewCategory(newCategory: NewCategory!): getCategoryResponse!
     editCategory(newCategory: NewCategory!): getCategoryResponse!
     deleteCategory(categoryId: Int!): getCategoryResponse!
     addPostToCategory(categoryId: Int!, postId: Int!): postCategoryResponse!
     removePostFromCategory(categoryId: Int!, postId: Int!): postCategoryResponse!
+}
+
+type Query {
+    getPostById(requesterId: Int!, postId: Int!): getPostByIdResponse!
+    getUserPublishedPosts(requesterId: Int!, userId: Int!, offset: Int!, limit: Int!): getPostsResponse!
+    getCategoryPosts(categoryId: Int!, offset: Int!, limit: Int!): getPostsResponse!
+    getUserAllPosts(ownerId: Int!, offset: Int!, limit: Int!): getPostsResponse!
+    getUserUnPublishedPosts(ownerId: Int!, offset: Int!, limit: Int!): getPostsResponse!
+
+    getPostComments(postId: Int!, offset: Int!, limit: Int!): getCommentsResponse!
+    getUserComments(authorId: Int!, offset: Int!, limit: Int!): getCommentsResponse!
+    getAllCategories(requesterId: Int!): getCategoriesResponse!
+    getPostCategories(postId: Int!): getCategoriesResponse!
+    getUserById(requestorId: Int!, userId: Int!): getUserByIdResponse!
 }

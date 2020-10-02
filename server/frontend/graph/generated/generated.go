@@ -78,37 +78,27 @@ type ComplexityRoot struct {
 	}
 
 	Mutation struct {
-		AddComment              func(childComplexity int, newComment model.NewComment) int
-		AddNewCategory          func(childComplexity int, newCategory model.NewCategory) int
-		AddNewPost              func(childComplexity int, newPost model.NewPost) int
-		AddPostToCategory       func(childComplexity int, categoryID int, postID int) int
-		DeleteCategory          func(childComplexity int, categoryID int) int
-		DeleteComment           func(childComplexity int, authorID int, commentID int) int
-		DeletePost              func(childComplexity int, requesterID int, postID int) int
-		DeleteUser              func(childComplexity int, adminID int, userID int) int
-		DownVoteComment         func(childComplexity int, commentID int) int
-		EditCategory            func(childComplexity int, newCategory model.NewCategory) int
-		EditComment             func(childComplexity int, newComment model.NewComment) int
-		EditPost                func(childComplexity int, newPost model.NewPost) int
-		EditUser                func(childComplexity int, userID int, editedUser model.EditedUser) int
-		GetAllCategories        func(childComplexity int, requesterID int) int
-		GetAllUsers             func(childComplexity int, adminID int) int
-		GetCategoryPosts        func(childComplexity int, categoryID int, offset int, limit int) int
-		GetPostByID             func(childComplexity int, requesterID int, postID int) int
-		GetPostCategories       func(childComplexity int, postID int) int
-		GetPostComments         func(childComplexity int, postID int, offset int, limit int) int
-		GetUserAllPosts         func(childComplexity int, ownerID int, offset int, limit int) int
-		GetUserByID             func(childComplexity int, requestorID int, userID int) int
-		GetUserComments         func(childComplexity int, authorID int, offset int, limit int) int
-		GetUserPublishedPosts   func(childComplexity int, requesterID int, userID int, offset int, limit int) int
-		GetUserUnPublishedPosts func(childComplexity int, ownerID int, offset int, limit int) int
-		Login                   func(childComplexity int, email string, password string) int
-		PublishPost             func(childComplexity int, requesterID int, postID int) int
-		Register                func(childComplexity int, email string, password string) int
-		RemovePostFromCategory  func(childComplexity int, categoryID int, postID int) int
-		UnPublishPost           func(childComplexity int, requesterID int, postID int) int
-		UpVoteComment           func(childComplexity int, commentID int) int
-		UpVotePost              func(childComplexity int, upVoterID int, postID int) int
+		AddComment             func(childComplexity int, newComment model.NewComment) int
+		AddNewCategory         func(childComplexity int, newCategory model.NewCategory) int
+		AddNewPost             func(childComplexity int, newPost model.NewPost) int
+		AddPostToCategory      func(childComplexity int, categoryID int, postID int) int
+		DeleteCategory         func(childComplexity int, categoryID int) int
+		DeleteComment          func(childComplexity int, authorID int, commentID int) int
+		DeletePost             func(childComplexity int, requesterID int, postID int) int
+		DeleteUser             func(childComplexity int, adminID int, userID int) int
+		DownVoteComment        func(childComplexity int, commentID int) int
+		EditCategory           func(childComplexity int, newCategory model.NewCategory) int
+		EditComment            func(childComplexity int, newComment model.NewComment) int
+		EditPost               func(childComplexity int, newPost model.NewPost) int
+		EditUser               func(childComplexity int, userID int, editedUser model.EditedUser) int
+		GetAllUsers            func(childComplexity int, adminID int) int
+		Login                  func(childComplexity int, email string, password string) int
+		PublishPost            func(childComplexity int, requesterID int, postID int) int
+		Register               func(childComplexity int, email string, password string) int
+		RemovePostFromCategory func(childComplexity int, categoryID int, postID int) int
+		UnPublishPost          func(childComplexity int, requesterID int, postID int) int
+		UpVoteComment          func(childComplexity int, commentID int) int
+		UpVotePost             func(childComplexity int, upVoterID int, postID int) int
 	}
 
 	Post struct {
@@ -130,7 +120,16 @@ type ComplexityRoot struct {
 	}
 
 	Query struct {
-		Users func(childComplexity int) int
+		GetAllCategories        func(childComplexity int, requesterID int) int
+		GetCategoryPosts        func(childComplexity int, categoryID int, offset int, limit int) int
+		GetPostByID             func(childComplexity int, requesterID int, postID int) int
+		GetPostCategories       func(childComplexity int, postID int) int
+		GetPostComments         func(childComplexity int, postID int, offset int, limit int) int
+		GetUserAllPosts         func(childComplexity int, ownerID int, offset int, limit int) int
+		GetUserByID             func(childComplexity int, requestorID int, userID int) int
+		GetUserComments         func(childComplexity int, authorID int, offset int, limit int) int
+		GetUserPublishedPosts   func(childComplexity int, requesterID int, userID int, offset int, limit int) int
+		GetUserUnPublishedPosts func(childComplexity int, ownerID int, offset int, limit int) int
 	}
 
 	Token struct {
@@ -209,30 +208,20 @@ type ComplexityRoot struct {
 type MutationResolver interface {
 	Register(ctx context.Context, email string, password string) (*model.AuthResponse, error)
 	Login(ctx context.Context, email string, password string) (*model.AuthResponse, error)
-	GetUserByID(ctx context.Context, requestorID int, userID int) (*model.GetUserByIDResponse, error)
 	GetAllUsers(ctx context.Context, adminID int) (*model.GetAllUsersResponse, error)
 	EditUser(ctx context.Context, userID int, editedUser model.EditedUser) (*model.EditUserResponse, error)
 	DeleteUser(ctx context.Context, adminID int, userID int) (*model.DeleteUserResponse, error)
-	GetPostByID(ctx context.Context, requesterID int, postID int) (*model.GetPostByIDResponse, error)
-	GetUserAllPosts(ctx context.Context, ownerID int, offset int, limit int) (*model.GetPostsResponse, error)
-	GetUserPublishedPosts(ctx context.Context, requesterID int, userID int, offset int, limit int) (*model.GetPostsResponse, error)
-	GetUserUnPublishedPosts(ctx context.Context, ownerID int, offset int, limit int) (*model.GetPostsResponse, error)
-	GetCategoryPosts(ctx context.Context, categoryID int, offset int, limit int) (*model.GetPostsResponse, error)
 	AddNewPost(ctx context.Context, newPost model.NewPost) (*model.GetPostByIDResponse, error)
 	EditPost(ctx context.Context, newPost model.NewPost) (*model.GetPostByIDResponse, error)
 	DeletePost(ctx context.Context, requesterID int, postID int) (*model.GetPostByIDResponse, error)
 	PublishPost(ctx context.Context, requesterID int, postID int) (*model.GetPostByIDResponse, error)
 	UnPublishPost(ctx context.Context, requesterID int, postID int) (*model.GetPostByIDResponse, error)
 	UpVotePost(ctx context.Context, upVoterID int, postID int) (*model.UpVotes, error)
-	GetPostComments(ctx context.Context, postID int, offset int, limit int) (*model.GetCommentsResponse, error)
-	GetUserComments(ctx context.Context, authorID int, offset int, limit int) (*model.GetCommentsResponse, error)
 	AddComment(ctx context.Context, newComment model.NewComment) (*model.AddNewCommentResponse, error)
 	EditComment(ctx context.Context, newComment model.NewComment) (*model.AddNewCommentResponse, error)
 	DeleteComment(ctx context.Context, authorID int, commentID int) (*model.AddNewCommentResponse, error)
 	UpVoteComment(ctx context.Context, commentID int) (*model.UpVotes, error)
 	DownVoteComment(ctx context.Context, commentID int) (*model.UpVotes, error)
-	GetAllCategories(ctx context.Context, requesterID int) (*model.GetCategoriesResponse, error)
-	GetPostCategories(ctx context.Context, postID int) (*model.GetCategoriesResponse, error)
 	AddNewCategory(ctx context.Context, newCategory model.NewCategory) (*model.GetCategoryResponse, error)
 	EditCategory(ctx context.Context, newCategory model.NewCategory) (*model.GetCategoryResponse, error)
 	DeleteCategory(ctx context.Context, categoryID int) (*model.GetCategoryResponse, error)
@@ -240,7 +229,16 @@ type MutationResolver interface {
 	RemovePostFromCategory(ctx context.Context, categoryID int, postID int) (*model.PostCategoryResponse, error)
 }
 type QueryResolver interface {
-	Users(ctx context.Context) ([]*model.User, error)
+	GetPostByID(ctx context.Context, requesterID int, postID int) (*model.GetPostByIDResponse, error)
+	GetUserPublishedPosts(ctx context.Context, requesterID int, userID int, offset int, limit int) (*model.GetPostsResponse, error)
+	GetCategoryPosts(ctx context.Context, categoryID int, offset int, limit int) (*model.GetPostsResponse, error)
+	GetUserAllPosts(ctx context.Context, ownerID int, offset int, limit int) (*model.GetPostsResponse, error)
+	GetUserUnPublishedPosts(ctx context.Context, ownerID int, offset int, limit int) (*model.GetPostsResponse, error)
+	GetPostComments(ctx context.Context, postID int, offset int, limit int) (*model.GetCommentsResponse, error)
+	GetUserComments(ctx context.Context, authorID int, offset int, limit int) (*model.GetCommentsResponse, error)
+	GetAllCategories(ctx context.Context, requesterID int) (*model.GetCategoriesResponse, error)
+	GetPostCategories(ctx context.Context, postID int) (*model.GetCategoriesResponse, error)
+	GetUserByID(ctx context.Context, requestorID int, userID int) (*model.GetUserByIDResponse, error)
 }
 
 type executableSchema struct {
@@ -547,18 +545,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Mutation.EditUser(childComplexity, args["userId"].(int), args["editedUser"].(model.EditedUser)), true
 
-	case "Mutation.getAllCategories":
-		if e.complexity.Mutation.GetAllCategories == nil {
-			break
-		}
-
-		args, err := ec.field_Mutation_getAllCategories_args(context.TODO(), rawArgs)
-		if err != nil {
-			return 0, false
-		}
-
-		return e.complexity.Mutation.GetAllCategories(childComplexity, args["requesterId"].(int)), true
-
 	case "Mutation.getAllUsers":
 		if e.complexity.Mutation.GetAllUsers == nil {
 			break
@@ -570,114 +556,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Mutation.GetAllUsers(childComplexity, args["adminId"].(int)), true
-
-	case "Mutation.getCategoryPosts":
-		if e.complexity.Mutation.GetCategoryPosts == nil {
-			break
-		}
-
-		args, err := ec.field_Mutation_getCategoryPosts_args(context.TODO(), rawArgs)
-		if err != nil {
-			return 0, false
-		}
-
-		return e.complexity.Mutation.GetCategoryPosts(childComplexity, args["categoryId"].(int), args["offset"].(int), args["limit"].(int)), true
-
-	case "Mutation.getPostById":
-		if e.complexity.Mutation.GetPostByID == nil {
-			break
-		}
-
-		args, err := ec.field_Mutation_getPostById_args(context.TODO(), rawArgs)
-		if err != nil {
-			return 0, false
-		}
-
-		return e.complexity.Mutation.GetPostByID(childComplexity, args["requesterId"].(int), args["postId"].(int)), true
-
-	case "Mutation.getPostCategories":
-		if e.complexity.Mutation.GetPostCategories == nil {
-			break
-		}
-
-		args, err := ec.field_Mutation_getPostCategories_args(context.TODO(), rawArgs)
-		if err != nil {
-			return 0, false
-		}
-
-		return e.complexity.Mutation.GetPostCategories(childComplexity, args["postId"].(int)), true
-
-	case "Mutation.getPostComments":
-		if e.complexity.Mutation.GetPostComments == nil {
-			break
-		}
-
-		args, err := ec.field_Mutation_getPostComments_args(context.TODO(), rawArgs)
-		if err != nil {
-			return 0, false
-		}
-
-		return e.complexity.Mutation.GetPostComments(childComplexity, args["postId"].(int), args["offset"].(int), args["limit"].(int)), true
-
-	case "Mutation.getUserAllPosts":
-		if e.complexity.Mutation.GetUserAllPosts == nil {
-			break
-		}
-
-		args, err := ec.field_Mutation_getUserAllPosts_args(context.TODO(), rawArgs)
-		if err != nil {
-			return 0, false
-		}
-
-		return e.complexity.Mutation.GetUserAllPosts(childComplexity, args["ownerId"].(int), args["offset"].(int), args["limit"].(int)), true
-
-	case "Mutation.getUserById":
-		if e.complexity.Mutation.GetUserByID == nil {
-			break
-		}
-
-		args, err := ec.field_Mutation_getUserById_args(context.TODO(), rawArgs)
-		if err != nil {
-			return 0, false
-		}
-
-		return e.complexity.Mutation.GetUserByID(childComplexity, args["requestorId"].(int), args["userId"].(int)), true
-
-	case "Mutation.getUserComments":
-		if e.complexity.Mutation.GetUserComments == nil {
-			break
-		}
-
-		args, err := ec.field_Mutation_getUserComments_args(context.TODO(), rawArgs)
-		if err != nil {
-			return 0, false
-		}
-
-		return e.complexity.Mutation.GetUserComments(childComplexity, args["authorId"].(int), args["offset"].(int), args["limit"].(int)), true
-
-	case "Mutation.getUserPublishedPosts":
-		if e.complexity.Mutation.GetUserPublishedPosts == nil {
-			break
-		}
-
-		args, err := ec.field_Mutation_getUserPublishedPosts_args(context.TODO(), rawArgs)
-		if err != nil {
-			return 0, false
-		}
-
-		return e.complexity.Mutation.GetUserPublishedPosts(childComplexity, args["requesterId"].(int), args["userId"].(int), args["offset"].(int), args["limit"].(int)), true
-
-	case "Mutation.getUserUnPublishedPosts":
-		if e.complexity.Mutation.GetUserUnPublishedPosts == nil {
-			break
-		}
-
-		args, err := ec.field_Mutation_getUserUnPublishedPosts_args(context.TODO(), rawArgs)
-		if err != nil {
-			return 0, false
-		}
-
-		return e.complexity.Mutation.GetUserUnPublishedPosts(childComplexity, args["ownerId"].(int), args["offset"].(int), args["limit"].(int)), true
 
 	case "Mutation.login":
 		if e.complexity.Mutation.Login == nil {
@@ -847,12 +725,125 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.PostCategory.PostID(childComplexity), true
 
-	case "Query.users":
-		if e.complexity.Query.Users == nil {
+	case "Query.getAllCategories":
+		if e.complexity.Query.GetAllCategories == nil {
 			break
 		}
 
-		return e.complexity.Query.Users(childComplexity), true
+		args, err := ec.field_Query_getAllCategories_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.GetAllCategories(childComplexity, args["requesterId"].(int)), true
+
+	case "Query.getCategoryPosts":
+		if e.complexity.Query.GetCategoryPosts == nil {
+			break
+		}
+
+		args, err := ec.field_Query_getCategoryPosts_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.GetCategoryPosts(childComplexity, args["categoryId"].(int), args["offset"].(int), args["limit"].(int)), true
+
+	case "Query.getPostById":
+		if e.complexity.Query.GetPostByID == nil {
+			break
+		}
+
+		args, err := ec.field_Query_getPostById_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.GetPostByID(childComplexity, args["requesterId"].(int), args["postId"].(int)), true
+
+	case "Query.getPostCategories":
+		if e.complexity.Query.GetPostCategories == nil {
+			break
+		}
+
+		args, err := ec.field_Query_getPostCategories_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.GetPostCategories(childComplexity, args["postId"].(int)), true
+
+	case "Query.getPostComments":
+		if e.complexity.Query.GetPostComments == nil {
+			break
+		}
+
+		args, err := ec.field_Query_getPostComments_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.GetPostComments(childComplexity, args["postId"].(int), args["offset"].(int), args["limit"].(int)), true
+
+	case "Query.getUserAllPosts":
+		if e.complexity.Query.GetUserAllPosts == nil {
+			break
+		}
+
+		args, err := ec.field_Query_getUserAllPosts_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.GetUserAllPosts(childComplexity, args["ownerId"].(int), args["offset"].(int), args["limit"].(int)), true
+
+	case "Query.getUserById":
+		if e.complexity.Query.GetUserByID == nil {
+			break
+		}
+
+		args, err := ec.field_Query_getUserById_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.GetUserByID(childComplexity, args["requestorId"].(int), args["userId"].(int)), true
+
+	case "Query.getUserComments":
+		if e.complexity.Query.GetUserComments == nil {
+			break
+		}
+
+		args, err := ec.field_Query_getUserComments_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.GetUserComments(childComplexity, args["authorId"].(int), args["offset"].(int), args["limit"].(int)), true
+
+	case "Query.getUserPublishedPosts":
+		if e.complexity.Query.GetUserPublishedPosts == nil {
+			break
+		}
+
+		args, err := ec.field_Query_getUserPublishedPosts_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.GetUserPublishedPosts(childComplexity, args["requesterId"].(int), args["userId"].(int), args["offset"].(int), args["limit"].(int)), true
+
+	case "Query.getUserUnPublishedPosts":
+		if e.complexity.Query.GetUserUnPublishedPosts == nil {
+			break
+		}
+
+		args, err := ec.field_Query_getUserUnPublishedPosts_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.GetUserUnPublishedPosts(childComplexity, args["ownerId"].(int), args["offset"].(int), args["limit"].(int)), true
 
 	case "Token.expireAt":
 		if e.complexity.Token.ExpireAt == nil {
@@ -1271,10 +1262,6 @@ type Token {
     expireAt: Int!
 }
 
-type Query {
-    users: [User!]!
-}
-
 type getUserByIdResponse {
     message: String!
     user: User!
@@ -1338,16 +1325,10 @@ type postCategoryResponse {
 type Mutation {
     register(email: String!, password: String!): AuthResponse!
     login(email: String!, password: String!): AuthResponse!
-    getUserById(requestorId: Int!, userId: Int!): getUserByIdResponse!
     getAllUsers(adminId: Int!): getAllUsersResponse!
     editUser(userId: Int!, editedUser: EditedUser!): EditUserResponse!
     deleteUser(adminId: Int!, userId: Int!): DeleteUserResponse!
 
-    getPostById(requesterId: Int!, postId: Int!): getPostByIdResponse!
-    getUserAllPosts(ownerId: Int!, offset: Int!, limit: Int!): getPostsResponse!
-    getUserPublishedPosts(requesterId: Int!, userId: Int!, offset: Int!, limit: Int!): getPostsResponse!
-    getUserUnPublishedPosts(ownerId: Int!, offset: Int!, limit: Int!): getPostsResponse!
-    getCategoryPosts(categoryId: Int!, offset: Int!, limit: Int!): getPostsResponse!
     addNewPost(newPost: NewPost!): getPostByIdResponse!
     editPost(newPost: NewPost!): getPostByIdResponse!
     deletePost(requesterId: Int!, postId: Int!): getPostByIdResponse!
@@ -1355,8 +1336,6 @@ type Mutation {
     unPublishPost(requesterId: Int!, postId: Int!): getPostByIdResponse!
     upVotePost(upVoterId: Int!, postId: Int!): upVotes!
 
-    getPostComments(postId: Int!, offset: Int!, limit: Int!): getCommentsResponse!
-    getUserComments(authorId: Int!, offset: Int!, limit: Int!): getCommentsResponse!
     addComment(newComment: NewComment!): addNewCommentResponse!
     editComment(newComment: NewComment!): addNewCommentResponse!
     deleteComment(authorId: Int!, commentId: Int!): addNewCommentResponse!
@@ -1364,13 +1343,25 @@ type Mutation {
     downVoteComment(commentId: Int!): upVotes!
 
 
-    getAllCategories(requesterId: Int!): getCategoriesResponse!
-    getPostCategories(postId: Int!): getCategoriesResponse!
     addNewCategory(newCategory: NewCategory!): getCategoryResponse!
     editCategory(newCategory: NewCategory!): getCategoryResponse!
     deleteCategory(categoryId: Int!): getCategoryResponse!
     addPostToCategory(categoryId: Int!, postId: Int!): postCategoryResponse!
     removePostFromCategory(categoryId: Int!, postId: Int!): postCategoryResponse!
+}
+
+type Query {
+    getPostById(requesterId: Int!, postId: Int!): getPostByIdResponse!
+    getUserPublishedPosts(requesterId: Int!, userId: Int!, offset: Int!, limit: Int!): getPostsResponse!
+    getCategoryPosts(categoryId: Int!, offset: Int!, limit: Int!): getPostsResponse!
+    getUserAllPosts(ownerId: Int!, offset: Int!, limit: Int!): getPostsResponse!
+    getUserUnPublishedPosts(ownerId: Int!, offset: Int!, limit: Int!): getPostsResponse!
+
+    getPostComments(postId: Int!, offset: Int!, limit: Int!): getCommentsResponse!
+    getUserComments(authorId: Int!, offset: Int!, limit: Int!): getCommentsResponse!
+    getAllCategories(requesterId: Int!): getCategoriesResponse!
+    getPostCategories(postId: Int!): getCategoriesResponse!
+    getUserById(requestorId: Int!, userId: Int!): getUserByIdResponse!
 }`, BuiltIn: false},
 }
 var parsedSchema = gqlparser.MustLoadSchema(sources...)
@@ -1601,20 +1592,6 @@ func (ec *executionContext) field_Mutation_editUser_args(ctx context.Context, ra
 	return args, nil
 }
 
-func (ec *executionContext) field_Mutation_getAllCategories_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
-	var err error
-	args := map[string]interface{}{}
-	var arg0 int
-	if tmp, ok := rawArgs["requesterId"]; ok {
-		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["requesterId"] = arg0
-	return args, nil
-}
-
 func (ec *executionContext) field_Mutation_getAllUsers_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
@@ -1626,252 +1603,6 @@ func (ec *executionContext) field_Mutation_getAllUsers_args(ctx context.Context,
 		}
 	}
 	args["adminId"] = arg0
-	return args, nil
-}
-
-func (ec *executionContext) field_Mutation_getCategoryPosts_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
-	var err error
-	args := map[string]interface{}{}
-	var arg0 int
-	if tmp, ok := rawArgs["categoryId"]; ok {
-		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["categoryId"] = arg0
-	var arg1 int
-	if tmp, ok := rawArgs["offset"]; ok {
-		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["offset"] = arg1
-	var arg2 int
-	if tmp, ok := rawArgs["limit"]; ok {
-		arg2, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["limit"] = arg2
-	return args, nil
-}
-
-func (ec *executionContext) field_Mutation_getPostById_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
-	var err error
-	args := map[string]interface{}{}
-	var arg0 int
-	if tmp, ok := rawArgs["requesterId"]; ok {
-		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["requesterId"] = arg0
-	var arg1 int
-	if tmp, ok := rawArgs["postId"]; ok {
-		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["postId"] = arg1
-	return args, nil
-}
-
-func (ec *executionContext) field_Mutation_getPostCategories_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
-	var err error
-	args := map[string]interface{}{}
-	var arg0 int
-	if tmp, ok := rawArgs["postId"]; ok {
-		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["postId"] = arg0
-	return args, nil
-}
-
-func (ec *executionContext) field_Mutation_getPostComments_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
-	var err error
-	args := map[string]interface{}{}
-	var arg0 int
-	if tmp, ok := rawArgs["postId"]; ok {
-		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["postId"] = arg0
-	var arg1 int
-	if tmp, ok := rawArgs["offset"]; ok {
-		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["offset"] = arg1
-	var arg2 int
-	if tmp, ok := rawArgs["limit"]; ok {
-		arg2, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["limit"] = arg2
-	return args, nil
-}
-
-func (ec *executionContext) field_Mutation_getUserAllPosts_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
-	var err error
-	args := map[string]interface{}{}
-	var arg0 int
-	if tmp, ok := rawArgs["ownerId"]; ok {
-		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["ownerId"] = arg0
-	var arg1 int
-	if tmp, ok := rawArgs["offset"]; ok {
-		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["offset"] = arg1
-	var arg2 int
-	if tmp, ok := rawArgs["limit"]; ok {
-		arg2, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["limit"] = arg2
-	return args, nil
-}
-
-func (ec *executionContext) field_Mutation_getUserById_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
-	var err error
-	args := map[string]interface{}{}
-	var arg0 int
-	if tmp, ok := rawArgs["requestorId"]; ok {
-		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["requestorId"] = arg0
-	var arg1 int
-	if tmp, ok := rawArgs["userId"]; ok {
-		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["userId"] = arg1
-	return args, nil
-}
-
-func (ec *executionContext) field_Mutation_getUserComments_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
-	var err error
-	args := map[string]interface{}{}
-	var arg0 int
-	if tmp, ok := rawArgs["authorId"]; ok {
-		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["authorId"] = arg0
-	var arg1 int
-	if tmp, ok := rawArgs["offset"]; ok {
-		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["offset"] = arg1
-	var arg2 int
-	if tmp, ok := rawArgs["limit"]; ok {
-		arg2, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["limit"] = arg2
-	return args, nil
-}
-
-func (ec *executionContext) field_Mutation_getUserPublishedPosts_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
-	var err error
-	args := map[string]interface{}{}
-	var arg0 int
-	if tmp, ok := rawArgs["requesterId"]; ok {
-		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["requesterId"] = arg0
-	var arg1 int
-	if tmp, ok := rawArgs["userId"]; ok {
-		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["userId"] = arg1
-	var arg2 int
-	if tmp, ok := rawArgs["offset"]; ok {
-		arg2, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["offset"] = arg2
-	var arg3 int
-	if tmp, ok := rawArgs["limit"]; ok {
-		arg3, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["limit"] = arg3
-	return args, nil
-}
-
-func (ec *executionContext) field_Mutation_getUserUnPublishedPosts_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
-	var err error
-	args := map[string]interface{}{}
-	var arg0 int
-	if tmp, ok := rawArgs["ownerId"]; ok {
-		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["ownerId"] = arg0
-	var arg1 int
-	if tmp, ok := rawArgs["offset"]; ok {
-		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["offset"] = arg1
-	var arg2 int
-	if tmp, ok := rawArgs["limit"]; ok {
-		arg2, err = ec.unmarshalNInt2int(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["limit"] = arg2
 	return args, nil
 }
 
@@ -2032,6 +1763,266 @@ func (ec *executionContext) field_Query___type_args(ctx context.Context, rawArgs
 		}
 	}
 	args["name"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_getAllCategories_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 int
+	if tmp, ok := rawArgs["requesterId"]; ok {
+		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["requesterId"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_getCategoryPosts_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 int
+	if tmp, ok := rawArgs["categoryId"]; ok {
+		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["categoryId"] = arg0
+	var arg1 int
+	if tmp, ok := rawArgs["offset"]; ok {
+		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["offset"] = arg1
+	var arg2 int
+	if tmp, ok := rawArgs["limit"]; ok {
+		arg2, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["limit"] = arg2
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_getPostById_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 int
+	if tmp, ok := rawArgs["requesterId"]; ok {
+		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["requesterId"] = arg0
+	var arg1 int
+	if tmp, ok := rawArgs["postId"]; ok {
+		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["postId"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_getPostCategories_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 int
+	if tmp, ok := rawArgs["postId"]; ok {
+		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["postId"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_getPostComments_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 int
+	if tmp, ok := rawArgs["postId"]; ok {
+		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["postId"] = arg0
+	var arg1 int
+	if tmp, ok := rawArgs["offset"]; ok {
+		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["offset"] = arg1
+	var arg2 int
+	if tmp, ok := rawArgs["limit"]; ok {
+		arg2, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["limit"] = arg2
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_getUserAllPosts_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 int
+	if tmp, ok := rawArgs["ownerId"]; ok {
+		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["ownerId"] = arg0
+	var arg1 int
+	if tmp, ok := rawArgs["offset"]; ok {
+		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["offset"] = arg1
+	var arg2 int
+	if tmp, ok := rawArgs["limit"]; ok {
+		arg2, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["limit"] = arg2
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_getUserById_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 int
+	if tmp, ok := rawArgs["requestorId"]; ok {
+		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["requestorId"] = arg0
+	var arg1 int
+	if tmp, ok := rawArgs["userId"]; ok {
+		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["userId"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_getUserComments_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 int
+	if tmp, ok := rawArgs["authorId"]; ok {
+		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["authorId"] = arg0
+	var arg1 int
+	if tmp, ok := rawArgs["offset"]; ok {
+		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["offset"] = arg1
+	var arg2 int
+	if tmp, ok := rawArgs["limit"]; ok {
+		arg2, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["limit"] = arg2
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_getUserPublishedPosts_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 int
+	if tmp, ok := rawArgs["requesterId"]; ok {
+		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["requesterId"] = arg0
+	var arg1 int
+	if tmp, ok := rawArgs["userId"]; ok {
+		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["userId"] = arg1
+	var arg2 int
+	if tmp, ok := rawArgs["offset"]; ok {
+		arg2, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["offset"] = arg2
+	var arg3 int
+	if tmp, ok := rawArgs["limit"]; ok {
+		arg3, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["limit"] = arg3
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_getUserUnPublishedPosts_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 int
+	if tmp, ok := rawArgs["ownerId"]; ok {
+		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["ownerId"] = arg0
+	var arg1 int
+	if tmp, ok := rawArgs["offset"]; ok {
+		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["offset"] = arg1
+	var arg2 int
+	if tmp, ok := rawArgs["limit"]; ok {
+		arg2, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["limit"] = arg2
 	return args, nil
 }
 
@@ -2799,47 +2790,6 @@ func (ec *executionContext) _Mutation_login(ctx context.Context, field graphql.C
 	return ec.marshalNAuthResponse2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐAuthResponse(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Mutation_getUserById(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	fc := &graphql.FieldContext{
-		Object:   "Mutation",
-		Field:    field,
-		Args:     nil,
-		IsMethod: true,
-	}
-
-	ctx = graphql.WithFieldContext(ctx, fc)
-	rawArgs := field.ArgumentMap(ec.Variables)
-	args, err := ec.field_Mutation_getUserById_args(ctx, rawArgs)
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	fc.Args = args
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().GetUserByID(rctx, args["requestorId"].(int), args["userId"].(int))
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(*model.GetUserByIDResponse)
-	fc.Result = res
-	return ec.marshalNgetUserByIdResponse2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐGetUserByIDResponse(ctx, field.Selections, res)
-}
-
 func (ec *executionContext) _Mutation_getAllUsers(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
@@ -2961,211 +2911,6 @@ func (ec *executionContext) _Mutation_deleteUser(ctx context.Context, field grap
 	res := resTmp.(*model.DeleteUserResponse)
 	fc.Result = res
 	return ec.marshalNDeleteUserResponse2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐDeleteUserResponse(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) _Mutation_getPostById(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	fc := &graphql.FieldContext{
-		Object:   "Mutation",
-		Field:    field,
-		Args:     nil,
-		IsMethod: true,
-	}
-
-	ctx = graphql.WithFieldContext(ctx, fc)
-	rawArgs := field.ArgumentMap(ec.Variables)
-	args, err := ec.field_Mutation_getPostById_args(ctx, rawArgs)
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	fc.Args = args
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().GetPostByID(rctx, args["requesterId"].(int), args["postId"].(int))
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(*model.GetPostByIDResponse)
-	fc.Result = res
-	return ec.marshalNgetPostByIdResponse2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐGetPostByIDResponse(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) _Mutation_getUserAllPosts(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	fc := &graphql.FieldContext{
-		Object:   "Mutation",
-		Field:    field,
-		Args:     nil,
-		IsMethod: true,
-	}
-
-	ctx = graphql.WithFieldContext(ctx, fc)
-	rawArgs := field.ArgumentMap(ec.Variables)
-	args, err := ec.field_Mutation_getUserAllPosts_args(ctx, rawArgs)
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	fc.Args = args
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().GetUserAllPosts(rctx, args["ownerId"].(int), args["offset"].(int), args["limit"].(int))
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(*model.GetPostsResponse)
-	fc.Result = res
-	return ec.marshalNgetPostsResponse2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐGetPostsResponse(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) _Mutation_getUserPublishedPosts(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	fc := &graphql.FieldContext{
-		Object:   "Mutation",
-		Field:    field,
-		Args:     nil,
-		IsMethod: true,
-	}
-
-	ctx = graphql.WithFieldContext(ctx, fc)
-	rawArgs := field.ArgumentMap(ec.Variables)
-	args, err := ec.field_Mutation_getUserPublishedPosts_args(ctx, rawArgs)
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	fc.Args = args
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().GetUserPublishedPosts(rctx, args["requesterId"].(int), args["userId"].(int), args["offset"].(int), args["limit"].(int))
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(*model.GetPostsResponse)
-	fc.Result = res
-	return ec.marshalNgetPostsResponse2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐGetPostsResponse(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) _Mutation_getUserUnPublishedPosts(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	fc := &graphql.FieldContext{
-		Object:   "Mutation",
-		Field:    field,
-		Args:     nil,
-		IsMethod: true,
-	}
-
-	ctx = graphql.WithFieldContext(ctx, fc)
-	rawArgs := field.ArgumentMap(ec.Variables)
-	args, err := ec.field_Mutation_getUserUnPublishedPosts_args(ctx, rawArgs)
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	fc.Args = args
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().GetUserUnPublishedPosts(rctx, args["ownerId"].(int), args["offset"].(int), args["limit"].(int))
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(*model.GetPostsResponse)
-	fc.Result = res
-	return ec.marshalNgetPostsResponse2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐGetPostsResponse(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) _Mutation_getCategoryPosts(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	fc := &graphql.FieldContext{
-		Object:   "Mutation",
-		Field:    field,
-		Args:     nil,
-		IsMethod: true,
-	}
-
-	ctx = graphql.WithFieldContext(ctx, fc)
-	rawArgs := field.ArgumentMap(ec.Variables)
-	args, err := ec.field_Mutation_getCategoryPosts_args(ctx, rawArgs)
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	fc.Args = args
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().GetCategoryPosts(rctx, args["categoryId"].(int), args["offset"].(int), args["limit"].(int))
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(*model.GetPostsResponse)
-	fc.Result = res
-	return ec.marshalNgetPostsResponse2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐGetPostsResponse(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Mutation_addNewPost(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -3414,88 +3159,6 @@ func (ec *executionContext) _Mutation_upVotePost(ctx context.Context, field grap
 	return ec.marshalNupVotes2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐUpVotes(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Mutation_getPostComments(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	fc := &graphql.FieldContext{
-		Object:   "Mutation",
-		Field:    field,
-		Args:     nil,
-		IsMethod: true,
-	}
-
-	ctx = graphql.WithFieldContext(ctx, fc)
-	rawArgs := field.ArgumentMap(ec.Variables)
-	args, err := ec.field_Mutation_getPostComments_args(ctx, rawArgs)
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	fc.Args = args
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().GetPostComments(rctx, args["postId"].(int), args["offset"].(int), args["limit"].(int))
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(*model.GetCommentsResponse)
-	fc.Result = res
-	return ec.marshalNgetCommentsResponse2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐGetCommentsResponse(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) _Mutation_getUserComments(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	fc := &graphql.FieldContext{
-		Object:   "Mutation",
-		Field:    field,
-		Args:     nil,
-		IsMethod: true,
-	}
-
-	ctx = graphql.WithFieldContext(ctx, fc)
-	rawArgs := field.ArgumentMap(ec.Variables)
-	args, err := ec.field_Mutation_getUserComments_args(ctx, rawArgs)
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	fc.Args = args
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().GetUserComments(rctx, args["authorId"].(int), args["offset"].(int), args["limit"].(int))
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(*model.GetCommentsResponse)
-	fc.Result = res
-	return ec.marshalNgetCommentsResponse2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐGetCommentsResponse(ctx, field.Selections, res)
-}
-
 func (ec *executionContext) _Mutation_addComment(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
@@ -3699,88 +3362,6 @@ func (ec *executionContext) _Mutation_downVoteComment(ctx context.Context, field
 	res := resTmp.(*model.UpVotes)
 	fc.Result = res
 	return ec.marshalNupVotes2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐUpVotes(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) _Mutation_getAllCategories(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	fc := &graphql.FieldContext{
-		Object:   "Mutation",
-		Field:    field,
-		Args:     nil,
-		IsMethod: true,
-	}
-
-	ctx = graphql.WithFieldContext(ctx, fc)
-	rawArgs := field.ArgumentMap(ec.Variables)
-	args, err := ec.field_Mutation_getAllCategories_args(ctx, rawArgs)
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	fc.Args = args
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().GetAllCategories(rctx, args["requesterId"].(int))
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(*model.GetCategoriesResponse)
-	fc.Result = res
-	return ec.marshalNgetCategoriesResponse2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐGetCategoriesResponse(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) _Mutation_getPostCategories(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	fc := &graphql.FieldContext{
-		Object:   "Mutation",
-		Field:    field,
-		Args:     nil,
-		IsMethod: true,
-	}
-
-	ctx = graphql.WithFieldContext(ctx, fc)
-	rawArgs := field.ArgumentMap(ec.Variables)
-	args, err := ec.field_Mutation_getPostCategories_args(ctx, rawArgs)
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	fc.Args = args
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().GetPostCategories(rctx, args["postId"].(int))
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(*model.GetCategoriesResponse)
-	fc.Result = res
-	return ec.marshalNgetCategoriesResponse2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐGetCategoriesResponse(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Mutation_addNewCategory(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -4396,7 +3977,7 @@ func (ec *executionContext) _PostCategory_categoryID(ctx context.Context, field 
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Query_users(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+func (ec *executionContext) _Query_getPostById(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -4411,9 +3992,16 @@ func (ec *executionContext) _Query_users(ctx context.Context, field graphql.Coll
 	}
 
 	ctx = graphql.WithFieldContext(ctx, fc)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Query_getPostById_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Users(rctx)
+		return ec.resolvers.Query().GetPostByID(rctx, args["requesterId"].(int), args["postId"].(int))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -4425,9 +4013,378 @@ func (ec *executionContext) _Query_users(ctx context.Context, field graphql.Coll
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*model.User)
+	res := resTmp.(*model.GetPostByIDResponse)
 	fc.Result = res
-	return ec.marshalNUser2ᚕᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐUserᚄ(ctx, field.Selections, res)
+	return ec.marshalNgetPostByIdResponse2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐGetPostByIDResponse(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Query_getUserPublishedPosts(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:   "Query",
+		Field:    field,
+		Args:     nil,
+		IsMethod: true,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Query_getUserPublishedPosts_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	fc.Args = args
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Query().GetUserPublishedPosts(rctx, args["requesterId"].(int), args["userId"].(int), args["offset"].(int), args["limit"].(int))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.GetPostsResponse)
+	fc.Result = res
+	return ec.marshalNgetPostsResponse2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐGetPostsResponse(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Query_getCategoryPosts(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:   "Query",
+		Field:    field,
+		Args:     nil,
+		IsMethod: true,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Query_getCategoryPosts_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	fc.Args = args
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Query().GetCategoryPosts(rctx, args["categoryId"].(int), args["offset"].(int), args["limit"].(int))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.GetPostsResponse)
+	fc.Result = res
+	return ec.marshalNgetPostsResponse2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐGetPostsResponse(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Query_getUserAllPosts(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:   "Query",
+		Field:    field,
+		Args:     nil,
+		IsMethod: true,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Query_getUserAllPosts_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	fc.Args = args
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Query().GetUserAllPosts(rctx, args["ownerId"].(int), args["offset"].(int), args["limit"].(int))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.GetPostsResponse)
+	fc.Result = res
+	return ec.marshalNgetPostsResponse2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐGetPostsResponse(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Query_getUserUnPublishedPosts(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:   "Query",
+		Field:    field,
+		Args:     nil,
+		IsMethod: true,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Query_getUserUnPublishedPosts_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	fc.Args = args
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Query().GetUserUnPublishedPosts(rctx, args["ownerId"].(int), args["offset"].(int), args["limit"].(int))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.GetPostsResponse)
+	fc.Result = res
+	return ec.marshalNgetPostsResponse2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐGetPostsResponse(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Query_getPostComments(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:   "Query",
+		Field:    field,
+		Args:     nil,
+		IsMethod: true,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Query_getPostComments_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	fc.Args = args
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Query().GetPostComments(rctx, args["postId"].(int), args["offset"].(int), args["limit"].(int))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.GetCommentsResponse)
+	fc.Result = res
+	return ec.marshalNgetCommentsResponse2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐGetCommentsResponse(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Query_getUserComments(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:   "Query",
+		Field:    field,
+		Args:     nil,
+		IsMethod: true,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Query_getUserComments_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	fc.Args = args
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Query().GetUserComments(rctx, args["authorId"].(int), args["offset"].(int), args["limit"].(int))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.GetCommentsResponse)
+	fc.Result = res
+	return ec.marshalNgetCommentsResponse2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐGetCommentsResponse(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Query_getAllCategories(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:   "Query",
+		Field:    field,
+		Args:     nil,
+		IsMethod: true,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Query_getAllCategories_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	fc.Args = args
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Query().GetAllCategories(rctx, args["requesterId"].(int))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.GetCategoriesResponse)
+	fc.Result = res
+	return ec.marshalNgetCategoriesResponse2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐGetCategoriesResponse(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Query_getPostCategories(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:   "Query",
+		Field:    field,
+		Args:     nil,
+		IsMethod: true,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Query_getPostCategories_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	fc.Args = args
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Query().GetPostCategories(rctx, args["postId"].(int))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.GetCategoriesResponse)
+	fc.Result = res
+	return ec.marshalNgetCategoriesResponse2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐGetCategoriesResponse(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Query_getUserById(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:   "Query",
+		Field:    field,
+		Args:     nil,
+		IsMethod: true,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Query_getUserById_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	fc.Args = args
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Query().GetUserByID(rctx, args["requestorId"].(int), args["userId"].(int))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.GetUserByIDResponse)
+	fc.Result = res
+	return ec.marshalNgetUserByIdResponse2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐGetUserByIDResponse(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query___type(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -7196,11 +7153,6 @@ func (ec *executionContext) _Mutation(ctx context.Context, sel ast.SelectionSet)
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "getUserById":
-			out.Values[i] = ec._Mutation_getUserById(ctx, field)
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
 		case "getAllUsers":
 			out.Values[i] = ec._Mutation_getAllUsers(ctx, field)
 			if out.Values[i] == graphql.Null {
@@ -7213,31 +7165,6 @@ func (ec *executionContext) _Mutation(ctx context.Context, sel ast.SelectionSet)
 			}
 		case "deleteUser":
 			out.Values[i] = ec._Mutation_deleteUser(ctx, field)
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
-		case "getPostById":
-			out.Values[i] = ec._Mutation_getPostById(ctx, field)
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
-		case "getUserAllPosts":
-			out.Values[i] = ec._Mutation_getUserAllPosts(ctx, field)
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
-		case "getUserPublishedPosts":
-			out.Values[i] = ec._Mutation_getUserPublishedPosts(ctx, field)
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
-		case "getUserUnPublishedPosts":
-			out.Values[i] = ec._Mutation_getUserUnPublishedPosts(ctx, field)
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
-		case "getCategoryPosts":
-			out.Values[i] = ec._Mutation_getCategoryPosts(ctx, field)
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
@@ -7271,16 +7198,6 @@ func (ec *executionContext) _Mutation(ctx context.Context, sel ast.SelectionSet)
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "getPostComments":
-			out.Values[i] = ec._Mutation_getPostComments(ctx, field)
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
-		case "getUserComments":
-			out.Values[i] = ec._Mutation_getUserComments(ctx, field)
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
 		case "addComment":
 			out.Values[i] = ec._Mutation_addComment(ctx, field)
 			if out.Values[i] == graphql.Null {
@@ -7303,16 +7220,6 @@ func (ec *executionContext) _Mutation(ctx context.Context, sel ast.SelectionSet)
 			}
 		case "downVoteComment":
 			out.Values[i] = ec._Mutation_downVoteComment(ctx, field)
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
-		case "getAllCategories":
-			out.Values[i] = ec._Mutation_getAllCategories(ctx, field)
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
-		case "getPostCategories":
-			out.Values[i] = ec._Mutation_getPostCategories(ctx, field)
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
@@ -7471,7 +7378,7 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 		switch field.Name {
 		case "__typename":
 			out.Values[i] = graphql.MarshalString("Query")
-		case "users":
+		case "getPostById":
 			field := field
 			out.Concurrently(i, func() (res graphql.Marshaler) {
 				defer func() {
@@ -7479,7 +7386,133 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 						ec.Error(ctx, ec.Recover(ctx, r))
 					}
 				}()
-				res = ec._Query_users(ctx, field)
+				res = ec._Query_getPostById(ctx, field)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
+				return res
+			})
+		case "getUserPublishedPosts":
+			field := field
+			out.Concurrently(i, func() (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Query_getUserPublishedPosts(ctx, field)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
+				return res
+			})
+		case "getCategoryPosts":
+			field := field
+			out.Concurrently(i, func() (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Query_getCategoryPosts(ctx, field)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
+				return res
+			})
+		case "getUserAllPosts":
+			field := field
+			out.Concurrently(i, func() (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Query_getUserAllPosts(ctx, field)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
+				return res
+			})
+		case "getUserUnPublishedPosts":
+			field := field
+			out.Concurrently(i, func() (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Query_getUserUnPublishedPosts(ctx, field)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
+				return res
+			})
+		case "getPostComments":
+			field := field
+			out.Concurrently(i, func() (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Query_getPostComments(ctx, field)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
+				return res
+			})
+		case "getUserComments":
+			field := field
+			out.Concurrently(i, func() (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Query_getUserComments(ctx, field)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
+				return res
+			})
+		case "getAllCategories":
+			field := field
+			out.Concurrently(i, func() (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Query_getAllCategories(ctx, field)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
+				return res
+			})
+		case "getPostCategories":
+			field := field
+			out.Concurrently(i, func() (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Query_getPostCategories(ctx, field)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
+				return res
+			})
+		case "getUserById":
+			field := field
+			out.Concurrently(i, func() (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Query_getUserById(ctx, field)
 				if res == graphql.Null {
 					atomic.AddUint32(&invalids, 1)
 				}

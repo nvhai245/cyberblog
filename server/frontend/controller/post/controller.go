@@ -14,15 +14,15 @@ import (
 )
 
 func GetPostByID(ctx context.Context, requesterID int, postID int) (*model.GetPostByIDResponse, error) {
-	session := helper.GetSession(ctx, "auth")
-	token := fmt.Sprintf("%v", session.Values["token"])
-	checkResponse, err := connection.AuthClient.CheckToken(context.Background(), &authPb.CheckTokenRequest{Token: token})
-	if err != nil {
-		log.Println("Error in rpc AuthClient.CheckToken(): ", err)
-		return nil, fmt.Errorf("INTERNAL SERVER ERROR!")
-	}
-	// No need to check auth
-	_ = checkResponse
+	//session := helper.GetSession(ctx, "auth")
+	//token := fmt.Sprintf("%v", session.Values["token"])
+	//checkResponse, err := connection.AuthClient.CheckToken(context.Background(), &authPb.CheckTokenRequest{Token: token})
+	//if err != nil {
+	//	log.Println("Error in rpc AuthClient.CheckToken(): ", err)
+	//	return nil, fmt.Errorf("INTERNAL SERVER ERROR!")
+	//}
+	//// No need to check auth
+	//_ = checkResponse
 	result, err := connection.ReadClient.GetPostById(ctx, &readPb.GetPostByIdRequest{
 		RequesterId: int32(requesterID),
 		PostId:      int32(postID),
@@ -72,14 +72,14 @@ func GetUserAllPosts(ctx context.Context, ownerID int, offset int, limit int) (*
 }
 
 func GetUserPublishedPosts(ctx context.Context, requesterID int, userID int, offset int, limit int) (*model.GetPostsResponse, error) {
-	session := helper.GetSession(ctx, "auth")
-	token := fmt.Sprintf("%v", session.Values["token"])
-	checkResponse, err := connection.AuthClient.CheckToken(context.Background(), &authPb.CheckTokenRequest{Token: token})
-	if err != nil {
-		log.Println("Error in rpc AuthClient.CheckToken(): ", err)
-		return nil, fmt.Errorf("INTERNAL SERVER ERROR!")
-	}
-	_ = checkResponse
+	//session := helper.GetSession(ctx, "auth")
+	//token := fmt.Sprintf("%v", session.Values["token"])
+	//checkResponse, err := connection.AuthClient.CheckToken(context.Background(), &authPb.CheckTokenRequest{Token: token})
+	//if err != nil {
+	//	log.Println("Error in rpc AuthClient.CheckToken(): ", err)
+	//	return nil, fmt.Errorf("INTERNAL SERVER ERROR!")
+	//}
+	//_ = checkResponse
 	result, err := connection.ReadClient.GetUserPublishedPosts(ctx, &readPb.GetUserPublishedPostsRequest{
 		RequesterId: int32(requesterID),
 		UserId:      int32(userID),
@@ -135,14 +135,15 @@ func GetUserUnPublishedPosts(ctx context.Context, ownerID int, offset int, limit
 }
 
 func GetCategoryPosts(ctx context.Context, categoryID int, offset int, limit int) (*model.GetPostsResponse, error) {
-	session := helper.GetSession(ctx, "auth")
-	token := fmt.Sprintf("%v", session.Values["token"])
-	checkResponse, err := connection.AuthClient.CheckToken(context.Background(), &authPb.CheckTokenRequest{Token: token})
-	if err != nil {
-		log.Println("Error in rpc AuthClient.CheckToken(): ", err)
-		return nil, fmt.Errorf("INTERNAL SERVER ERROR!")
-	}
-	_ = checkResponse
+	//session := helper.GetSession(ctx, "auth")
+	//token := fmt.Sprintf("%v", session.Values["token"])
+	//log.Println(token)
+	//checkResponse, err := connection.AuthClient.CheckToken(context.Background(), &authPb.CheckTokenRequest{Token: token})
+	//if err != nil {
+	//	log.Println("Error in rpc AuthClient.CheckToken(): ", err)
+	//	return nil, fmt.Errorf("INTERNAL SERVER ERROR!")
+	//}
+	//_ = checkResponse
 	result, err := connection.ReadClient.GetCategoryPosts(ctx, &readPb.GetCategoryPostsRequest{
 		CategoryId: int32(categoryID),
 		Offset:     int32(offset),
