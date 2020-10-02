@@ -18,14 +18,14 @@ export default function signin() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log("dshfghsdfhasdui**************************")
         login({
             variables: {
                 email: email,
                 password: password
             }
+        }).then(data => {
+            console.log(data)
         })
-        console.log(data)
     }
 
     const removeNoise = ({ offsetParent, lastElementChild }, type) => {
@@ -238,11 +238,11 @@ export default function signin() {
                     <div className="editor-field__noise"></div>
                 </div>
                 <div className={styles.authButtons}>
-                    <div style={{ marginTop: "0.5rem" }} className="btn btn--primary" onMouseOver={(e) => generateNoise(e, 'button')}
+                    <div type="submit" style={{ marginTop: "0.5rem" }} className="btn btn--primary" onMouseOver={(e) => generateNoise(e, 'button')}
                         onMouseOut={(e) => removeNoise(e, 'button')}>
-                        <button type="submit" className="btn__container">
+                        <button className="btn__container">
                             Đăng Nhập
-                    </button>
+                        </button>
                         <div className="btn__bottom"></div>
                         <div className="btn__noise"></div>
                     </div>
