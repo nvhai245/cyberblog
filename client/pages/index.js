@@ -29,16 +29,15 @@ function Home() {
     )
   }
 
-  export async function getStaticProps(context) {
-    const apolloClient = initializeApollo(null, context)
-    await apolloClient.query({
+  export async function getServerSideProps({req}) {
+    const apolloClient = initializeApollo(null, req)
+    let res = await apolloClient.query({
       query: GET_CATEGORY_POSTS,
     })
     return {
       props: {
         initialApolloState: apolloClient.cache.extract(),
       },
-      revalidate: 1,
     }
   }
 

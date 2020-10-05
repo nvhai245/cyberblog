@@ -28,7 +28,7 @@ func InjectHTTPMiddleware(session *sessions.CookieStore) func(http.Handler) http
 			// CORS
 			w.Header().Set("Access-Control-Allow-Credentials", "true")
 			w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
-			w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
+			w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie")
 			w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 			if r.Method == "OPTIONS" {
 				w.WriteHeader(http.StatusOK)

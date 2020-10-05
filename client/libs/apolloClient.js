@@ -4,10 +4,13 @@ import { concatPagination } from '@apollo/client/utilities'
 
 let apolloClient
 
-function createApolloClient() {
+function createApolloClient(req) {
     const link = createHttpLink({
         uri: 'http://localhost:8080/query', // Server URL (must be absolute)
         credentials: 'include', // Additional fetch() options like `credentials` or `headers`
+        headers: req ? {
+            cookie: req.headers.cookie,
+        } : undefined,
     })
     return new ApolloClient({
         ssrMode: typeof window === 'undefined',
@@ -21,12 +24,11 @@ function createApolloClient() {
                 },
             },
         }),
-        credentials: 'include'
     })
 }
 
-export function initializeApollo(initialState = null) {
-    const _apolloClient = apolloClient ?? createApolloClient()
+export function initializeApollo(initialState, req) {
+    const _apolloClient = createApolloClient(req)
 
     // If your page has Next.js data fetching methods that use Apollo Client, the initial state
     // gets hydrated here
