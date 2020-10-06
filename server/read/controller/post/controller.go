@@ -6,6 +6,21 @@ import (
 	"log"
 )
 
+func GetFeed(req *pb.GetFeedRequest) (*pb.GetFeedResponse, error) {
+	log.Printf("postController.GetFeed(), [Request]: %+v", req)
+	success, foundPosts, err := postModel.GetFeed(req.GetOffset(), req.GetLimit())
+	if success == false || err != nil {
+		return nil, err
+	}
+	res := &pb.GetFeedResponse{
+		Success:    true,
+		FoundPosts: modelPostSliceToProtoPostSlice(foundPosts),
+	}
+	// ******************************************************************************************
+	log.Printf("postController.GetFeed(), [Response]: %+v", res)
+	return res, nil
+}
+
 func GetPostById(req *pb.GetPostByIdRequest) (*pb.GetPostByIdResponse, error) {
 	log.Printf("postController.GetPostById(), [Request]: %+v", req)
 	success, foundPost, err := postModel.GetPostById(req.GetRequesterId(), req.GetPostId())

@@ -40,6 +40,10 @@ func (*ReadServer) GetAllUsers(ctx context.Context, req *pb.GetAllUsersRequest) 
 	return res, nil
 }
 
+func (*ReadServer) GetFeed(ctx context.Context, req *pb.GetFeedRequest) (*pb.GetFeedResponse, error) {
+	return postController.GetFeed(req)
+}
+
 func (*ReadServer) GetPostById(ctx context.Context, req *pb.GetPostByIdRequest) (*pb.GetPostByIdResponse, error) {
 	return postController.GetPostById(req)
 }

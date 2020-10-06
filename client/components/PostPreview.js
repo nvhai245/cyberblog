@@ -1,15 +1,17 @@
 import React from 'react'
-import { GET_CATEGORY_POSTS } from '../libs/gql/allCharacters'
+import { GET_FEED } from '../libs/gql/getFeed'
 import { gql, useQuery } from '@apollo/client'
 
-export default function PostPreview() {
-    const { loading, error, data, fetchMore, networkStatus } = useQuery(GET_CATEGORY_POSTS, {
+export default function PostPreview(initialApolloState) {
+    console.log(initialApolloState)
+    const { loading, error, data, fetchMore, networkStatus } = useQuery(GET_FEED, {
         notifyOnNetworkStatusChange: true,
+        variables: {offset: 0, limit: 10}
     })
     return (
         <div>
-            {data.getCategoryPosts.message}
-            {data.getCategoryPosts.posts.map(post => 
+            {data.getFeed.message}
+            {data.getFeed.posts.map(post =>
                 <div>
                     <li>{post.title}</li>
                     <li>{post.content}</li>

@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import { LOGIN } from '../libs/gql/login'
 import { gql, useMutation, useQuery } from '@apollo/client'
+import Cookie from 'js-cookie'
+import Router from 'next/router'
+import Loading from '../components/Loading'
 
-export default function signin() {
+export default function SignIn() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [authInfo, setAuthInfo] = useState({loggedIn: false, user: null})
     const handleEmailChange = (e) => {
         setEmail(e.target.value)
     }
@@ -14,7 +18,7 @@ export default function signin() {
         setPassword(e.target.value)
     }
 
-    const [login, { data }] = useMutation(LOGIN)
+    const [login, { loading: mutationLoading, error: mutationError }] = useMutation(LOGIN)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -23,10 +27,25 @@ export default function signin() {
                 email: email,
                 password: password
             }
-        }).then(data => {
-            console.log(data)
+        }).then(({data}) => {
+            console.log(data.login)
+            if (data.login && data.login.message == "LOGGED IN!") {
+                setAuthInfo({loggedIn: true, user: data.login.user})
+            }
+        }).catch(error => {
+            console.log(error.toString())
         })
     }
+
+    useEffect(() => {
+        const changeLoginState = async () => {
+            if (authInfo.loggedIn) {
+                await Cookie.set("authInfo", authInfo)
+                return Router.push("/")
+            }
+        }
+        changeLoginState()
+    }, [authInfo])
 
     const removeNoise = ({ offsetParent, lastElementChild }, type) => {
         let inputNoise;
@@ -236,6 +255,10 @@ export default function signin() {
                     </div>
                     <span className="editor-field__bottom"></span>
                     <div className="editor-field__noise"></div>
+                </div>
+                <div style={{textAlign: "right"}}>
+                    {mutationLoading && <Loading />}
+                    {mutationError && <p style={{color: "#FF9494", fontSize: "0.7rem"}}>{mutationError.toString()}</p>}
                 </div>
                 <div className={styles.authButtons}>
                     <div type="submit" style={{ marginTop: "0.5rem" }} className="btn btn--primary" onMouseOver={(e) => generateNoise(e, 'button')}

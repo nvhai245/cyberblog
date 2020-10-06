@@ -13,6 +13,27 @@ import (
 	"time"
 )
 
+func GetFeed(ctx context.Context, offset int, limit int) (*model.GetPostsResponse, error) {
+	result, err := connection.ReadClient.GetFeed(ctx, &readPb.GetFeedRequest{
+		Offset: int32(offset),
+		Limit:  int32(limit),
+	})
+	if err != nil {
+		return nil, err
+	}
+	if result.GetSuccess() == false || result.GetFoundPosts() == nil {
+		return nil, fmt.Errorf("INTERNAL SERVER ERROR!")
+	}
+	var posts []*model.Post
+	for _, post := range result.GetFoundPosts() {
+		posts = append(posts, readPostToGraphPost(post))
+	}
+	return &model.GetPostsResponse{
+		Message: "get feeds successful!",
+		Posts:   posts,
+	}, nil
+}
+
 func GetPostByID(ctx context.Context, requesterID int, postID int) (*model.GetPostByIDResponse, error) {
 	//session := helper.GetSession(ctx, "auth")
 	//token := fmt.Sprintf("%v", session.Values["token"])

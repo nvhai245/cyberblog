@@ -188,6 +188,7 @@ type Mutation {
 }
 
 type Query {
+    getFeed(offset: Int!, limit: Int!): getPostsResponse!
     getPostById(requesterId: Int!, postId: Int!): getPostByIdResponse!
     getUserPublishedPosts(requesterId: Int!, userId: Int!, offset: Int!, limit: Int!): getPostsResponse!
     getCategoryPosts(categoryId: Int!, offset: Int!, limit: Int!): getPostsResponse!

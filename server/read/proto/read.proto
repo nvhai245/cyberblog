@@ -58,6 +58,7 @@ service Read {
   rpc GetAllUsers (GetAllUsersRequest) returns (GetAllUsersResponse);
 
   // Post rpc
+  rpc GetFeed(GetFeedRequest) returns (GetFeedResponse);
   rpc GetPostById (GetPostByIdRequest) returns (GetPostByIdResponse);
   rpc GetUserPublishedPosts (GetUserPublishedPostsRequest) returns (GetUserPublishedPostsResponse);
   rpc GetUserAllPosts (GetUserAllPostsRequest) returns (GetUserAllPostsResponse);
@@ -98,6 +99,16 @@ message GetAllUsersRequest {
 message GetAllUsersResponse {
   bool success = 1;
   repeated User users = 2;
+}
+
+message GetFeedRequest {
+  int32 offset = 1;
+  int32 limit = 2;
+}
+
+message GetFeedResponse {
+  bool success = 1;
+  repeated Post found_posts = 2;
 }
 
 message GetPostByIdRequest {

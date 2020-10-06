@@ -122,6 +122,7 @@ type ComplexityRoot struct {
 	Query struct {
 		GetAllCategories        func(childComplexity int, requesterID int) int
 		GetCategoryPosts        func(childComplexity int, categoryID int, offset int, limit int) int
+		GetFeed                 func(childComplexity int, offset int, limit int) int
 		GetPostByID             func(childComplexity int, requesterID int, postID int) int
 		GetPostCategories       func(childComplexity int, postID int) int
 		GetPostComments         func(childComplexity int, postID int, offset int, limit int) int
@@ -229,6 +230,7 @@ type MutationResolver interface {
 	RemovePostFromCategory(ctx context.Context, categoryID int, postID int) (*model.PostCategoryResponse, error)
 }
 type QueryResolver interface {
+	GetFeed(ctx context.Context, offset int, limit int) (*model.GetPostsResponse, error)
 	GetPostByID(ctx context.Context, requesterID int, postID int) (*model.GetPostByIDResponse, error)
 	GetUserPublishedPosts(ctx context.Context, requesterID int, userID int, offset int, limit int) (*model.GetPostsResponse, error)
 	GetCategoryPosts(ctx context.Context, categoryID int, offset int, limit int) (*model.GetPostsResponse, error)
@@ -748,6 +750,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Query.GetCategoryPosts(childComplexity, args["categoryId"].(int), args["offset"].(int), args["limit"].(int)), true
+
+	case "Query.getFeed":
+		if e.complexity.Query.GetFeed == nil {
+			break
+		}
+
+		args, err := ec.field_Query_getFeed_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.GetFeed(childComplexity, args["offset"].(int), args["limit"].(int)), true
 
 	case "Query.getPostById":
 		if e.complexity.Query.GetPostByID == nil {
@@ -1351,6 +1365,7 @@ type Mutation {
 }
 
 type Query {
+    getFeed(offset: Int!, limit: Int!): getPostsResponse!
     getPostById(requesterId: Int!, postId: Int!): getPostByIdResponse!
     getUserPublishedPosts(requesterId: Int!, userId: Int!, offset: Int!, limit: Int!): getPostsResponse!
     getCategoryPosts(categoryId: Int!, offset: Int!, limit: Int!): getPostsResponse!
@@ -1807,6 +1822,28 @@ func (ec *executionContext) field_Query_getCategoryPosts_args(ctx context.Contex
 		}
 	}
 	args["limit"] = arg2
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_getFeed_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 int
+	if tmp, ok := rawArgs["offset"]; ok {
+		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["offset"] = arg0
+	var arg1 int
+	if tmp, ok := rawArgs["limit"]; ok {
+		arg1, err = ec.unmarshalNInt2int(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["limit"] = arg1
 	return args, nil
 }
 
@@ -3975,6 +4012,47 @@ func (ec *executionContext) _PostCategory_categoryID(ctx context.Context, field 
 	res := resTmp.(int)
 	fc.Result = res
 	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Query_getFeed(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:   "Query",
+		Field:    field,
+		Args:     nil,
+		IsMethod: true,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Query_getFeed_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	fc.Args = args
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Query().GetFeed(rctx, args["offset"].(int), args["limit"].(int))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.GetPostsResponse)
+	fc.Result = res
+	return ec.marshalNgetPostsResponse2ᚖgithubᚗcomᚋnvhai245ᚋcyberblogᚋserverᚋfrontendᚋgraphᚋmodelᚐGetPostsResponse(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query_getPostById(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -7378,6 +7456,20 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 		switch field.Name {
 		case "__typename":
 			out.Values[i] = graphql.MarshalString("Query")
+		case "getFeed":
+			field := field
+			out.Concurrently(i, func() (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Query_getFeed(ctx, field)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
+				return res
+			})
 		case "getPostById":
 			field := field
 			out.Concurrently(i, func() (res graphql.Marshaler) {

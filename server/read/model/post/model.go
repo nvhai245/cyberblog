@@ -20,6 +20,17 @@ type Post struct {
 	PublishedAt int32  `db:"published_at"`
 }
 
+// GetFeed func
+func GetFeed(offset int32, limit int32) (success bool, foundPosts []*Post, err error) {
+	queryString := "SELECT * FROM posts WHERE published = $1 ORDER BY published_at DESC OFFSET $2 LIMIT $3 "
+	err = connection.DB.Select(&foundPosts, queryString, true, offset, limit)
+	if err != nil {
+		log.Println("Error in postModel.GetFeed(): ", err)
+		return false, nil, err
+	}
+	return true, foundPosts, nil
+}
+
 // GetPostById func
 func GetPostById(requesterId int32, postId int32) (bool, *Post, error) {
 	foundPost := &Post{}

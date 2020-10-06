@@ -98,6 +98,10 @@ func (r *mutationResolver) RemovePostFromCategory(ctx context.Context, categoryI
 	return categoryController.RemovePostFromCategory(ctx, categoryID, postID)
 }
 
+func (r *queryResolver) GetFeed(ctx context.Context, offset int, limit int) (*model.GetPostsResponse, error) {
+	return postController.GetFeed(ctx, offset, limit)
+}
+
 func (r *queryResolver) GetPostByID(ctx context.Context, requesterID int, postID int) (*model.GetPostByIDResponse, error) {
 	return postController.GetPostByID(ctx, requesterID, postID)
 }
