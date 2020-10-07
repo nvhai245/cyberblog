@@ -14,8 +14,8 @@ import (
 	"github.com/nvhai245/cyberblog/server/frontend/graph/model"
 )
 
-func (r *mutationResolver) Register(ctx context.Context, email string, password string) (*model.AuthResponse, error) {
-	return userController.Register(ctx, email, password)
+func (r *mutationResolver) Register(ctx context.Context, email string, password string, username string) (*model.AuthResponse, error) {
+	return userController.Register(ctx, email, password, username)
 }
 
 func (r *mutationResolver) Login(ctx context.Context, email string, password string) (*model.AuthResponse, error) {

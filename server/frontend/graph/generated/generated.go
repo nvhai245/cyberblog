@@ -94,7 +94,7 @@ type ComplexityRoot struct {
 		GetAllUsers            func(childComplexity int, adminID int) int
 		Login                  func(childComplexity int, email string, password string) int
 		PublishPost            func(childComplexity int, requesterID int, postID int) int
-		Register               func(childComplexity int, email string, password string) int
+		Register               func(childComplexity int, email string, password string, username string) int
 		RemovePostFromCategory func(childComplexity int, categoryID int, postID int) int
 		UnPublishPost          func(childComplexity int, requesterID int, postID int) int
 		UpVoteComment          func(childComplexity int, commentID int) int
@@ -207,7 +207,7 @@ type ComplexityRoot struct {
 }
 
 type MutationResolver interface {
-	Register(ctx context.Context, email string, password string) (*model.AuthResponse, error)
+	Register(ctx context.Context, email string, password string, username string) (*model.AuthResponse, error)
 	Login(ctx context.Context, email string, password string) (*model.AuthResponse, error)
 	GetAllUsers(ctx context.Context, adminID int) (*model.GetAllUsersResponse, error)
 	EditUser(ctx context.Context, userID int, editedUser model.EditedUser) (*model.EditUserResponse, error)
@@ -593,7 +593,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.Register(childComplexity, args["email"].(string), args["password"].(string)), true
+		return e.complexity.Mutation.Register(childComplexity, args["email"].(string), args["password"].(string), args["username"].(string)), true
 
 	case "Mutation.removePostFromCategory":
 		if e.complexity.Mutation.RemovePostFromCategory == nil {
@@ -1337,7 +1337,7 @@ type postCategoryResponse {
 }
 
 type Mutation {
-    register(email: String!, password: String!): AuthResponse!
+    register(email: String!, password: String!, username: String!): AuthResponse!
     login(email: String!, password: String!): AuthResponse!
     getAllUsers(adminId: Int!): getAllUsersResponse!
     editUser(userId: Int!, editedUser: EditedUser!): EditUserResponse!
@@ -1684,6 +1684,14 @@ func (ec *executionContext) field_Mutation_register_args(ctx context.Context, ra
 		}
 	}
 	args["password"] = arg1
+	var arg2 string
+	if tmp, ok := rawArgs["username"]; ok {
+		arg2, err = ec.unmarshalNString2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["username"] = arg2
 	return args, nil
 }
 
@@ -2769,7 +2777,7 @@ func (ec *executionContext) _Mutation_register(ctx context.Context, field graphq
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().Register(rctx, args["email"].(string), args["password"].(string))
+		return ec.resolvers.Mutation().Register(rctx, args["email"].(string), args["password"].(string), args["username"].(string))
 	})
 	if err != nil {
 		ec.Error(ctx, err)

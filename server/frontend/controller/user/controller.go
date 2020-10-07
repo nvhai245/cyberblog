@@ -13,8 +13,8 @@ import (
 	"time"
 )
 
-func Register(ctx context.Context, email string, password string) (*model.AuthResponse, error) {
-	res, err := connection.AuthClient.Register(context.Background(), &authPb.RegisterRequest{Email: email, Password: password})
+func Register(ctx context.Context, email string, password string, username string) (*model.AuthResponse, error) {
+	res, err := connection.AuthClient.Register(context.Background(), &authPb.RegisterRequest{Email: email, Password: password, Username: username})
 	if err != nil {
 		log.Println("Error in rpc AuthClient.Register(): ", err)
 		return nil, fmt.Errorf("INTERNAL SERVER ERROR!")

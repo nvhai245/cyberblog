@@ -160,7 +160,7 @@ type postCategoryResponse {
 }
 
 type Mutation {
-    register(email: String!, password: String!): AuthResponse!
+    register(email: String!, password: String!, username: String!): AuthResponse!
     login(email: String!, password: String!): AuthResponse!
     getAllUsers(adminId: Int!): getAllUsersResponse!
     editUser(userId: Int!, editedUser: EditedUser!): EditUserResponse!

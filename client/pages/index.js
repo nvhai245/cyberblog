@@ -6,6 +6,7 @@ import {initializeApollo} from '../libs/apolloClient'
 import PostPreview from '../components/PostPreview'
 import {GET_FEED} from '../libs/gql/getFeed'
 import parseAuthCookie from "../libs/parseAuthCookie";
+import Layout from "../components/Layout";
 
 
 function Home({initialApolloState, initialAuthState}) {

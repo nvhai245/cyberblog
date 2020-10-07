@@ -31,7 +31,7 @@ func Register(req *pb.RegisterRequest) *pb.RegisterResponse {
 	hashedPassword := hashAndSalt([]byte(req.GetPassword()))
 	res, err := connection.WriteClient.SaveUser(context.Background(), &writePb.SaveUserRequest{
 		User: &writePb.NewUser{
-			Username:  "",
+			Username:  req.GetUsername(),
 			Email:     req.GetEmail(),
 			FirstName: "",
 			LastName:  "",

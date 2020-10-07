@@ -9,7 +9,7 @@ export default function AppBar({authState}) {
                 {authState && authState.loggedIn ?
                     <div className={styles.userInfo}>
                         <Link href={`${authState.user.username}/profile`}>
-                            <a>{"[" + authState.user.username + " user]"}</a>
+                            <a style={{marginRight: "1rem"}}>{"[" + authState.user.username + "]"}</a>
                         </Link>
                         <Link href="/logout">
                             <a>[Đăng xuất]</a>

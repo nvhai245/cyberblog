@@ -3,7 +3,6 @@ import { GET_FEED } from '../libs/gql/getFeed'
 import { gql, useQuery } from '@apollo/client'
 
 export default function PostPreview(initialApolloState) {
-    console.log(initialApolloState)
     const { loading, error, data, fetchMore, networkStatus } = useQuery(GET_FEED, {
         notifyOnNetworkStatusChange: true,
         variables: {offset: 0, limit: 10}
