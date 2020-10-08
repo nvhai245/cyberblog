@@ -1062,7 +1062,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.GetPostsResponse.Message(childComplexity), true
 
-	case "getPostsResponse.posts":
+	case "getPostsResponse.post":
 		if e.complexity.GetPostsResponse.Posts == nil {
 			break
 		}
@@ -1303,7 +1303,7 @@ type getPostByIdResponse {
 
 type getPostsResponse {
     message: String!
-    posts: [Post!]!
+    post: [Post!]!
 }
 
 type getCommentsResponse {
@@ -8206,7 +8206,7 @@ func (ec *executionContext) _getPostsResponse(ctx context.Context, sel ast.Selec
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "posts":
+		case "post":
 			out.Values[i] = ec._getPostsResponse_posts(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				invalids++

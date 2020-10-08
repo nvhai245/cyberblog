@@ -87,7 +87,7 @@ func GetUserAllPosts(ctx context.Context, ownerID int, offset int, limit int) (*
 		posts = append(posts, readPostToGraphPost(post))
 	}
 	return &model.GetPostsResponse{
-		Message: "get user all posts successful!",
+		Message: "get user all post successful!",
 		Posts:   posts,
 	}, nil
 }
@@ -118,7 +118,7 @@ func GetUserPublishedPosts(ctx context.Context, requesterID int, userID int, off
 		posts = append(posts, readPostToGraphPost(post))
 	}
 	return &model.GetPostsResponse{
-		Message: "get user published posts successful!",
+		Message: "get user published post successful!",
 		Posts:   posts,
 	}, nil
 }
@@ -150,7 +150,7 @@ func GetUserUnPublishedPosts(ctx context.Context, ownerID int, offset int, limit
 		posts = append(posts, readPostToGraphPost(post))
 	}
 	return &model.GetPostsResponse{
-		Message: "get user unpublished posts successful!",
+		Message: "get user unpublished post successful!",
 		Posts:   posts,
 	}, nil
 }
@@ -181,7 +181,7 @@ func GetCategoryPosts(ctx context.Context, categoryID int, offset int, limit int
 		posts = append(posts, readPostToGraphPost(post))
 	}
 	return &model.GetPostsResponse{
-		Message: "get category posts successful!",
+		Message: "get category post successful!",
 		Posts:   posts,
 	}, nil
 }

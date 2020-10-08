@@ -22,7 +22,7 @@ type Post struct {
 
 // GetFeed func
 func GetFeed(offset int32, limit int32) (success bool, foundPosts []*Post, err error) {
-	queryString := "SELECT * FROM posts WHERE published = $1 ORDER BY published_at DESC OFFSET $2 LIMIT $3 "
+	queryString := "SELECT * FROM post WHERE published = $1 ORDER BY published_at DESC OFFSET $2 LIMIT $3 "
 	err = connection.DB.Select(&foundPosts, queryString, true, offset, limit)
 	if err != nil {
 		log.Println("Error in postModel.GetFeed(): ", err)
@@ -34,7 +34,7 @@ func GetFeed(offset int32, limit int32) (success bool, foundPosts []*Post, err e
 // GetPostById func
 func GetPostById(requesterId int32, postId int32) (bool, *Post, error) {
 	foundPost := &Post{}
-	queryString := "SELECT * FROM posts WHERE id = $1"
+	queryString := "SELECT * FROM post WHERE id = $1"
 	rows, err := connection.DB.Queryx(queryString, postId)
 	if err != nil {
 		log.Println("Error in postModel.GetPostById(): ", err)
@@ -61,7 +61,7 @@ func GetPostById(requesterId int32, postId int32) (bool, *Post, error) {
 
 // GetUserPublishedPosts func
 func GetUserPublishedPosts(requesterId int32, userId int32, offset int32, limit int32) (success bool, foundPosts []*Post, err error) {
-	queryString := "SELECT * FROM posts WHERE author_id = $1 AND published = $2 ORDER BY published_at DESC OFFSET $3 LIMIT $4 "
+	queryString := "SELECT * FROM post WHERE author_id = $1 AND published = $2 ORDER BY published_at DESC OFFSET $3 LIMIT $4 "
 	err = connection.DB.Select(&foundPosts, queryString, userId, true, offset, limit)
 	if err != nil {
 		log.Println("Error in postModel.GetUserPublishedPosts(): ", err)
@@ -72,7 +72,7 @@ func GetUserPublishedPosts(requesterId int32, userId int32, offset int32, limit 
 
 // GetUserAllPosts func
 func GetUserAllPosts(ownerId int32, offset int32, limit int32) (success bool, foundPosts []*Post, err error) {
-	queryString := "SELECT * FROM posts WHERE author_id = $1 ORDER BY created_at DESC OFFSET $2 LIMIT $3"
+	queryString := "SELECT * FROM post WHERE author_id = $1 ORDER BY created_at DESC OFFSET $2 LIMIT $3"
 	err = connection.DB.Select(&foundPosts, queryString, ownerId, offset, limit)
 	if err != nil {
 		log.Println("Error in postModel.GetUserAllPosts(): ", err)
@@ -83,7 +83,7 @@ func GetUserAllPosts(ownerId int32, offset int32, limit int32) (success bool, fo
 
 // GetUserUnPublishedPosts func
 func GetUserUnPublishedPosts(ownerId int32, offset int32, limit int32) (success bool, foundPosts []*Post, err error) {
-	queryString := "SELECT * FROM posts WHERE author_id = $1 AND published = $2 ORDER BY created_at DESC OFFSET $3 LIMIT $4"
+	queryString := "SELECT * FROM post WHERE author_id = $1 AND published = $2 ORDER BY created_at DESC OFFSET $3 LIMIT $4"
 	err = connection.DB.Select(&foundPosts, queryString, ownerId, false, offset, limit)
 	if err != nil {
 		log.Println("Error in postModel.GetUserUnPublishedPosts(): ", err)
@@ -94,7 +94,7 @@ func GetUserUnPublishedPosts(ownerId int32, offset int32, limit int32) (success 
 
 // GetCategoryPosts func
 func GetCategoryPosts(categoryId int32, offset int32, limit int32) (success bool, foundPosts []*Post, err error) {
-	queryString := "SELECT * FROM posts WHERE published = $1 AND id in (SELECT post_id FROM post_category WHERE category_id = $2) ORDER BY created_at DESC OFFSET $3 LIMIT $4"
+	queryString := "SELECT * FROM post WHERE published = $1 AND id in (SELECT post_id FROM post_category WHERE category_id = $2) ORDER BY created_at DESC OFFSET $3 LIMIT $4"
 	err = connection.DB.Select(&foundPosts, queryString, true, categoryId, offset, limit)
 	if err != nil {
 		log.Println("Error in postModel.GetUserUnPublishedPosts(): ", err)

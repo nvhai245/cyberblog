@@ -35,7 +35,7 @@ type PostCategory struct {
 
 // Insert func
 func Insert(newPost *Post) (success bool, postId int32) {
-	queryString := `INSERT INTO posts (author_id, parent_id, title, published, up_vote, content) VALUES (:AuthorId, :ParentId, :Title, :Published, :UpVote, :Content) RETURNING id`
+	queryString := `INSERT INTO post (author_id, parent_id, title, published, up_vote, content) VALUES (:AuthorId, :ParentId, :Title, :Published, :UpVote, :Content) RETURNING id`
 	rows, err := connection.DB.NamedQuery(queryString, structs.Map(newPost))
 	if err != nil {
 		log.Println("Error in postModel.Insert(): ", err)
@@ -55,7 +55,7 @@ func Insert(newPost *Post) (success bool, postId int32) {
 // Update func
 func Update(newPost *Post) (bool, *Post) {
 	updatedPost := &Post{}
-	queryString := `UPDATE posts SET (title, content, updated_at) = (:Title, :Content, :UpdatedAt) WHERE id = :ID RETURNING *`
+	queryString := `UPDATE post SET (title, content, updated_at) = (:Title, :Content, :UpdatedAt) WHERE id = :ID RETURNING *`
 	rows, err := connection.DB.NamedQuery(queryString, structs.Map(newPost))
 	if err != nil {
 		log.Println("Error in postModel.Update(): ", err)
@@ -82,7 +82,7 @@ func Update(newPost *Post) (bool, *Post) {
 // Delete func
 func Delete(requestorId int32, postId int32) (bool, *Post) {
 	deletedPost := Post{}
-	queryString := "DELETE FROM posts WHERE id = $1 AND author_id = $2 RETURNING *"
+	queryString := "DELETE FROM post WHERE id = $1 AND author_id = $2 RETURNING *"
 	rows, err := connection.DB.Queryx(queryString, postId, requestorId)
 	if err != nil {
 		log.Println("Error in postModel.Delete(): ", err)
@@ -109,7 +109,7 @@ func Delete(requestorId int32, postId int32) (bool, *Post) {
 // Publish func
 func Publish(requestorId int32, postId int32) (bool, *Post) {
 	publishedPost := &Post{}
-	queryString := "UPDATE posts SET published = $1, published_at = $2 WHERE id = $3 AND author_id = $4 RETURNING *"
+	queryString := "UPDATE post SET published = $1, published_at = $2 WHERE id = $3 AND author_id = $4 RETURNING *"
 	rows, err := connection.DB.Queryx(queryString, true, time.Now().Unix(), postId, requestorId)
 	if err != nil {
 		log.Println("Error in postModel.Publish(): ", err)
@@ -136,7 +136,7 @@ func Publish(requestorId int32, postId int32) (bool, *Post) {
 // UnPublish func
 func UnPublish(requestorId int32, postId int32) (bool, *Post) {
 	unPublishedPost := &Post{}
-	queryString := "UPDATE posts SET published = $1, published_at = $2 WHERE id = $3 AND author_id = $4 RETURNING *"
+	queryString := "UPDATE post SET published = $1, published_at = $2 WHERE id = $3 AND author_id = $4 RETURNING *"
 	rows, err := connection.DB.Queryx(queryString, false, 0, postId, requestorId)
 	if err != nil {
 		log.Println("Error in postModel.UnPublish(): ", err)
@@ -162,7 +162,7 @@ func UnPublish(requestorId int32, postId int32) (bool, *Post) {
 
 // UpVote func
 func UpVote(upVoterId int32, postId int32) (success bool, newUpVotes int32) {
-	queryString := "UPDATE posts SET up_vote = up_vote + 1 WHERE id = $1 RETURNING up_vote"
+	queryString := "UPDATE post SET up_vote = up_vote + 1 WHERE id = $1 RETURNING up_vote"
 	rows, err := connection.DB.Queryx(queryString, postId)
 	if err != nil {
 		log.Println("Error in postModel.UpVote(): ", err)

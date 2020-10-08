@@ -13,6 +13,8 @@ function Register(props) {
     const [username, setUsername] = useState("")
     const [passwordConfirm, setPasswordConfirm] = useState("")
     const [authInfo, setAuthInfo] = useState({loggedIn: false, user: null})
+    const [validationError, setValidationError] = useState(null)
+    const [passwordNotMatchColor, setPasswordNotMatchColor] = useState(null)
 
     const [register, {loading: mutationLoading, error: mutationError}] = useMutation(REGISTER)
 
@@ -21,6 +23,11 @@ function Register(props) {
     }
     const handlePasswordChange = (e) => {
         setPassword(e.target.value)
+        if (e.target.value !== passwordConfirm) {
+            setPasswordNotMatchColor("red")
+        } else {
+            setPasswordNotMatchColor(null)
+        }
     }
     const handleUsernameChange = (e) => {
         setUsername(e.target.value)
@@ -28,23 +35,35 @@ function Register(props) {
 
     const handlePasswordConfirmChange = (e) => {
         setPasswordConfirm(e.target.value)
+        if (e.target.value !== password) {
+            setPasswordNotMatchColor("red")
+        } else {
+            setPasswordNotMatchColor(null)
+        }
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        register({
-            variables: {
-                email: email,
-                password: password,
-                username: username,
-            }
-        }).then(({data}) => {
-            console.log(data.register)
-            if (data.register && data.register.message == "REGISTERED SUCCESSFUL!") {
-                setAuthInfo({loggedIn: true, user: data.register.user})
-            }
-        }).catch(error => {
-            console.log(error.toString())
-        })
+        setValidationError(null)
+        if (email == "" || password == "" || username == "") {
+            setValidationError("Hãy hoàn thành các trường còn trống!")
+        } else if (passwordConfirm !== password) {
+            setValidationError("Mật khẩu không khớp!")
+        } else {
+            register({
+                variables: {
+                    email: email,
+                    password: password,
+                    username: username,
+                }
+            }).then(({data}) => {
+                console.log(data.register)
+                if (data.register && data.register.message == "REGISTERED SUCCESSFUL!") {
+                    setAuthInfo({loggedIn: true, user: data.register.user})
+                }
+            }).catch(error => {
+                console.log(error.toString())
+            })
+        }
     }
     useEffect(() => {
         const changeLoginState = async () => {
@@ -92,13 +111,15 @@ function Register(props) {
                     </div>
 
                     <div className="editor-field__container">
-                        <input onChange={handlePasswordConfirmChange} type="password" className="editor-field__input" required />
+                        <input style={{color: passwordNotMatchColor && passwordNotMatchColor}} onChange={handlePasswordConfirmChange} type="password" className="editor-field__input" required />
                     </div>
                 </div>
                 <div style={{textAlign: "right"}}>
                     {mutationLoading && <Loading/>}
                     {mutationError &&
                     <p style={{color: "#FF9494", fontSize: "1rem", marginTop: "0.5rem"}}>{mutationError.toString()}</p>}
+                    {validationError &&
+                    <p style={{color: "#FF9494", fontSize: "1rem", marginTop: "0.5rem"}}>{validationError}</p>}
                 </div>
                 <div onClick={handleSubmit} className={styles.authButtons}>
                     <div style={{marginTop: "0.5rem"}} className="btn btn--primary">
