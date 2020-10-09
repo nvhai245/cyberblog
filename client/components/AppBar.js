@@ -5,6 +5,11 @@ import Link from 'next/link'
 export default function AppBar({authState}) {
     return (
         <div className={styles.appBar}>
+            <div>
+                <Link href="/">
+                    <a>[Trang chủ]</a>
+                </Link>
+            </div>
             <div className={styles.userInfo}>
                 {authState && authState.loggedIn ?
                     <div className={styles.userInfo}>

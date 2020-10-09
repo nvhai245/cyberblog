@@ -34,10 +34,11 @@ function Home({initialApolloState, initialAuthState}) {
 export async function getServerSideProps({req}) {
     const apolloClient = initializeApollo(null, req)
     const authCookie = await parseAuthCookie(req)
-    let res = await apolloClient.query({
+    let data = await apolloClient.query({
         query: GET_FEED,
         variables: {offset: 0, limit: 10}
     })
+    console.log(data.data.getFeed.posts)
     return {
         props: {
             initialApolloState: apolloClient.cache.extract(),

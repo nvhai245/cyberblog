@@ -77,6 +77,11 @@ p {
   margin: 0;
 }
 
+i {
+  font-weight: lighter !important;
+  font-size: 90%;
+}
+
 ul {
   list-style: none;
 }
@@ -342,7 +347,7 @@ a.button:hover {
 }
 
 .container {
-  margin: 5vh auto;
+  margin-bottom: 20vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -353,4 +358,24 @@ a.button:hover {
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
+}
+
+.PostView {
+  color: white;
+  margin: 5vh auto;
+  width: 65vw;
+  font-size: 0.9em;
+  border: 1px solid white;
+  padding: 2%;
+}
+
+.post_title {
+  font-size: 2rem;
+  color: white;
+}
+
+.post_info {
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px dashed white;
 }
