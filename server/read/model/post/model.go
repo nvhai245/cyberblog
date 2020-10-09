@@ -72,7 +72,7 @@ func GetUserPublishedPosts(requesterId int32, userId int32, offset int32, limit 
 
 // GetUserAllPosts func
 func GetUserAllPosts(ownerId int32, offset int32, limit int32) (success bool, foundPosts []*Post, err error) {
-	queryString := "SELECT * FROM post WHERE author_id = $1 ORDER BY created_at DESC OFFSET $2 LIMIT $3"
+	queryString := "SELECT * FROM posts WHERE author_id = $1 ORDER BY created_at DESC OFFSET $2 LIMIT $3"
 	err = connection.DB.Select(&foundPosts, queryString, ownerId, offset, limit)
 	if err != nil {
 		log.Println("Error in postModel.GetUserAllPosts(): ", err)
