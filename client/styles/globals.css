@@ -361,12 +361,9 @@ a.button:hover {
 }
 
 .PostView {
-  color: white;
-  margin: 5vh auto;
-  width: 65vw;
-  font-size: 0.9em;
   border: 1px solid white;
   padding: 2%;
+  width: 100%;
 }
 
 .post_title {
@@ -378,4 +375,25 @@ a.button:hover {
   padding-bottom: 0.5rem;
   margin-bottom: 0.5rem;
   border-bottom: 1px dashed white;
+}
+
+.PostViewContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: white;
+  margin: 5vh auto;
+  width: 65vw;
+  font-size: 0.9em;
+}
+
+.post_options {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.draftJsEmojiPlugin__image__192TI {
+  margin: 0 auto;
+  max-width: 80%;
 }

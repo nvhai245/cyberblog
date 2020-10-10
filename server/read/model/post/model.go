@@ -43,7 +43,7 @@ func GetPostById(requesterId int32, postId int32) (bool, *Post, error) {
 	defer rows.Close()
 	for rows.Next() {
 		if rows.Err() == sql.ErrNoRows {
-			log.Println("Error in model.GetUserByEmail(): ", rows.Err())
+			log.Println("Error in model.GetPostById(): ", rows.Err())
 			return false, nil, err
 		}
 		err = rows.StructScan(foundPost)
