@@ -142,7 +142,7 @@ type GetPostByIDResponse struct {
 
 type GetPostsResponse struct {
 	Message string  `json:"message"`
-	Posts   []*Post `json:"post"`
+	Posts   []*Post `json:"posts"`
 }
 
 type GetUserByIDResponse struct {
